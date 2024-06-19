@@ -1,0 +1,68 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("1 - carro");
+        System.out.println("2 - moto");
+        System.out.println("3 - caminhão");
+        System.out.println("=================================================");
+        System.out.print("qual veiculo vc deseja estacionar?");
+        int opção = input.nextInt();
+        switch (opção) {
+            case 1:
+                System.out.print("quantas horas o carro ficou estacionado?");
+                float horas = input.nextFloat();
+                float preço = horas * 5;
+                if (horas >= 24) {
+                    float preço_total = preço - (preço * 20) / 100;
+                    System.out.print("o preço total a se pagar pelo estacionamento do carro é de R$:" +preço_total);
+                }
+                else if (horas <= 1 ) {
+                    float preço_total = preço * 1;
+                    System.out.print("o valor total a se pagar pelo estacionamento do carro é de R$:" +preço_total);
+                }
+                else {
+                    System.out.print("o preço total a se pagar pelo estacionamento do carro é de R$:" +preço);
+                }
+                break;
+            case 2:
+                System.out.print("quantas horas a moto ficou estacionada?");
+                float horas2 = input.nextFloat();
+                float preço2 = horas2 * 3;
+                if (horas2 >= 24) {
+                    float preço_total2 = preço2 - (preço2 * 20) / 100;
+                    System.out.print("o preço total a se pagar pelo estacionamento da moto é de R$:" +preço_total2);
+                }
+                else if (horas2 <= 1 ) {
+                    float preço_total2 = preço2 * 1;
+                    System.out.print("o valor total a se pagar pelo estacionamento do moto é de R$:" +preço_total2);
+                }
+                else {
+                    System.out.print("o preço total a se pagar pelo estacionamento do moto é de R$:" + preço2);
+                }
+                break;
+            case 3:
+                System.out.print("quantas horas o caminhão ficou estacionado?");
+                float horas3 = input.nextFloat();
+                float preço3 = horas3 * 10;
+                if (horas3 >= 24) {
+                    float preço_total3 = preço3 - (preço3 * 20) / 100;
+                    System.out.print("o preço total a se pagar pelo estacionamento do caminhão é de R$:" +preço_total3);
+                }
+                else if (horas3 <= 1 ) {
+                    float preço_total3 = preço3 * 1;
+                    System.out.print("o valor total a se pagar pelo estacionamento do caminhão é de R$:" +preço_total3);
+                }
+                else {
+                    System.out.print("o preço total a se pagar pelo estacionamento do caminhão é de R$:" + preço3);
+                }
+                break;
+            default:
+                System.out.print("nenhuma das opções escolhidas");
+                
+            input.close();    
+
+        }
+    }
+}
