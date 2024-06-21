@@ -1,0 +1,86 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("ESTACIONAMENTO");
+        System.out.println("=========================================");
+        System.out.println("1 - carro");
+        System.out.println("2 - moto");
+        System.out.println("3 - caminhão");
+
+        System.out.println("=========================================");
+
+        System.out.print("qual dessas opções vc deseja escolher:");
+        int opcao = input.nextInt();
+
+        System.out.println("==========================================");
+
+        System.out.print("quantas horas vc deseja colocar o veiculo estacionado?");
+        float horas = input.nextFloat();
+
+        switch (opcao) {
+            case 1: // carro
+                if (horas <= 2) {
+                    float preco = horas * 5;
+                    System.out.println("o total a se pagar pelo estacionamento do carro é de R$:"+preco);
+                    break;
+                }
+                else if (horas <= 5) {
+                    float preco = horas * 4;
+                    System.out.println("o total a se pagar pelo estacionamento do carro é de R$:"+preco);
+                    break;
+                }
+                else {
+                    float preco = horas * 3;
+                    System.out.println("o total a se pagar pwlo estacionamento do carro é de R$:"+preco);
+                    break;
+                }
+
+
+            case 2: // moto
+                if (horas <= 2) {
+                    float preco = horas * 3;
+                    System.out.println("o preco total a se pagar pelo estacionamento da moto é de R$:" +preco);
+                    break;
+                }
+                else if (horas <= 5) {
+                    float preco = horas * 2;
+                    System.out.println("o preço total a se pagar pelo estacionamento da moto é de R$:" +preco);
+                    break;
+                }
+                else {
+                    float preco = horas * 1;
+                    System.out.println("o preço total a se pagar pelo estacionamento da moto é de R$:" +preco);
+                    break;
+                }
+
+
+            case 3: // caminhão
+                if (horas <= 2) {
+                    float preco = horas * 10;
+                    System.out.println("o preço total a se pagar pelo estacionamento do caminhão é de R$:" +preco);
+                    break;
+                }
+                else if (horas <= 5) {
+                    float preco = horas * 8;
+                    System.out.println("o preço total a se pagar pelo estacionamento do caminhão é de R$:" +preco);
+                    break;
+                }
+                else {
+                    float preco = horas * 7;
+                    System.out.println("o preço total a se pagar pelo estacionamento do caminhão é de R$:" +preco);
+                    break;
+                }
+
+
+            default:
+                System.out.println("nenhuma das opções escolhidas!!!");
+
+        }
+
+        input.close();
+
+
+    }
+}
