@@ -1,0 +1,210 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("RESTAURANTE CHICAGO STYLE");
+        System.out.println("==============================================");
+        System.out.println("OPÇÕES DE MENU:");
+        System.out.println("1 - HAMBURGER - R$:20,00");
+        System.out.println("2 - PIZZA - R$:25,00");
+        System.out.println("3 - SALADA - R$:15,00");
+        System.out.println("===============================================");
+        System.out.print("escolha uma das opções do menu:");
+        int opcao = input.nextInt();
+
+        switch (opcao) {
+            case 1:
+                System.out.println("ESCOLHA O ACOMPANHAMENTO:");
+                System.out.println("=======================================");
+                System.out.println("BATATA FRITA - R$:5,00");
+                System.out.println("REFRIGERANTE - R$:4,00");
+                System.out.println("0 ou 1 - selecionar acompanhamentos especificos");
+                System.out.println("2 ou mais - selecionar todos os acompanhamentos");
+                System.out.println("========================================");
+                System.out.print("quantos acompanhamentos vc deseja escolher?");
+                int opcoes = input.nextInt();
+                if (opcoes < 2) {
+                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    String escolha = input.next();
+                    if (escolha.equals("s")) {
+                        System.out.println("1 - BATATA FRITA - R$:5,00");
+                        System.out.println("2 - REFRIGERANTE - R$:4,00");
+                        System.out.println("========================================");
+                        System.out.print("qual dos acompanhamentos vc deseja escolher? --- selecione maior que 2 para ambos os acompanhamentos");
+                        int opcoes2 = input.nextInt();
+                        if (opcoes2 > 2) {
+                            System.out.println("todos os acompanhamentos selecionados!!");
+                            float preco = 20 + 5 + 4;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else if (opcoes2 == 1) {
+                            float preco = 20 + 5;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else {
+                            float preco = 20 + 4;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        }
+                    } else if (escolha.equals("n")) {
+                        if (opcoes == 1) {
+                            float preco = 20 + 5;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else if (opcoes == 2) {
+                            float preco = 20 + 4;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else {
+                            System.out.print("nenhuma das opões escolhida");
+                            float preco = 20;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        }
+                    } else {
+                        float preco = 20;
+                        System.out.print("o total a se pagar pela comida é R$:" + preco);
+                        break;
+
+                    }
+                } else {
+                    float preco = 20 + 5 + 4;
+                    System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                    break;
+                }
+
+            case 2:
+                System.out.println("ESCOLHA O ACOMPANHAMENTO:");
+                System.out.println("=======================================");
+                System.out.println("1 - SUCO - R$:3,00");
+                System.out.println("2 - SOBREMESA - R$:6,00");
+                System.out.println("0 ou 1 - selecionar acompanhamentos especificos");
+                System.out.println("2 ou mais - selecionar todos os acompanhamentos");
+                System.out.println("========================================");
+                System.out.print("quantos acompanhamentos vc deseja escolher? ");
+                int opcoes3 = input.nextInt();
+                if (opcoes3 < 2) {
+                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    String escolha = input.next();
+                    if (escolha.equals("s")) {
+                        System.out.println("1 -SUCO - R$:3,00");
+                        System.out.println("2 - SOBREMESA - R$:6,00");
+                        System.out.println("========================================");
+                        System.out.print("qual dos acompanhamentos vc deseja escolher? --- selecione maior que 2 para ambos os acompanhamentos");
+                        int opcoes2 = input.nextInt();
+                        if (opcoes2 > 2) {
+                            System.out.println("todos os acompanhamentos selecionados!!");
+                            float preco = 25 + 3 + 6;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else if (opcoes2 == 1) {
+                            float preco = 25 + 3;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else {
+                            float preco = 25 + 6;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        }
+                    } else if (escolha.equals("n")) {
+                        if (opcoes3 == 1) {
+                            float preco = 25 + 3;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else if (opcoes3 == 2) {
+                            float preco = 25 + 6;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else {
+                            System.out.print("nenhuma das opões escolhida");
+                            float preco = 25;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        }
+                    } else {
+                        float preco = 25;
+                        System.out.print("o total a se pagar pela comida é R$:" + preco);
+                        break;
+
+                    }
+                } else {
+                    float preco = 25 + 3 + 6;
+                    System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                    break;
+                }
+
+            case 3:
+                System.out.println("ESCOLHA O ACOMPANHAMENTO:");
+                System.out.println("=======================================");
+                System.out.println("AGUA - R$:2,00");
+                System.out.println("FRUTA - R$:3,00");
+                System.out.println("0 ou 1 - selecionar acompanhamentos especificos");
+                System.out.println("2 ou mais - selecionar todos os acompanhamentos");
+                System.out.println("========================================");
+                System.out.print("quantos acompanhamentos vc deseja escolher?");
+                int opcoes4 = input.nextInt();
+                if (opcoes4 < 2) {
+                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    String escolha = input.next();
+                    if (escolha.equals("s")) {
+                        System.out.println("1 - AGUA - R$:2,00");
+                        System.out.println("2 - FRUTA - R$:3,00");
+                        System.out.println("========================================");
+                        System.out.print("qual dos acompanhamentos vc deseja escolher? --- selecione maior que 2 para ambos os acompanhamentos");
+                        int opcoes2 = input.nextInt();
+                        if (opcoes2 > 2) {
+                            System.out.println("todos os acompanhamentos selecionados!!");
+                            float preco = 15 + 2 + 3;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else if (opcoes2 == 1) {
+                            float preco = 15 + 2;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        } else {
+                            float preco = 15 + 3;
+                            System.out.println("o total a se pagar pela comida é R$:" + preco);
+                            break;
+                        }
+                    } else if (escolha.equals("n")) {
+                        if (opcoes4 == 1) {
+                            float preco = 15 + 2;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else if (opcoes4 == 2) {
+                            float preco = 15 + 3;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        } else {
+                            System.out.print("nenhuma das opões escolhida");
+                            float preco = 15;
+                            System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                            break;
+                        }
+                    } else {
+                        float preco = 15;
+                        System.out.print("o total a se pagar pela comida é R$:" + preco);
+                        break;
+
+                    }
+                } else {
+                    float preco = 15 + 2 + 3;
+                    System.out.println("o total a se pagar pela comida é de R$:" + preco);
+                    break;
+                }
+
+            default:
+                System.out.print("opção invalida!!!");
+
+
+
+        }
+
+
+
+
+
+
+        }
+    }
