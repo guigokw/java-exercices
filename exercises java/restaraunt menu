@@ -57,7 +57,7 @@ public class Main {
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
                         } else {
-                            System.out.print("nenhuma das opões escolhida");
+                            System.out.println("nenhuma das opões escolhidas");
                             float preco = 20;
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
@@ -117,7 +117,7 @@ public class Main {
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
                         } else {
-                            System.out.print("nenhuma das opões escolhida");
+                            System.out.println("nenhuma das opões escolhida");
                             float preco = 25;
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
@@ -177,7 +177,7 @@ public class Main {
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
                         } else {
-                            System.out.print("nenhuma das opões escolhida");
+                            System.out.println("nenhuma das opões escolhida");
                             float preco = 15;
                             System.out.println("o total a se pagar pela comida é de R$:" + preco);
                             break;
@@ -208,3 +208,6 @@ public class Main {
 
         }
     }
+
+
+
