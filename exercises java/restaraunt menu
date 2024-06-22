@@ -25,7 +25,7 @@ public class Main {
                 System.out.print("quantos acompanhamentos vc deseja escolher?");
                 int opcoes = input.nextInt();
                 if (opcoes < 2) {
-                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    System.out.print("vc deseja selecionar algum acompanhamento, responda S OU N");
                     String escolha = input.next();
                     if (escolha.equals("s")) {
                         System.out.println("1 - BATATA FRITA - R$:5,00");
@@ -85,7 +85,7 @@ public class Main {
                 System.out.print("quantos acompanhamentos vc deseja escolher? ");
                 int opcoes3 = input.nextInt();
                 if (opcoes3 < 2) {
-                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    System.out.print("vc deseja selecionar algum acompanhamento, responda S OU N");
                     String escolha = input.next();
                     if (escolha.equals("s")) {
                         System.out.println("1 -SUCO - R$:3,00");
@@ -145,7 +145,7 @@ public class Main {
                 System.out.print("quantos acompanhamentos vc deseja escolher?");
                 int opcoes4 = input.nextInt();
                 if (opcoes4 < 2) {
-                    System.out.print("vc deseja selecionar mais algum acompanhamento, responda S OU N");
+                    System.out.print("vc deseja selecionar algum acompanhamento, responda S OU N");
                     String escolha = input.next();
                     if (escolha.equals("s")) {
                         System.out.println("1 - AGUA - R$:2,00");
