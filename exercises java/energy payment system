@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        float energia;
+        double preco = 0;
+        float dinheiro = 0;
+        double pagamento;
+        int opcao;
+        do {
+            System.out.println("CONSUMO DE ENERGIA");
+            System.out.println("=======================================");
+            System.out.println("1 - registrar consumo de energia");
+            System.out.println("2 - pagar conta");
+            System.out.println("3 - verficar saldo do devedor");
+            System.out.println("4 - sair");
+            System.out.println("========================================");
+            System.out.print("escolha uma dessas opcoes:");
+            opcao = input.nextInt();
+            switch (opcao) {
+                case 1:
+                    System.out.print("quantos kwh foram usados neste mes?");
+                    energia = input.nextFloat();
+                    preco = energia * 0.50;
+                    System.out.println("o total a se pagar de enrigia este mes é de R$:" +preco);
+                    break;
+
+                case 2:
+                    System.out.print("quantos R$ vc tem disponivel?");
+                    dinheiro = input.nextFloat();
+
+                    if (dinheiro < preco) {
+                        System.out.println("vc esta pagando mais do que o saldo do devedor");
+                    }
+                    else {
+                        System.out.println("vc conseguiu pagar sua conta de energia, saldo do devedor atualizado...");
+                    }
+                    break;
+
+                case 3:
+                    if (dinheiro > preco) {
+                        pagamento = dinheiro - preco;
+                        System.out.println("vc pagou sua conta de energia, agora o seu saldo do devedor é de R$:" + pagamento);
+                        break;
+                    } else {
+                        pagamento = dinheiro - preco;
+                        System.out.println("ao pagar sua conta de energia, vc acumulou uma divida de R$:" +pagamento);
+                        break;
+                    }
+
+                case 4:
+                    System.out.print("saindo do programa....");
+                    break;
+
+                default:
+                    System.out.println("opcao invalida, por favor insira novamente...");
+            }
+        } while (opcao != 4);
+
+    }
+}
