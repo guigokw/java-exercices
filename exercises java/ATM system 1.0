@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        float saldo = 0;
+        int opcao;
+        do {
+            System.out.println("SISTEMA BANCARIO");
+            System.out.println("===================================");
+            System.out.println("1 - depositar dinheiro");
+            System.out.println("2 - sacar dinheiro");
+            System.out.println("3 - verificar saldo");
+            System.out.println("4 - sair");
+            System.out.println("===================================");
+            System.out.print("escolha uma dessas opções");
+             opcao = input.nextInt();
+            if (opcao == 1) {
+                System.out.print("quantos R$ vc deseja depositar?");
+                float depositar = input.nextFloat();
+                float saldo_banco = saldo += depositar;
+                System.out.println("R$:" +depositar+ " depositados");
+            }
+            else if (opcao == 2) {
+                System.out.print("quantos R$ vc deseja sacar");
+                float sacar = input.nextFloat();
+                if (sacar > saldo) {
+                    System.out.println("nao é possivel sacar esse valor da sua conta bancaria!!");
+                }
+                else {
+                    float saldo_banco = saldo -= sacar;
+                    System.out.println("R$: " + sacar + " sacados");
+                }
+            }
+            else if (opcao == 3) {
+                System.out.println("SALDO DO BANCO:");
+                System.out.println("========================================");
+                System.out.println(saldo);
+            }
+        } while (opcao != 4);
+        
+        input.close();
+
+    }
+}
