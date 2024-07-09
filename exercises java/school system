@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("quantos alunos fizeram a prova:");
+        int q = input.nextInt();
+
+        String []alunos = new String[q];
+        double [] notas = new double[q];
+
+        for (int c = 0; c < alunos.length; c++) {
+            System.out.println("insira o nome do " + (c + 1)+ " aluno:");
+            alunos[c] = input.next();
+
+        }
+        for (int c2 = 0; c2 < notas.length; c2++) {
+            System.out.println("insira a nota de " +alunos[c2]+ ":");
+            notas[c2] = input.nextDouble();
+
+        }
+
+        if (q <= 0) {
+            System.out.println("nehuma nota inserida:");
+        }
+        else {
+            System.out.println("NOTA DOS ALUNOS:");
+        }
+        for (int c3 = 0; c3 < alunos.length; c3++) {
+            System.out.println("a nota de " + alunos[c3] + " foi de " + notas[c3]);
+        }
+}
+
+}
