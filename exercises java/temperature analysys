@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("quandos dias de temperatura serao registrados?");
+        int dias = input.nextInt();
+
+        double [] temperatura = new double[dias];
+        double soma = 0;
+        double media = 0;
+        int acima_media = 0;
+
+
+        for (int c = 0; c < temperatura.length; c++) {
+            System.out.print("quantos graus foi registrado no " + (c + 1) + " dia");
+            temperatura[c] = input.nextDouble();
+            soma += temperatura[c];
+        }
+            media = soma / dias;
+
+        for (double temp : temperatura) {
+            if (temp > media) {
+                acima_media++;
+            }
+        }
+        
+        System.out.println("a temperatura media ao longo desses " +dias+ " dias foi de " +media);
+
+        System.out.println("ao todo foram " +acima_media+ " dias com temperatura maior que a da media");
+
+        input.close();
+
+    }
+}
