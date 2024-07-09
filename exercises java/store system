@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("quantos produtos vc deseja inserir?");
+        int p = input.nextInt();
+
+
+        String [] produto = new String[p];
+        double [] preco = new double[p];
+
+        for (int cc = 0; cc < produto.length; cc++) {
+            System.out.print("insira o nome do " + (cc + 1)+ " produto");
+            produto[cc] = input.next();
+        }
+
+        for (int cc2 = 0; cc2 < preco.length; cc2++) {
+            System.out.print("insira o preço do " +produto[cc2]);
+            preco[cc2] = input.nextDouble();
+        }
+
+        if (p <= 0) {
+            System.out.println("nenhum produto inserido");
+        }
+        else {
+            System.out.println("PRODUTOS A VENDA");
+        }
+
+        double preco_total = 0;
+
+        for (int cc3 = 0; cc3 < produto.length; cc3++) {
+            System.out.println(produto[cc3]+ " - R$:" +preco[cc3]);
+            preco_total += preco[cc3];
+        }
+        System.out.println("O PREÇO TOTAL DE TODOS OS PRODUTOS É DE R$:" +preco_total);
+
+
+
+
+    }
+}
