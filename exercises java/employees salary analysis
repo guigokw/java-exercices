@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("quantos funcionarios tem na empresa?");
+        int f = input.nextInt();
+
+        String []nomes = new String[f];
+        double [] salarios = new double[f];
+
+        double soma = 0;
+        double media = 0;
+        int acima_media = 0;
+
+        for (int c = 0; c < nomes.length; c++) {
+            System.out.print("qual o nome do " + (c + 1) + " funcionario?");
+            nomes[c] = input.next();
+        }
+
+        for (int c2 = 0; c2 < salarios.length; c2++) {
+            System.out.print("qual o salario de " +nomes[c2]);
+            salarios[c2] = input.nextDouble();
+            soma += salarios[c2];
+        }
+
+        media = soma / f;
+
+        for (double s : salarios) {
+            if (s > media) {
+                acima_media++;
+            }
+        }
+
+
+        System.out.println("o salario medio dos funcionarios é de R$:" +media);
+
+
+
+        System.out.println("FUNCIONARIOS COM SALARIO ACIMA DA MEDIA:");
+        for (int c3 = 0; c3 < salarios.length; c3++) {
+            if (salarios[c3] > media) {
+                System.out.println(nomes[c3]);
+            }
+        }
+        
+        System.out.println("==================================================");
+
+        System.out.println("FUNCIONARIOS COM SALARIO ABAIXO OU IGUAL A MEDIA:");
+        for (int c4 = 0; c4 < salarios.length; c4++) {
+            if (salarios[c4] <= media) {
+                System.out.println(nomes[c4]);
+            }
+        }
+        
+        input.close();
+
+
+
+
+    }
+}
