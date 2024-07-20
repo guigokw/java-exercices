@@ -1,57 +1,78 @@
+package calculadorausandometodos;
 import java.util.Scanner;
-
 public class Main {
+
+    public static void soma(double numero, double numero2) {
+        double soma = numero + numero2;
+        System.out.println("o resultado da soma é " +soma);
+    }
+
+    public static void subtracao(double numero, double numero2) {
+        double subtracao = numero - numero2;
+        System.out.println("o resultado da subtracao é " +subtracao);
+    }
+     static void multiplicacao(double numero, double numero2) {
+        double multiplicacao = numero * numero2;
+        System.out.println("o resultado da multplicação é " +multiplicacao);
+    }
+    public static void divisão(double numero, double numero2) {
+        if (numero2 == 0) {
+            System.out.println("nao foi possivel fazer a divisão");
+        } else {
+            double divisao = numero / numero2;
+            System.out.println("o resultado da divisão é " + divisao);
+        }
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println("CALCULADORA");
-        System.out.println("====================================================");
-        System.out.println("1 - adição");
-        System.out.println("2 - subtração");
+
+        System.out.println("1 - adicao");
+        System.out.println("2 - subtracao");
         System.out.println("3 - multiplicação");
         System.out.println("4 - divisão");
-        System.out.println("=====================================================");
-        System.out.print("qual a opção vc deseja escolher:");
+        System.out.println("5 - sair da calculadora");
+        System.out.println("=======================================");
+        System.out.print("escolha uma dessas opções");
         int opcao = input.nextInt();
+
         switch (opcao) {
             case 1:
-                System.out.print("insira o primeiro numero:");
-                float numero1 = input.nextFloat();
-                System.out.print("insira o segundo numero");
-                float numero2 = input.nextFloat();
-                float soma = numero1 + numero2;
-                System.out.print("o resultado da soma é " +soma);
-                break;
+                    System.out.print("insira o primeiro numero:");
+                    double numero = input.nextDouble();
+                    System.out.print("insira o segundo numero ");
+                    double numero2 = input.nextDouble();
+
+                    soma(numero, numero2);
+                    break;
             case 2:
                 System.out.print("insira o primeiro numero:");
-                float numero3 = input.nextFloat();
-                System.out.print("insira o segundo numero");
-                float numero4 = input.nextFloat();
-                float subtracao = numero3 - numero4;
-                System.out.println("o resultado da subtração é " +subtracao);
-                break;
+                 numero = input.nextDouble();
+                System.out.print("insira o segundo numero ");
+                 numero2 = input.nextDouble();
+                 subtracao(numero, numero2);
+                 break;
             case 3:
                 System.out.print("insira o primeiro numero:");
-                float numero5 = input.nextFloat();
-                System.out.print("insira o segundo numero");
-                float numero6 = input.nextFloat();
-                float multiplicacao = numero5 * numero6;
-                System.out.println("o resultado da multiplicação é " +multiplicacao);
-                break;
+                 numero = input.nextDouble();
+                System.out.print("insira o segundo numero ");
+                 numero2 = input.nextDouble();
+                 multiplicacao(numero,numero2);
+                 break;
             case 4:
                 System.out.print("insira o primeiro numero:");
-                float numero7 = input.nextFloat();
-                System.out.print("insira o segundo numero");
-                float numero8 = input.nextFloat();
-                if (numero8 == 0) {
-                    System.out.println("nao foi possivel fazer essa divisão!!!");
-                }
-                else {
-                    float divisao = numero7 / numero8;
-                    System.out.println("o resultado da divisão é " +divisao);
-                }
+                 numero = input.nextDouble();
+                System.out.print("insira o segundo numero ");
+                 numero2 = input.nextDouble();
+                 divisão(numero, numero2);
+                 break;
+
+            case 5:
+                System.out.println("saindo da calculadora....");
                 break;
+
             default:
-                System.out.println("nenhuma das opções escolhidas!!!");
+                System.out.println("opcao invalida!");
         }
 
         input.close();
