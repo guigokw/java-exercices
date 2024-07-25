@@ -1,0 +1,94 @@
+package mercadodetrabalho;
+import java.util.Scanner;
+
+public class CalculadorsDeDescontos {
+
+    public static double descontoEletrodomesticos(double preco) {
+        return preco - (preco * 10) / 100;
+    }
+    public static double descontoRoupas(double preco) {
+        return preco - (preco * 20) / 100;
+    }
+    public static double descontoAlimentos(double preco) {
+        return preco - (preco * 5) / 100;
+    }
+    public static double descontoLivros(double preco) {
+        return preco - (preco * 15) / 100;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("1 - ELETRODOMESTICOS");
+        System.out.println("2 - ROUPAS");
+        System.out.println("3 - ALIMENTOS");
+        System.out.println("4 - LIVROS");
+        System.out.println("5 - OUTROS");
+
+        System.out.println("===========================================");
+
+        System.out.print("insira sua opcao de compra:");
+        int opcao = input.nextInt();
+
+        switch (opcao) {
+            case 1:
+                System.out.print("qual o preço do produto?");
+                double preco = input.nextDouble();
+                while (preco < 0) {
+                    System.out.print("preco invalido, por favor insira novamente");
+                    preco = input.nextDouble();
+                }
+                double preco_total = descontoEletrodomesticos(preco);
+                System.out.println("com o desconto de 10%, o produto custara R$:"+preco_total);
+                break;
+
+            case 2:
+                System.out.print("qual o preço do produto?");
+                preco = input.nextDouble();
+                while (preco < 0) {
+                    System.out.print("preco invalido, por favor insira novamente");
+                    preco = input.nextDouble();
+                }
+                preco_total = descontoRoupas(preco);
+                System.out.println("com o desconto de 20%, o produto custara R$:"+preco_total);
+                break;
+
+            case 3:
+                System.out.print("qual o preço do produto?");
+                preco = input.nextDouble();
+                while (preco < 0) {
+                    System.out.print("preco invalido, por favor insira novamente");
+                    preco = input.nextDouble();
+                }
+                preco_total = descontoAlimentos(preco);
+                System.out.println("com o desconto de 5%, o produto custara R$:"+preco_total);
+                break;
+
+            case 4:
+                System.out.print("qual o preço do produto?");
+                preco = input.nextDouble();
+                while (preco < 0) {
+                    System.out.print("preco invalido, por favor insira novamente");
+                    preco = input.nextDouble();
+                }
+                preco_total = descontoLivros(preco);
+                System.out.println("com o desconto de 15%, o produto custara R$:"+preco_total);
+                break;
+
+            case 5:
+                System.out.print("qual o preço do produto?");
+                preco = input.nextDouble();
+                while (preco < 0) {
+                    System.out.print("preco invalido, por favor insira novamente");
+                    preco = input.nextDouble();
+                }
+                System.out.println("o preco total do produto sera de R$:" +preco);
+                break;
+
+            default:
+                System.out.println("nenhuma das opcoes escolhidas, saindo do programa....");
+        }
+
+        input.close();
+    }
+}
