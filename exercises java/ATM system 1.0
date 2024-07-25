@@ -37,7 +37,7 @@ public class Main {
                 System.out.println("========================================");
                 System.out.println(saldo);
             }
-        } while (opcao != 4);
+        } while (opcao < 4);
         
         input.close();
 
