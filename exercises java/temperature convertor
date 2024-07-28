@@ -1,0 +1,54 @@
+
+import java.util.Scanner;
+
+public class ConversorDeTempreatura {
+
+    public static double converterParaFahreinheit(double graus) {
+        return graus * 9/5 + 32;
+    }
+
+    public static double converterParaCelsius(double graus) {
+        return (graus - 32) * 5/9;
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("1 - de graus celsius para fahreinheit");
+            System.out.println("2 - de graus fahreinheit para celsius");
+            System.out.println("3 ou mais - sair do programa");
+
+
+            System.out.println("===========================================");
+
+            System.out.print("qual conversão vc deseja fazer?");
+            int opcao = input.nextInt();
+
+            if (opcao >= 3) {
+                System.out.println("saindo do programa.....");
+                break;
+            }
+
+
+            System.out.print("quantos graus vc deseja converter?");
+            double graus = input.nextDouble();
+
+            switch (opcao) {
+                case 1:
+                    double fahrenheit = converterParaFahreinheit(graus);
+                    System.out.println(graus + " graus celsius convertido para fahreinheit dara " + fahrenheit + " graus fahreinheit");
+                    break;
+
+                case 2:
+                    double celsius = converterParaCelsius(graus);
+                    System.out.println(graus + " fahreinheit convertido para celsius dara " + celsius + " graus celsius");
+                    break;
+
+
+            }
+        }
+        
+        input.close();
+    }
+}
