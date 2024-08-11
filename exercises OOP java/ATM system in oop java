@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class ContaBancaria {
+    Scanner input = new Scanner(System.in);
+    int numero_da_conta;
+    double saldo;
+    String titular_da_conta;
+
+
+    void depositar() {
+        System.out.print("digite o numero da conta para poder prosseguir...");
+        int numero = input.nextInt();
+        if (numero == numero_da_conta) {
+            System.out.print("quantos R$: vc deseja depositar");
+            double deposito = input.nextDouble();
+            saldo += deposito;
+            System.out.println("R$:"+deposito+ " depositados");
+        } else {
+            System.out.println("nao foi possivel fazer a operação...");
+        }
+    }
+
+    void sacar() {
+        System.out.print("digite o numero da conta para poder prosseguir...");
+        int numero = input.nextInt();
+        if (numero == numero_da_conta) {
+            System.out.print("quantos R$: vc deseja sacar");
+            double saque = input.nextDouble();
+            if (saque < saldo) {
+                saldo -= saque;
+                System.out.println("R$:" +saque+ " sacados");
+            } else {
+                System.out.println("nao foi possivel fazer a operação...");
+            }
+        }
+    }
+
+    void consultar_saldo() {
+        System.out.print("digite o numero da conta para poder prosseguir...");
+        int numero = input.nextInt();
+        if (numero == numero_da_conta) {
+            System.out.println("SALDO ATUAL: R$:" +this.saldo);
+        } else {
+            System.out.println("nao foi possivel realizar essa operação...");
+        }
+    }
+
+    void detalhes_da_conta() {
+        System.out.print("digite o numero da conta para poder prosseguir...");
+        int numero = input.nextInt();
+        if (numero == numero_da_conta) {
+            System.out.println("TITULAR: " +this.titular_da_conta);
+            System.out.println("SALDO ATUAL: R$:" +this.saldo);
+            System.out.println("NUMERO DA CONTA: " +this.numero_da_conta);
+        } else {
+            System.out.println("nao foi possivel fazer a operação...");
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        ContaBancaria conta1 = new ContaBancaria();
+
+        while (true) {
+            System.out.println("1 - criar conta bancaria");
+            System.out.println("2 - depositar");
+            System.out.println("3 - sacar");
+            System.out.println("4 - consultar saldo");
+            System.out.println("5 - ver detalhes da conta");
+            System.out.println("6 - sair do caixa eletronico");
+            System.out.println("==================================");
+
+            System.out.print("escolha uma dessas opções:");
+            int opcao = input.nextInt();
+
+            if (opcao == 1) {
+                System.out.println("insira o nome do titular da conta:");
+                String titularConta = input.next();
+                conta1.titular_da_conta = titularConta;
+
+                System.out.println("insira o numero da conta:");
+                int numeroConta = input.nextInt();
+                conta1.numero_da_conta = numeroConta;
+
+                System.out.println("insira o saldo da conta:");
+                double saldoConta = input.nextDouble();
+                conta1.saldo = saldoConta;
+            }
+            else if (opcao == 2) {
+                conta1.depositar();
+            }
+            else if (opcao == 3) {
+                conta1.sacar();
+            }
+            else if (opcao == 4) {
+                conta1.consultar_saldo();
+            }
+            else if (opcao == 5) {
+                conta1.detalhes_da_conta();
+            }
+            else if (opcao == 6) {
+                System.out.println("saindo do caixa eletronico....");
+                break;
+            }
+            else {
+                System.out.println("opcao invalida por favor digite novamente");
+            }
+        }
+    }
+}
