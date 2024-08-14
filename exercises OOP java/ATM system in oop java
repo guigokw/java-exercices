@@ -32,6 +32,8 @@ public class ContaBancaria {
             } else {
                 System.out.println("nao foi possivel fazer a operação...");
             }
+        } else {
+            System.out.println("nao foi possivel fazer a operação");
         }
     }
 
@@ -77,7 +79,8 @@ public class ContaBancaria {
 
             if (opcao == 1) {
                 System.out.println("insira o nome do titular da conta:");
-                String titularConta = input.next();
+                input.nextLine();
+                String titularConta = input.nextLine();
                 conta1.titular_da_conta = titularConta;
 
                 System.out.println("insira o numero da conta:");
