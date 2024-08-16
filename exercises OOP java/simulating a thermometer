@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class Termometro {
+    Scanner input = new Scanner(System.in);
+    double temperaturaAtual;
+    double temperaturaMaxima;
+    double temperaturaMinima;
+
+    void aumentarTemperatura() {
+        System.out.print("a temperatura aumentou, qual a temperatura atual?");
+        double tempAtual = input.nextDouble();
+        while (tempAtual <= temperaturaAtual) {
+            System.out.println("esta temperatura esta abaixo da atual por favor, certifique se de colocar a temperatura correta...");
+            tempAtual = input.nextDouble();
+        }
+        temperaturaAtual = tempAtual;
+        if (temperaturaAtual > temperaturaMaxima) {
+            temperaturaMaxima = temperaturaAtual;
+        }
+    }
+
+    void diminuirTemperatura() {
+        System.out.print("a temperatura caiu, qual a temperatura atual?");
+        double tempAtual2 = input.nextDouble();
+        while (tempAtual2 >= temperaturaAtual) {
+            System.out.println("esta temperatura esta acima da atual por favor, certifique se de colocar a temperatura correta...");
+            tempAtual2 = input.nextDouble();
+        }
+        temperaturaAtual = tempAtual2;
+        if (temperaturaAtual < temperaturaMinima) {
+            temperaturaMinima = temperaturaAtual;
+        }
+    }
+
+    void exibirTemperatura() {
+        System.out.println("a temperatura atual é de " +this.temperaturaAtual);
+        System.out.println("a temperatura maxima é de " +this.temperaturaMaxima);
+        System.out.println(("a temperatura minima é de " +this.temperaturaMinima));
+    }
+
+    public static void main(String[] args) {
+        Termometro t1 = new Termometro();
+
+        t1.temperaturaAtual = 31.2;
+        t1.temperaturaMinima = 24.6;
+        t1.temperaturaMaxima = 34.4;
+
+        t1.exibirTemperatura();
+        t1.aumentarTemperatura();
+        t1.exibirTemperatura();
+        t1.diminuirTemperatura();
+        t1.exibirTemperatura();
+    }
+}
