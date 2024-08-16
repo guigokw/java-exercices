@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class Retangulo {
+    Scanner input = new Scanner(System.in);
+    double largura;
+    double altura;
+
+    void definirDimensoes() {
+        System.out.print("qual a largura do retangulo?");
+        double novaLargura = input.nextDouble();
+        System.out.print("qual a altura do retangulo?");
+        double novaAltura = input.nextDouble();
+
+        largura = novaLargura;
+        altura = novaAltura;
+    }
+
+    double calcularArea() {
+        return largura * altura;
+    }
+
+    double calcularPerimetro() {
+        return 2 * (largura + altura);
+    }
+
+    void exibirDimensoes() {
+        System.out.println("a dimensão atual da largura do retangulo é de " + this.largura);
+        System.out.println("a dimensao atual da altura do retangulo é de " +this.altura);
+    }
+
+    public static void main(String[] args) {
+        Retangulo r1 = new Retangulo();
+
+        r1.largura = 7;
+        r1.altura = 10;
+        r1.exibirDimensoes();
+
+        double area = r1.calcularArea();
+        System.out.println("a area do retangulo é de " +area);
+
+        double perimetro = r1.calcularPerimetro();
+        System.out.println("o perimetro do retangulo é de " +perimetro);
+
+        r1.definirDimensoes();
+        double area2 = r1.calcularArea();
+        System.out.println("a area do retangulo é de " +area2);
+
+        double perimetro2 = r1.calcularPerimetro();
+        System.out.println("o perimetro do retangulo é de " +perimetro2);
+    }
+
+}
