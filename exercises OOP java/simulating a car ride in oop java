@@ -1,0 +1,77 @@
+// classe
+
+public class Carro {
+    String modelo;
+    String cor;
+    boolean ligado;
+    int km;
+
+
+    // metodos
+
+    void ligar_o_carro() {
+        if (ligado) {
+            System.out.println("o carro ja esta ligado");
+        } else {
+            System.out.println("ligando o carro...");
+            ligado = true;
+        }
+    }
+
+    boolean andar() {
+        if (!ligado) {
+            System.out.println("nao da para andar com o carro desligado!!");
+            return false;
+        } else {
+            km += 7;
+            System.out.println("o carro andou " + this.km + " km");
+            if (km >= 24) {
+                System.out.println("vc chegou ao seu destino");
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+    void desligar_o_carro() {
+        if (!ligado) {
+            System.out.println("o carro ja esta deligado");
+        } else {
+            System.out.println("desligando o carro....");
+            ligado = false;
+        }
+    }
+
+    void analisar_carro() {
+        System.out.println("esse carro é do modelo " + this.modelo);
+        System.out.println("esse carro é da cor " + this.cor);
+    }
+
+    public static void main(String[] args) {
+        Carro c1 = new Carro();
+
+        // atributos
+
+        c1.modelo = "fiesta";
+        c1.cor = "preto";
+        c1.ligado = false;
+        c1.km = 0;
+
+
+        // objetos
+
+        c1.analisar_carro();
+        c1.ligar_o_carro();
+        while (c1.ligado) {
+            boolean resultado = c1.andar();
+            if (resultado) {
+                break;
+            }
+        }
+        c1.desligar_o_carro();
+
+
+    }
+
