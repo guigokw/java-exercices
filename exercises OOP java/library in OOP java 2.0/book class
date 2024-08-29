@@ -1,0 +1,55 @@
+public class Livro {
+    private String titulo;
+    private String autor;
+    private boolean emprestado;
+
+    public String getTitulo() {
+        return this.titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return this.autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public boolean getEmprestado() {
+        return this.emprestado;
+    }
+
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
+    }
+
+    public void emprestar() {
+        if (! emprestado) {
+            System.out.println(this.titulo+ " emprestado");
+            emprestado = true;
+        } else {
+            System.out.println(this.titulo+ " ja esta emprestado");
+        }
+    }
+
+    public void devolver() {
+        if (emprestado) {
+            System.out.println("devolvendo " +this.titulo);
+            emprestado = false;
+        } else {
+            System.out.println("o livro " +this.titulo+ " nao foi pego emprestado, logo nao ha como devolver");
+        }
+    }
+
+    public void getStatus() {
+        if (emprestado) {
+            System.out.println(this.titulo+ " nao esta disponivel");
+        } else {
+            System.out.println(this.titulo+ " esta disponivel");
+        }
+    }
+}
