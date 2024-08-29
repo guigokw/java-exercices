@@ -1,0 +1,30 @@
+public class MainLivro {
+    public static void main(String[] args) {
+        Livro livro1 = new Livro();
+        Livro livro2 = new Livro();
+        Leitor leitor1 = new Leitor();
+
+        livro1.setTitulo("as cronicas de gelo e fogo");
+        livro1.setAutor("george rr martin");
+        livro1.setEmprestado(false);
+
+        livro2.setTitulo("harry potter e a pedra filosofal");
+        livro2.setAutor(("JK rowling"));
+        livro2.setEmprestado(false);
+
+        leitor1.setNome("Luiz guilherme");
+        leitor1.setLivroEmprestado(null);
+
+
+        leitor1.emprestarLivro(livro2);
+        livro2.emprestar();
+        livro1.emprestar();
+        leitor1.devolverLivro(livro1);
+        leitor1.devolverLivro(livro2);
+        leitor1.devolverLivro(livro2);
+        leitor1.emprestarLivro(livro1);
+        leitor1.emprestarLivro(livro2);
+
+
+    }
+}
