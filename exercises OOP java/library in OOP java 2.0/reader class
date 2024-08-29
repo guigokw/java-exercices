@@ -1,0 +1,36 @@
+public class Leitor {
+    private String nome;
+    private Livro livroEmprestado = null;
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Livro getLivroEmprestado() {
+        return this.livroEmprestado;
+    }
+
+    public void setLivroEmprestado(Livro livroEmprestado) {
+        this.livroEmprestado = livroEmprestado;
+    }
+
+    public void emprestarLivro(Livro livro1) {
+        if (livroEmprestado == null && ! livro1.getEmprestado()) {
+            livro1.emprestar();
+        } else {
+            System.out.println("nao foi possivel fazer o emprestimo de " +livro1.getTitulo());
+        }
+    }
+
+    public void devolverLivro(Livro livro1) {
+        if (livro1.getEmprestado()) {
+            livro1.devolver();
+        } else {
+            System.out.println("nao foi possivel fazer a devolucao de " +livro1.getTitulo());
+        }
+    }
+}
