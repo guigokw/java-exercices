@@ -1,0 +1,30 @@
+public class Main {
+    public static void main(String[] args) {
+        Hospede h1 = new Hospede();
+        Hospede h2 = new Hospede();
+
+        Reserva r1 = new Reserva();
+        Reserva r2 = new Reserva();
+
+        h1.setNome("pablo vegetti");
+        h1.setId(1);
+        h1.setContato(999874581);
+
+        h2.setNome("dimitri payet");
+        h2.setId(2);
+        h2.setContato(988456712);
+
+        r1.setHospede(h1);
+        r1.setNumeroQuarto(189);
+        r1.setDataCheckIn("4 de novembro de 2024");
+        r1.setDataCheckOut("5 de novembro de 2024");
+
+        r2.setHospede(h2);
+        r2.setNumeroQuarto(190);
+        r2.setDataCheckIn("10 de novembro de 2024");
+        r2.setDataCheckOut("11 de novembro de 2024");
+
+        r1.exibirDetalhesReserva();
+        r2.exibirDetalhesReserva();
+    }
+}
