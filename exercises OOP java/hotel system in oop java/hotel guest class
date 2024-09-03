@@ -1,0 +1,44 @@
+public class Hospede {
+    private String nome;
+    private int id;
+    private int contato;
+    private boolean reservaFeita = true;
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getContato() {
+        return this.contato;
+    }
+
+    public void setContato(int contato) {
+        this.contato = contato;
+    }
+
+    public boolean getReservaFeita() {
+        return this.reservaFeita;
+    }
+
+    public void setReservaFeita(boolean reservaFeita) {
+        this.reservaFeita = reservaFeita;
+    }
+
+    public void exibirDetalhesHospede() {
+        System.out.println("NOME DO HOSPEDE: " +this.nome);
+        System.out.println("ID DO HOSPEDE: " +this.id);
+        System.out.println("CONTATO DO HOSPEDE: " +this.contato);
+    }
+}
