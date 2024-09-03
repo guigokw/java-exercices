@@ -1,0 +1,51 @@
+public class Reserva {
+    private Hospede hospede;
+    private int numeroQuarto;
+    private String dataCheckIn;
+    private String dataCheckOut;
+
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
+
+    public int getNumeroQuarto() {
+        return numeroQuarto;
+    }
+
+    public void setNumeroQuarto(int numeroQuarto) {
+        this.numeroQuarto = numeroQuarto;
+    }
+
+    public String getDataCheckIn() {
+        return dataCheckIn;
+    }
+
+    public void setDataCheckIn(String dataCheckIn) {
+        this.dataCheckIn = dataCheckIn;
+    }
+
+    public String getDataCheckOut() {
+        return dataCheckOut;
+    }
+
+    public void setDataCheckOut(String dataCheckOut) {
+        this.dataCheckOut = dataCheckOut;
+    }
+
+
+    public void exibirDetalhesReserva() {
+        if (hospede.getReservaFeita()) {
+            hospede.exibirDetalhesHospede();
+            System.out.println("NUMERO DO QUARTO: " +this.numeroQuarto);
+            System.out.println("DATA DE CHECK-IN: " +this.dataCheckIn);
+            System.out.println("DATA DE CHCK-OUT: " +this.dataCheckOut);
+            System.out.println("===========================================");
+        } else {
+            System.out.println("nao foi possivel exibir os detalhes da reserva");
+        }
+    }
+}
