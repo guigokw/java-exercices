@@ -1,0 +1,20 @@
+public class MainContaBancaria {
+    public static void main(String[] args) {
+        ContaBancaria c1 = new ContaBancaria();
+        ContaBancaria c2 = new ContaBancaria();
+
+        c1.setNomeDoTitular("gabriel lopes");
+        c1.setNumeroDaConta(1819);
+        c1.setSaldoBancario(-20);
+
+        c2.setNomeDoTitular("alberto torres");
+        c2.setNumeroDaConta(2526);
+        c2.setSaldoBancario(50);
+
+        c1.depositar();
+        c2.sacar();
+        c1.transferir(c2);
+        c1.exibirInformacoes();
+        c2.exibirInformacoes();
+    }
+}
