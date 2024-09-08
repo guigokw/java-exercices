@@ -1,0 +1,75 @@
+import java.util.Scanner;
+
+public class ContaBancaria {
+    Scanner input = new Scanner(System.in);
+    private String nomeDoTitular;
+    private int numeroDaConta;
+    private double saldoBancario;
+
+    public String getNomeDoTitular() {
+        return this.nomeDoTitular;
+    }
+
+    public void setNomeDoTitular(String nome) {
+        this.nomeDoTitular = nome;
+    }
+
+    public int getNumeroDaConta() {
+        return this.numeroDaConta;
+    }
+
+    public void setNumeroDaConta(int numero) {
+        this.numeroDaConta = numero;
+    }
+
+    public double getSaldoBancario() {
+        return this.saldoBancario;
+    }
+
+    public void setSaldoBancario(double saldo) {
+        while (saldo < 0) {
+            System.out.println("Saldo invalido, por favor insira novamente");
+            saldo = input.nextDouble();
+        }
+            this.saldoBancario = saldo;
+
+    }
+
+    public double depositar() {
+        System.out.print("quantos R$: vc deseja depositar na conta de " +this.nomeDoTitular);
+        double deposito = input.nextDouble();
+        System.out.println(" R$: " +deposito + " depositado");
+        return this.saldoBancario += deposito;
+    }
+
+    public void sacar() {
+        System.out.print("quantos R$: vc deseja sacar na conta de " +this.nomeDoTitular);
+        double saque = input.nextDouble();
+        if (saque > this.saldoBancario || saque < 0) {
+            System.out.println("Saque nao realizado pois o saque é maior que o saldo bancario");
+        } else {
+            System.out.println("R$: " +saque+ " sacados");
+            this.saldoBancario -= saque;
+        }
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("NOME DO TITULAR: " +this.nomeDoTitular);
+        System.out.println("NUMERO DA CONTA: " +this.numeroDaConta);
+        System.out.println("SALDO BANCARIOA ATUAL: " +this.saldoBancario);
+    }
+
+    public void transferir (ContaBancaria destino) {
+        System.out.print("Quantos R$ você deseja transferir para a conta de " + destino.getNomeDoTitular() + ": ");
+        double transferencia = input.nextDouble();
+
+        if (transferencia > this.saldoBancario || transferencia < 0) {
+            System.out.println("Transferência não realizada. Saldo insuficiente.");
+        } else {
+            this.saldoBancario -= transferencia;
+            destino.setSaldoBancario(destino.getSaldoBancario() + transferencia);
+            System.out.println("R$ " + transferencia + " transferidos para a conta de " + destino.getNomeDoTitular() + ".");
+        }
+    }
+
+}
