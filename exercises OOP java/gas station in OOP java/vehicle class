@@ -1,0 +1,38 @@
+package postodegasolina;
+
+public class Veiculo {
+    private String modeloDoVeiculo;
+    private String corDoVeiculo;
+    private double combustivelTotal;
+
+    public Veiculo(String modeloDoVeiculo, String corDoVeiculo, double combustivelTotal) {
+        this.modeloDoVeiculo = modeloDoVeiculo;
+        this.corDoVeiculo = corDoVeiculo;
+        this.combustivelTotal = combustivelTotal;
+    }
+
+    public String getModeloDoVeiculo() {
+        return modeloDoVeiculo;
+    }
+
+    public void setModeloDoVeiculo(String modeloDoVeiculo) {
+        this.modeloDoVeiculo = modeloDoVeiculo;
+    }
+
+    public String getCorDoVeiculo() {
+        return corDoVeiculo;
+    }
+
+    public void setCorDoVeiculo(String corDoVeiculo) {
+        this.corDoVeiculo = corDoVeiculo;
+    }
+
+    public double getCombustivelTotal() {
+        return combustivelTotal;
+    }
+
+    public void setCombustivelTotal(double combustivelTotal) {
+        this.combustivelTotal = combustivelTotal;
+    }
+
+}
