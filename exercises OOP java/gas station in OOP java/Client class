@@ -1,0 +1,45 @@
+package postodegasolina;
+
+public class Cliente {
+    private String nomeDoCliente;
+    private String contato;
+    private Veiculo veiculo;
+
+    public Cliente(String nomeDoCliente, String contato, Veiculo veiculo) {
+        this.nomeDoCliente = nomeDoCliente;
+        this.contato = contato;
+        this.veiculo = veiculo;
+    }
+
+    public String getNomeDoCliente() {
+        return nomeDoCliente;
+    }
+
+    public void setNomeDoCliente(String nomeDoCliente) {
+        this.nomeDoCliente = nomeDoCliente;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public void exibirDetalhes(Veiculo v1, BombaDeCombustivel b1) {
+        System.out.println("NOME DO CLIENTE: " +this.nomeDoCliente);
+        System.out.println("CONTATO DO CLIENTE: " +this.contato);
+        System.out.println("MODELO DO VEICULO: " +v1.getModeloDoVeiculo());
+        System.out.println("COR DO VEICULO: " +v1.getCorDoVeiculo());
+        System.out.println("COMBUSTIVEL TOTAL: " +v1.getCombustivelTotal()+ " litros de " +b1.getTipoDeCombustivel());
+    }
+}
