@@ -1,0 +1,48 @@
+package postodegasolina;
+
+import java.util.Scanner;
+
+public class BombaDeCombustivel {
+    Scanner input = new Scanner(System.in);
+    private String tipoDeCombustivel;
+    private double precoCombustivelPorLitro;
+
+    public BombaDeCombustivel(String tipoDeCombustivel, double precoCombustivelPorLitro) {
+        this.tipoDeCombustivel = tipoDeCombustivel;
+        this.precoCombustivelPorLitro = precoCombustivelPorLitro;
+    }
+
+    public String getTipoDeCombustivel() {
+        return this.tipoDeCombustivel;
+    }
+
+    public void setTipoDeCombustivel(String tipoDeCombustivel) {
+        this.tipoDeCombustivel = tipoDeCombustivel;
+    }
+
+
+    public double getPrecoCombustivelPorLitro() {
+        return precoCombustivelPorLitro;
+    }
+
+    public void setPrecoCombustivel(double precoCombustivelPorLitro) {
+        this.precoCombustivelPorLitro = precoCombustivelPorLitro;
+    }
+
+    public void abastecerPorLitro(Veiculo v1) {
+        System.out.print("quantos litros de " +this.tipoDeCombustivel+ " vc deseja abastecer?");
+        double litros = input.nextDouble();
+        double precoAbastecimento = litros * this.precoCombustivelPorLitro;
+        v1.setCombustivelTotal(v1.getCombustivelTotal() + litros);
+        System.out.println("o " +v1.getModeloDoVeiculo()+ " foi abstecido com R$:" +precoAbastecimento+ " de litros de " +this.tipoDeCombustivel);
+    }
+
+    public void abastecerPorValor(Veiculo v1) {
+        System.out.print("quantos R$: de " +this.tipoDeCombustivel+ " vc deseja abastecer");
+        double preco = input.nextDouble();
+        double litrosAbastecimento = preco / this.precoCombustivelPorLitro;
+        v1.setCombustivelTotal(v1.getCombustivelTotal() + litrosAbastecimento);
+        System.out.println("o " +v1.getModeloDoVeiculo()+ " foi abastecido com " +litrosAbastecimento+ " litros de " +this.tipoDeCombustivel);
+
+    }
+}
