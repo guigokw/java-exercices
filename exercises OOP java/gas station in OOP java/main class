@@ -1,0 +1,23 @@
+import postodegasolina.BombaDeCombustivel;
+import postodegasolina.Cliente;
+import postodegasolina.Veiculo;
+
+public class Main {
+    public static void main(String[] args) {
+        Veiculo veiculo1 = new Veiculo(" ford fiesta", "preto", 7);
+        BombaDeCombustivel bomba1 = new BombaDeCombustivel("gasolina",  6.09);
+        Cliente cliente1 = new Cliente("guilherme torres da silva", "28998756489", veiculo1);
+
+        Veiculo veiculo2 = new Veiculo("dodge ram", "branco", 14);
+        BombaDeCombustivel bomba2 = new BombaDeCombustivel("diesel", 5.96);
+        Cliente cliente2 = new Cliente("pedro parker", "27998687489", veiculo2);
+
+        bomba1.abastecerPorLitro(veiculo1);
+        cliente1.exibirDetalhes(veiculo1, bomba1);
+
+        System.out.println("====================================");
+
+        bomba2.abastecerPorValor(veiculo2);
+        cliente2.exibirDetalhes(veiculo2, bomba2);
+    }
+}
