@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class Moto implements Veiculo {
+    private String marca;
+    private String modelo;
+    private int ano;
+    private double preco;
+    Scanner input = new Scanner(System.in);
+
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("MARCA DA MOTO: " +this.marca);
+        System.out.println("MODELO DA MOTO: " +this.modelo);
+        System.out.println("ANO DE FABRICACAO DA MOTO: " +this.ano);
+        System.out.println("PRECO DA MOTO: " +this.preco);
+        System.out.println("================================================");
+    }
+
+    @Override
+    public double calcularValor() {
+        return preco;
+    }
+
+    @Override
+    public void adicionarDadosDoVeiculo() {
+        System.out.print("qual a marca da moto?");
+        marca = input.nextLine();
+
+
+        System.out.print("qual o modelo da moto?");
+        modelo = input.nextLine();
+
+
+        System.out.print("qual o ano de fabricação da moto?");
+        ano = input.nextInt();
+        while (ano < 1950 || ano > 2024) {
+            System.out.print("ano invalido, por favor insira o ano de fabricacao da moto novamente entre (1950 - 2024)");
+            ano = input.nextInt();
+        }
+
+        System.out.print("qual o preco da moto?");
+        preco = input.nextDouble();
+    }
+}
