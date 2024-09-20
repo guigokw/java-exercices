@@ -1,0 +1,20 @@
+public interface Veiculo {
+
+    String getMarca();
+    void setMarca(String marca);
+
+    String getModelo();
+    void setModelo(String modelo);
+
+    int getAno();
+    void setAno(int ano);
+
+    double getPreco();
+    void setPreco(double preco);
+
+    void exibirDetalhes();
+
+    double calcularValor();
+
+    void adicionarDadosDoVeiculo();
+}
