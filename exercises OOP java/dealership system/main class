@@ -1,0 +1,56 @@
+public class Main{
+    public static void main(String[] args) {
+        Carro c1 = new Carro();
+        Carro c2 = new Carro();
+        Carro c3 = new Carro();
+
+        Moto m1 = new Moto();
+        Moto m2 = new Moto();
+        Moto m3 = new Moto();
+
+        SistemaConcessonaria concessonaria1 = new SistemaConcessonaria();
+
+        c1.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(c1);
+
+        System.out.println("===============================");
+
+
+        c2.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(c2);
+
+        System.out.println("===============================");
+
+        c3.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(c3);
+
+        System.out.println("===============================");
+
+        m1.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(m1);
+
+        System.out.println("===============================");
+
+        m2.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(m2);
+
+        System.out.println("===============================");
+
+        m3.adicionarDadosDoVeiculo();
+        concessonaria1.adicionarVeiculos(m3);
+
+        System.out.println("===============================");
+
+        concessonaria1.listarVeiculos();
+
+        System.out.println("===============================");
+
+        concessonaria1.removerVeiculos(m2);
+
+        System.out.println("===============================");
+
+        concessonaria1.listarVeiculos();
+
+        System.out.println("O valor total dos veiculos é de R$:" +concessonaria1.calcularValorTotal());
+    }
+}
