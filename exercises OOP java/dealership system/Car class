@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class Carro implements Veiculo {
+    private String marca;
+    private String modelo;
+    private int ano;
+    private double preco;
+    Scanner input = new Scanner(System.in);
+
+
+
+    @Override
+    public String getMarca() {
+        return this.marca;
+    }
+
+    @Override
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    @Override
+    public String getModelo() {
+        return modelo;
+    }
+
+    @Override
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    @Override
+    public int getAno() {
+        return ano;
+    }
+
+    @Override
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    @Override
+    public double getPreco() {
+        return preco;
+    }
+
+    @Override
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("MARCA DO CARRO: " +this.marca);
+        System.out.println("MODELO DO CARRO: " +this.modelo);
+        System.out.println("ANO DE FABRICACAO DO CARRO: " +this.ano);
+        System.out.println("PRECO DO CARRO: " +this.preco);
+        System.out.println("================================================");
+    }
+
+    @Override
+    public double calcularValor() {
+        return preco;
+    }
+
+    @Override
+    public void adicionarDadosDoVeiculo() {
+        System.out.print("qual a marca do carro?");
+        marca = input.nextLine();
+
+        System.out.print("qual o modelo do carro?");
+        modelo = input.nextLine();
+
+
+        System.out.print("qual o ano de fabricação do carro?");
+        ano = input.nextInt();
+        while (ano < 1950 || ano > 2024) {
+            System.out.println("ano invalido por favor me indique o ano de fabricação do carro entre (1950 - 2024)");
+            ano = input.nextInt();
+        }
+
+        System.out.print("qual o preco do carro?");
+        preco = input.nextDouble();
+    }
+}
