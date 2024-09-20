@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+
+
+public class SistemaConcessonaria {
+    ArrayList<Veiculo>veiculos = new ArrayList<>();
+
+
+
+    public void adicionarVeiculos(Veiculo veiculo) {
+        veiculos.add(veiculo);
+        System.out.println(veiculo.getMarca()+ " do modelo " +veiculo.getModelo()+ " foi adicionado ao sistema");
+    }
+
+    public void removerVeiculos(Veiculo veiculo) {
+        veiculos.remove(veiculo);
+        System.out.println(veiculo.getMarca()+ " do modelo " +veiculo.getModelo()+ " foi removido do sistema");
+    }
+
+
+    public void listarVeiculos() {
+        for (Veiculo v : veiculos) {
+            if (v == null) {
+                System.out.println("a lista esta vazia");
+            } else {
+                v.exibirDetalhes();
+            }
+        }
+    }
+
+    public double calcularValorTotal() {
+        double precoTotal = 0;
+        for (Veiculo v : veiculos) {
+            precoTotal += v.getPreco();
+        }
+        return precoTotal;
+    }
+
+}
