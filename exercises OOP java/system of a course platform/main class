@@ -1,0 +1,68 @@
+public class Main {
+    public static void main(String[] args) {
+        CursoPresencial cursoPresencial1 = new CursoPresencial();
+        CursoPresencial cursoPresencial2 = new CursoPresencial();
+
+        CursoOnline cursoOnline1 = new CursoOnline();
+        CursoOnline cursoOnline2 = new CursoOnline();
+
+        Aluno aluno1 = new Aluno();
+        Aluno aluno2 = new Aluno();
+        Aluno aluno3 = new Aluno();
+        Aluno aluno4 = new Aluno();
+        Aluno aluno5 = new Aluno();
+
+        GerenciadorDeCursos g1 = new GerenciadorDeCursos();
+
+        cursoPresencial1.registrarCursoPresencial();
+        g1.adicionarCurso(cursoPresencial1);
+
+        System.out.println("===========================================");
+
+        cursoPresencial2.registrarCursoPresencial();
+        g1.adicionarCurso(cursoPresencial2);
+
+        System.out.println("===========================================");
+
+        cursoOnline1.registrarCursoOnline();
+        g1.adicionarCurso(cursoOnline1);
+
+        System.out.println("===========================================");
+
+        cursoOnline2.registrarCursoOnline();
+        g1.adicionarCurso(cursoOnline2);
+
+        System.out.println("===========================================");
+
+        System.out.println("----- lista de cursos ------");
+        g1.listarCursos();
+
+        System.out.println("===========================================");
+
+        aluno1.setNomeAluno("guilherme torres");
+        aluno1.setCursoMatriculado(cursoPresencial2);
+        g1.adicionarAluno(aluno1);
+
+        aluno2.setNomeAluno("pietro carvalho");
+        aluno2.setCursoMatriculado(cursoOnline1);
+        g1.adicionarAluno(aluno2);
+
+        aluno3.setNomeAluno("jose ribeiro");
+        aluno3.setCursoMatriculado(cursoOnline2);
+        g1.adicionarAluno(aluno3);
+
+        aluno4.setNomeAluno("alyssa barden");
+        aluno4.setCursoMatriculado(cursoPresencial2);
+        g1.adicionarAluno(aluno4);
+
+        aluno5.setNomeAluno("jessica miller");
+        aluno5.setCursoMatriculado(cursoOnline1);
+        g1.adicionarAluno(aluno5);
+
+        System.out.println("===========================================");
+
+        System.out.println("----- alunos matriculados e seus respectivos cursos ------");
+        g1.listarAlunos();
+
+    }
+}
