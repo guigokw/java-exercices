@@ -1,0 +1,29 @@
+
+public class Aluno {
+    private String nomeAluno;
+    private Curso cursoMatriculado;
+
+    public String getNomeAluno() {
+        return nomeAluno;
+    }
+
+    public void setNomeAluno(String nomeAluno) {
+        this.nomeAluno = nomeAluno;
+    }
+
+    public Curso getCursoMatriculado() {
+        return cursoMatriculado;
+    }
+
+    public void setCursoMatriculado(Curso cursoMatriculado) {
+        this.cursoMatriculado = cursoMatriculado;
+    }
+
+
+    public void exibirDetalhesAluno() {
+        System.out.println("NOME DO ALUNO: " +this.nomeAluno);
+        System.out.println("CURSO MATRICULADO " +cursoMatriculado.getNomeCurso());
+        System.out.println("----------------------------------------");
+    }
+
+}
