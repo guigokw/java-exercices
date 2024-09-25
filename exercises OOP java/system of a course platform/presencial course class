@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class CursoPresencial implements Curso {
+    private String nomeCurso;
+    private int cargaHoraria;
+    private String localCurso;
+
+    @Override
+    public String getNomeCurso() {
+        return this.nomeCurso;
+    }
+
+    @Override
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
+    }
+
+    @Override
+    public int getCargaHoraria() {
+        return this.cargaHoraria;
+    }
+
+    @Override
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public String getLocalCurso() {
+        return localCurso;
+    }
+
+    public void setLocalCurso(String localCurso) {
+        this.localCurso = localCurso;
+    }
+
+    @Override
+    public void exibirDetalhesDoCurso() {
+        System.out.println("NOME DO CURSO: " +this.nomeCurso);
+        System.out.println("CARG HORARIA DO CURSO: " +this.cargaHoraria+ " horas");
+        System.out.println("LOCAL DO CURSO: " +this.localCurso);
+        System.out.println("---------------------------------------");
+    }
+
+    public void registrarCursoPresencial() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("qual é o nome do curso presencial?");
+        nomeCurso = input.nextLine();
+
+        System.out.print("qual a localização do curso presencial?");
+        localCurso = input.nextLine();
+
+        System.out.print("qual a carga horaria do curso presencial?");
+        cargaHoraria = input.nextInt();
+
+    }
+}
