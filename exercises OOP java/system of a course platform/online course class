@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class CursoOnline implements Curso {
+    private String nomeCurso;
+    private int cargaHoraria;
+    private String plataformaCurso;
+
+
+    @Override
+    public String getNomeCurso() {
+        return this.nomeCurso;
+    }
+
+    @Override
+    public void setNomeCurso(String nomeCurso) {
+        this.nomeCurso = nomeCurso;
+    }
+
+    @Override
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    @Override
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+
+    public String getPlataformaCurso() {
+        return plataformaCurso;
+    }
+
+    public void setPlataformaCurso(String plataformaCurso) {
+        this.plataformaCurso = plataformaCurso;
+    }
+
+    @Override
+    public void exibirDetalhesDoCurso() {
+        System.out.println("NOME DO CURSO: " +this.nomeCurso);
+        System.out.println("CARGA HORARIA DO CURSO: " +this.cargaHoraria+ " horas");
+        System.out.println("PLATAFORMA DO CURSO: " +this.plataformaCurso);
+        System.out.println("---------------------------------------------------");
+    }
+
+    public void registrarCursoOnline() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("qual o nome do curso online?");
+        nomeCurso = input.nextLine();
+
+        System.out.print("qual a plataforma do curso online?");
+        plataformaCurso = input.nextLine();
+
+
+        System.out.print("qual a carga horaria do curso online?");
+        cargaHoraria = input.nextInt();
+
+    }
+}
