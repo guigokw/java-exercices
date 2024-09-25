@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+
+public class GerenciadorDeCursos {
+    ArrayList<Curso> cursos = new ArrayList<>();
+    ArrayList<Aluno> alunos = new ArrayList<>();
+
+    public void adicionarCurso(Curso curso) {
+        cursos.add(curso);
+        System.out.println("curso " +curso.getNomeCurso()+ " adiconado ao sistema");
+    }
+
+    public void removerCurso(Curso curso) {
+        cursos.remove(curso);
+        System.out.println("curso " +curso.getNomeCurso()+ " removido do sistema");
+    }
+
+    public void listarCursos() {
+        for (Curso curso : cursos) {
+            if (curso == null) {
+                System.out.println("a lista de cursos esta vazia");
+            } else {
+                curso.exibirDetalhesDoCurso();
+            }
+        }
+    }
+
+    public void adicionarAluno(Aluno aluno) {
+        alunos.add(aluno);
+        System.out.println("aluno " +aluno.getNomeAluno()+ " adiconado no sistema");
+    }
+
+    public void removerAluno(Aluno aluno) {
+        alunos.remove(aluno);
+        System.out.println("aluno " +aluno.getNomeAluno()+ " removido do curso");
+    }
+
+    public void listarAlunos() {
+        for (Aluno aluno : alunos) {
+            if (aluno == null) {
+                System.out.println("a lista de alunos esta vazia");
+            } else {
+                aluno.exibirDetalhesAluno();
+            }
+        }
+    }
+}
