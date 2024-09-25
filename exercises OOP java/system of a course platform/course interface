@@ -1,0 +1,7 @@
+public interface Curso {
+    String getNomeCurso();
+    void setNomeCurso(String nomeCurso);
+    int getCargaHoraria();
+    void setCargaHoraria(int cargaHoraria);
+    void exibirDetalhesDoCurso();
+}
