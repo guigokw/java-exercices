@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Professor extends Pessoa {
+    private String especialidade;
+    private double salario;
+
+    public Professor(String nome, int idade, String sexo, String especialidade, double salario) {
+        super(nome, idade, sexo);
+        this.especialidade = especialidade;
+        this.salario = salario;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public void receberAumento() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("quantos % de R$ o professor " +this.getNome()+ " vai receber de aumento?");
+        double porcentagem = input.nextDouble();
+        this.salario = salario + (salario * porcentagem) / 100;
+
+        System.out.println("agora o salario de " +this.getNome()+ " é de " +this.salario);
+    }
+
+    @Override
+    public void exibirDados() {
+        System.out.println("------------------- DADOS DO PROFESSOR --------------------");
+        super.exibirDados();
+        System.out.println("ESPECIALIDADE: " +this.especialidade);
+        System.out.println("SALARIO: R$:" +this.salario);
+        System.out.println("-------------------------------------");
+    }
+}
