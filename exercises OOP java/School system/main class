@@ -1,0 +1,42 @@
+public class Main {
+    public static void main(String[] args) {
+        Aluno a1 = new Aluno("luiz guilherme carvalho ribeiro", 18, "masculino", false, "analise e desenvolvimento de sistemas");
+        Aluno a2 = new Aluno("pietro carvalho", 6, "masculino", true, "escola primaria");
+
+        Professor p1 = new Professor("gabriel ribeiro", 46, "masculino", "programação", 12.500);
+        Professor p2 = new Professor("alyssa morgan", 44, "feminino", "portugues", 4000);
+
+        Funcionario f1 = new Funcionario("roberto cazares", 36, "masculino", "publico", false);
+        Funcionario f2 = new Funcionario("lyanna machado", 24, "feminino", "empresarial", true);
+
+        a1.fazerAniversario();
+
+        System.out.println("============================================");
+
+        a1.fazerMatricula();
+
+        System.out.println("============================================");
+
+        a2.fazerAniversario();
+
+        System.out.println("============================================");
+
+        p1.receberAumento();
+
+        System.out.println("============================================");
+
+        f2.mudarTrabalho();
+
+        System.out.println("============================================");
+
+        a1.exibirDados();
+        a2.exibirDados();
+
+        p1.exibirDados();
+        p2.exibirDados();
+
+        f1.exibirDados();
+        f2.exibirDados();
+        
+    }
+}
