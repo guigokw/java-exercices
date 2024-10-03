@@ -1,0 +1,57 @@
+public class Aluno extends Pessoa {
+    private boolean matricula;
+    private String curso;
+
+    public Aluno(String nome, int idade, String sexo, boolean matricula, String curso) {
+        super(nome, idade, sexo);
+        this.matricula = matricula;
+        this.curso = curso;
+    }
+
+    public boolean isMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(boolean matricula) {
+        this.matricula = matricula;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public void cancelarMatricula() {
+        if (! matricula) {
+            System.out.println("a matricula de " +this.getNome()+ " ja esta cancelada");
+        } else {
+            this.matricula = false;
+            System.out.println("a matricula de " +this.getNome()+ " foi cancelada");
+        }
+    }
+
+    public void fazerMatricula() {
+        if (! matricula) {
+            System.out.println("a matricula de " +this.getNome()+ " foi realizada para o curso de " +this.curso);
+            this.matricula = true;
+        } else {
+            System.out.println("a matricula de " +this.getNome()+ " ja esta realizada");
+        }
+    }
+
+    @Override
+    public void exibirDados() {
+        System.out.println("------------- DADOS DO ALUNO --------------");
+        super.exibirDados();
+        if (! matricula) {
+            System.out.println("MATRICULA: nao realizada");
+        } else {
+            System.out.println("MATRCICULA: realizada");
+        }
+        System.out.println("CURSO: " +this.curso);
+        System.out.println("-------------------------------------");
+    }
+}
