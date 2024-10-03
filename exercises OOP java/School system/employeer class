@@ -1,0 +1,50 @@
+public class Funcionario extends Pessoa {
+    private String setor;
+    private boolean estaTrabalhando;
+
+    public Funcionario(String nome, int idade, String sexo, String setor, boolean estaTrabalhando) {
+        super(nome, idade, sexo);
+        this.setor = setor;
+        this.estaTrabalhando = estaTrabalhando;
+    }
+
+    public String getSetor() {
+        return setor;
+    }
+
+    public void setSetor(String setor) {
+        this.setor = setor;
+    }
+
+    public boolean isEstaTrabalhando() {
+        return estaTrabalhando;
+    }
+
+    public void setEstaTrabalhando(boolean estaTrabalhando) {
+        this.estaTrabalhando = estaTrabalhando;
+    }
+
+    public void mudarTrabalho() {
+        if (! estaTrabalhando) {
+            System.out.println(this.getNome()+ " começou a trabalhar...");
+            this.estaTrabalhando = true;
+        } else {
+            System.out.println(this.getNome()+ " parou de trabalhar....");
+            this.estaTrabalhando = false;
+        }
+    }
+
+    @Override
+    public void exibirDados() {
+        System.out.println("---------------- DADOS DO FUNCIONARIO-----------------");
+        super.exibirDados();
+        System.out.println("SETOR: " +this.setor);
+        if (! estaTrabalhando) {
+            System.out.println("SITUAÇÃO: nao esta trabalhando no momento");
+            System.out.println("-------------------------------------");
+        } else {
+            System.out.println("SITUAÇÃO: esta trabalhando");
+            System.out.println("-------------------------------------");
+        }
+    }
+}
