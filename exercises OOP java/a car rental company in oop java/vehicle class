@@ -1,0 +1,78 @@
+public class Veiculo implements Alugavel {
+    protected String marca;
+    protected String modelo;
+    protected int ano;
+    protected boolean disponivel;
+
+    public Veiculo(String marca, String modelo, int ano, boolean disponivel) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.disponivel = disponivel;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("MARCA: " +this.marca);
+        System.out.println("MODELO: " +this.modelo);
+        System.out.println("ANO DE FABRICAÇÃO: " +this.ano);
+        if (disponivel) {
+            System.out.println("ESTE VEICULO ESTA DISPONIVEL");
+        } else {
+            System.out.println("ESTE VEICULO NAO ESTA DISPONIVEL");
+        }
+    }
+
+    @Override
+    public void alugarVeiculo() {
+        if (disponivel) {
+            System.out.println("veiculo da marca " +this.marca+ " do modelo " +this.modelo+ " foi alugado...");
+            this.disponivel = false;
+        } else {
+            System.out.println("este veiculo nao esta disponivel....");
+        }
+    }
+
+    @Override
+    public void devolverVeiculo() {
+        if (! disponivel) {
+            System.out.println("veiculo da marca " +this.marca+ " do modelo " +this.modelo+ " foi devolvido a locadora....");
+            this.disponivel = true;
+        } else {
+            System.out.println("nao pode devolver este veiculo pois nao foi alugado...");
+        }
+    }
+}
