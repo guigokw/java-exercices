@@ -1,0 +1,63 @@
+public class MainLocadora {
+    public static void main(String[] args) {
+        Carro carro1 = new Carro("ford", "fiesta", 2008, true, 4);
+        Carro carro2 = new Carro("toyotta", "hilux", 2022, true, 6);
+        Carro carro3 = new Carro("chevrolet", "sedan", 2014, true, 4);
+
+        Moto moto1 = new Moto("honda", "shadow 750", 2010, true, 745);
+        Moto moto2 = new Moto("suzuki", "boulevard 800", 2018, true, 805);
+        Moto moto3 = new Moto("yamaha", "midnight star 950", 2012, true, 942);
+
+        Locadora locadora = new Locadora();
+
+        locadora.adicionarVeiculo(carro1);
+
+        System.out.println("=============================================");
+
+        locadora.adicionarVeiculo(carro2);
+
+        System.out.println("=============================================");
+
+        locadora.adicionarVeiculo(carro3);
+
+        System.out.println("=============================================");
+
+        locadora.adicionarVeiculo(moto1);
+
+        System.out.println("=============================================");
+
+        locadora.adicionarVeiculo(moto2);
+
+        System.out.println("=============================================");
+
+        locadora.adicionarVeiculo(moto3);
+
+        System.out.println("=============================================");
+
+        locadora.listarVeiculos();
+
+        System.out.println("=============================================");
+
+        locadora.alugarVeiculo("fiesta");
+
+        System.out.println("=============================================");
+
+        locadora.listarVeiculos();
+
+        System.out.println("=============================================");
+
+        locadora.alugarVeiculo("shadow 750");
+
+        System.out.println("=============================================");
+
+        locadora.listarVeiculos();
+
+        System.out.println("=============================================");
+
+        locadora.devolverVeiculo("fiesta");
+
+        System.out.println("=============================================");
+
+        locadora.listarVeiculos();
+    }
+}
