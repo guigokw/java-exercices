@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+public class Locadora {
+    ArrayList<Alugavel> locadora = new ArrayList<>();
+
+    public void adicionarVeiculo(Veiculo veiculo) {
+        locadora.add(veiculo);
+        System.out.println(veiculo.getMarca()+ " do modelo " +veiculo.getModelo()+ " foi adicionado a locadora");
+    }
+
+    public void listarVeiculos() {
+        System.out.println("___________________ VEICULOS DA LOCADORA ___________________");
+        for (Alugavel veiculos : locadora) {
+            veiculos.exibirDetalhes();
+        }
+    }
+
+    public void alugarVeiculo(String modelo) {
+        for (Alugavel veiculos : locadora) {
+            if (veiculos instanceof Carro && ((Carro) veiculos).getModelo().equalsIgnoreCase(modelo)) {
+                veiculos.alugarVeiculo();
+                return;
+            } else if (veiculos instanceof Moto && ((Moto) veiculos).getModelo().equalsIgnoreCase(modelo)) {
+                veiculos.alugarVeiculo();
+                return;
+            }
+        }
+        System.out.println("Veiculo nao encontrado");
+    }
+
+    public void devolverVeiculo(String modelo) {
+        for (Alugavel veiculos : locadora) {
+            if (veiculos instanceof Carro && ((Carro) veiculos).getModelo().equalsIgnoreCase(modelo)) {
+                veiculos.devolverVeiculo();
+                return;
+            } else if (veiculos instanceof Moto && ((Moto) veiculos).getModelo().equalsIgnoreCase(modelo)) {
+                veiculos.devolverVeiculo();
+                return;
+            }
+
+        }
+        System.out.println("Veiculo nao encontrado");
+    }
+}
