@@ -1,0 +1,25 @@
+public class Carro extends Veiculo {
+    private int quantidadePortas;
+
+
+    public Carro(String marca, String modelo, int ano, boolean disponivel, int quantidadePortas) {
+        super(marca, modelo, ano, disponivel);
+        this.quantidadePortas = quantidadePortas;
+    }
+
+    public int getQuantidadePortas() {
+        return quantidadePortas;
+    }
+
+    public void setQuantidadePortas(int quantidadePortas) {
+        this.quantidadePortas = quantidadePortas;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("---------------- DETALHES DO CARRO -----------------");
+        super.exibirDetalhes();
+        System.out.println("QUANTIDADE DE PORTAS: " +this.quantidadePortas);
+        System.out.println("-----------------------------------------------------");
+    }
+}
