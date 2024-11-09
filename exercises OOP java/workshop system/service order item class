@@ -1,0 +1,39 @@
+public class ItemOrdemServico {
+    private String descricaoItem;
+    private int quantidade;
+    private double precoUnitario;
+
+    public ItemOrdemServico(String descricaoItem, int quantidade, double precoUnitario) {
+        this.descricaoItem = descricaoItem;
+        this.quantidade = quantidade;
+        this.precoUnitario = precoUnitario;
+    }
+
+    public String getDescricaoItem() {
+        return descricaoItem;
+    }
+
+    public void setDescricaoItem(String descricaoItem) {
+        this.descricaoItem = descricaoItem;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(double precoUnitario) {
+        this.precoUnitario = precoUnitario;
+    }
+
+    public double calcularPrecoTotal() {
+        return this.quantidade * this.precoUnitario;
+    }
+}
