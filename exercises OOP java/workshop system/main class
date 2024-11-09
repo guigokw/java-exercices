@@ -1,0 +1,110 @@
+public class Main {
+    public static void main(String[] args) {
+
+        Cliente cliente1 = new Cliente("roberto ribeiro", 999756487, "betinhoriber@gmail.com");
+
+        System.out.println("==========================================");
+
+        Cliente cliente2 = new Cliente("alberto falcone", 999874411, "betofalcone77@gmail.com");
+
+        System.out.println("==========================================");
+
+        Cliente cliente3 = new Cliente("jose ferreira", 999523366, "jferreira55@gmail.com");
+
+        System.out.println("==========================================");
+
+        Carro carro1 = new Carro("LKGH-4887", "ford", "fiesta", 2008, cliente1, 21000, 4);
+
+        System.out.println("==========================================");
+
+        Moto moto1 = new Moto("LLMH-4214", "honda", "cg-150", 2015, cliente2, 4000, "guidao retrovisor manete manopla");
+
+        System.out.println("==========================================");
+
+        Caminhao caminhao1 = new Caminhao("HABR-2020", "volvo", "fh-440", 2002, cliente3, 12000, 500, 9);
+
+        System.out.println("==========================================");
+
+        Carro carro2 = new Carro("MMGH-1727", "chevrolet", "corvette", 2016, cliente1, 2000, 4);
+
+        System.out.println("==========================================");
+
+        cliente1.adicionarVeiculo(carro1);
+
+        System.out.println("==========================================");
+
+        cliente2.adicionarVeiculo(moto1);
+
+        System.out.println("==========================================");
+
+        cliente3.adicionarVeiculo(caminhao1);
+
+        System.out.println("==========================================");
+
+        cliente1.adicionarVeiculo(carro2);
+
+        System.out.println("==========================================");
+
+        cliente1.listarVeiculosDoCliente();
+
+        System.out.println("==========================================");
+
+        cliente2.listarVeiculosDoCliente();
+
+        System.out.println("==========================================");
+
+        cliente3.listarVeiculosDoCliente();
+
+        System.out.println("==========================================");
+
+        carro1.calcularProximaRevisao();
+
+        System.out.println("==========================================");
+        moto1.calcularProximaRevisao();
+
+        System.out.println("==========================================");
+
+        caminhao1.calcularProximaRevisao();
+
+        System.out.println("==========================================");
+
+        carro2.calcularProximaRevisao();
+
+        System.out.println("==========================================");
+
+        OrdemServico ordem1 = new OrdemServico(1, "20/10/2024", carro1, "revisão geral", "revisionamento geral do veiculo alterando e consertando tudo oq for possivel", 2000);
+
+        System.out.println("==========================================");
+
+        OrdemServico ordem2 = new OrdemServico(2, "22/10/2024", carro2, "troca de oleo", "troca de oleo do caminhao para melhorar sei la oq", 1050);
+
+        System.out.println("==========================================");
+
+        carro1.adicionarOrdemServico(ordem1);
+
+        System.out.println("==========================================");
+
+        ordem1.aplicarDesconto();
+
+        System.out.println("==========================================");
+
+        carro1.listarServicos();
+
+        System.out.println("==========================================");
+
+        carro2.adicionarOrdemServico(ordem2);
+
+        System.out.println("==========================================");
+
+        carro1.listarServicos();
+
+        System.out.println("==========================================");
+
+        caminhao1.listarServicos();
+
+        System.out.println("==========================================");
+
+        cliente1.exibirHistoricoDeServicos();
+
+    }
+}
