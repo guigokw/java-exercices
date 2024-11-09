@@ -1,0 +1,4 @@
+public interface HistoricoServico {
+    void adicionarOrdemServico(OrdemServico ordem);
+    void listarServicos();
+}
