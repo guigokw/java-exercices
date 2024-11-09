@@ -1,0 +1,80 @@
+import java.util.ArrayList;
+
+public abstract class Veiculo implements HistoricoServico {
+    protected String placa;
+    protected String marca;
+    protected String modelo;
+    protected int ano;
+    protected Cliente proprietario;
+    protected int kilometragem;
+
+    ArrayList<OrdemServico> listaDeServicos = new ArrayList<>();
+
+    public Veiculo(String placa, String marca, String modelo, int ano, Cliente proprietario, int kilometragem) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.proprietario = proprietario;
+        this.kilometragem = kilometragem;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public Cliente getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Cliente proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public int getKilometragem() {
+        return kilometragem;
+    }
+
+    public void setKilometragem(int kilometragem) {
+        this.kilometragem = kilometragem;
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("PROPRIETARIO DO VEICULO: " +this.proprietario.getNome());
+        System.out.println("PLACA DO VEICULO: " +this.placa);
+        System.out.println("MARCA DO VEICULO: " +this.marca);
+        System.out.println("MODELO DO VEICULO: " +this.modelo);
+        System.out.println("ANO DE FABRICAÇÃO: " +this.ano);
+        System.out.println("KILOMETRAGEM RODADA: " +this.kilometragem);
+    }
+
+    public abstract void calcularProximaRevisao();
+}
