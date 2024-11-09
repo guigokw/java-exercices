@@ -1,0 +1,50 @@
+public class Carro extends Veiculo {
+    private int numeroDePortas;
+
+    public Carro(String placa, String marca, String modelo, int ano, Cliente proprietario, int kilometragem, int numeroDePortas) {
+        super(placa, marca, modelo, ano, proprietario, kilometragem);
+        this.numeroDePortas = numeroDePortas;
+    }
+
+    public int getNumeroDePortas() {
+        return numeroDePortas;
+    }
+
+    public void setNumeroDePortas(int numeroDePortas) {
+        this.numeroDePortas = numeroDePortas;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("-------------- INFORMAÇÕES DO CARRO -------------");
+        super.exibirDetalhes();
+        System.out.println("QUANTIDADE DE PORTAS: " +this.numeroDePortas);
+        System.out.println("---------------------------------------------------");
+    }
+
+    @Override
+    public void calcularProximaRevisao() {
+        if (this.kilometragem >= 10000) {
+            System.out.println("o carro de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e precisa de revisão");
+        } else {
+            System.out.println("o carro de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e nao precisa de revisão");
+        }
+    }
+
+    @Override
+    public void adicionarOrdemServico(OrdemServico ordem) {
+        listaDeServicos.add(ordem);
+        System.out.println(ordem.getTipoServico()+ " para o carro de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " da marca " +this.marca+ " foi realizada");
+    }
+
+    @Override
+    public void listarServicos() {
+        if (listaDeServicos.isEmpty()) {
+            System.out.println("nao foi realizado nenhum serviço no carro de " +this.proprietario.getNome()+ " do modelo " +this.modelo);
+        } else {
+            for (OrdemServico servicos : listaDeServicos) {
+                servicos.exibirDetalhesDoServico();
+            }
+        }
+    }
+}
