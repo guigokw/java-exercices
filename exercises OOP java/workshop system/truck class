@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class Caminhao extends Veiculo {
+    private int capacidadeDeCarga;
+    private int numeroDeEixos;
+
+    public Caminhao(String placa, String marca, String modelo, int ano, Cliente proprietario, int kilometragem, int capacidadeDeCarga, int numeroDeEixos) {
+        super(placa, marca, modelo, ano, proprietario, kilometragem);
+        this.capacidadeDeCarga = capacidadeDeCarga;
+        this.numeroDeEixos = numeroDeEixos;
+    }
+
+    public int getCapacidadeDeCarga() {
+        return capacidadeDeCarga;
+    }
+
+    public void setCapacidadeDeCarga(int capacidadeDeCarga) {
+        this.capacidadeDeCarga = capacidadeDeCarga;
+    }
+
+    public int getNumeroDeEixos() {
+        return numeroDeEixos;
+    }
+
+    public void setNumeroDeEixos(int numeroDeEixos) {
+        this.numeroDeEixos = numeroDeEixos;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("------------- INFORMAÇÕES DO CAMINHÃO ---------------");
+        super.exibirDetalhes();
+        System.out.println("CAPACIDADE DE CARGA: " +this.capacidadeDeCarga);
+        System.out.println("NUMERO DE EIXOS: " +this.numeroDeEixos);
+        System.out.println("-------------------------------------------------------");
+    }
+
+    @Override
+    public void calcularProximaRevisao() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("1 - caminhão de uso urbano");
+        System.out.println("2 - caminhão de uso misto");
+        System.out.println("3 - caminhão de uso rodoviario");
+
+        System.out.println("----------------------");
+
+        System.out.println("qual dessas opções é a de seu caminhão");
+        int opcao = input.nextInt();
+
+        switch (opcao) {
+            case 1:
+                if (this.kilometragem >= 5000) {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e precisa de revisão");
+                } else {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e nao precisa de revisão");
+                }
+                break;
+
+            case 2:
+                if (this.kilometragem >= 10000) {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e precisa de revisão");
+                } else {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e nao precisa de revisão");
+                }
+                break;
+
+            case 3:
+                if (this.kilometragem >= 15000) {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e  precisa de revisão");
+                } else {
+                    System.out.println("o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e  nao precisa de revisão");
+                }
+                break;
+
+            default:
+                System.out.println("opcao incorreta, por favor tente novamente ou saia do programa....");
+        }
+    }
+
+    @Override
+    public void adicionarOrdemServico(OrdemServico ordem) {
+        listaDeServicos.add(ordem);
+        System.out.println(ordem.getTipoServico()+ " para o caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " da marca " +this.marca+ " foi realizada");
+    }
+
+    @Override
+    public void listarServicos() {
+        if (listaDeServicos.isEmpty()) {
+            System.out.println("nao foi realizado nenhum serviço no caminhão de " +this.proprietario.getNome()+ " do modelo " +this.modelo);
+        } else {
+            for (OrdemServico servicos : listaDeServicos) {
+                servicos.exibirDetalhesDoServico();
+            }
+        }
+    }
+}
