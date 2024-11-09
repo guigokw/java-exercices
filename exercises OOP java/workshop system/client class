@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+
+public class Cliente {
+    private String nome;
+    private int telefone;
+    private String email;
+    ArrayList<Veiculo> listaDeVeiculos = new ArrayList<>();
+
+    public Cliente(String nome, int telefone, String email) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void adicionarVeiculo(Veiculo veiculo) {
+        listaDeVeiculos.add(veiculo);
+        System.out.println("o veiculo de " +this.nome+ " da marca " +veiculo.getMarca()+ " do modelo " +veiculo.getModelo()+ " foi registrado na oficina");
+    }
+
+    public void listarVeiculosDoCliente() {
+        if (listaDeVeiculos.isEmpty()) {
+            System.out.println("a lista de veiculos de " +this.nome+ " esta vazia");
+        } else {
+            System.out.println("=============== VEICULOS DE " +this.nome+ " ===================");
+            for (Veiculo veiculos : listaDeVeiculos) {
+                veiculos.exibirDetalhes();
+            }
+        }
+    }
+
+    public void exibirHistoricoDeServicos() {
+        for (Veiculo veiculos : listaDeVeiculos) {
+            veiculos.listarServicos();
+            System.out.println("------------------------------");
+        }
+    }
+}
