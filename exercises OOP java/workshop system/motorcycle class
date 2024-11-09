@@ -1,0 +1,50 @@
+public class Moto extends Veiculo {
+    private String tipoDeGuidao;
+
+    public Moto(String placa, String marca, String modelo, int ano, Cliente proprietario, int kilometragem, String tipoDeGuidao) {
+        super(placa, marca, modelo, ano, proprietario, kilometragem);
+        this.tipoDeGuidao = tipoDeGuidao;
+    }
+
+    public String getTipoDeGuidao() {
+        return tipoDeGuidao;
+    }
+
+    public void setTipoDeGuidao(String tipoDeGuidao) {
+        this.tipoDeGuidao = tipoDeGuidao;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("------------- INFORMAÇÕES DA MOTO --------------");
+        super.exibirDetalhes();
+        System.out.println("TIPO DE GUIDÃO: " +this.tipoDeGuidao);
+        System.out.println("---------------------------------------------------");
+    }
+
+    @Override
+    public void calcularProximaRevisao() {
+        if (this.kilometragem >= 8000) {
+            System.out.println("a moto de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e precisa de revisão");
+        } else {
+            System.out.println("a moto de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " andou " +this.kilometragem+ " KMS e nao precisa de revisão");
+        }
+    }
+
+    @Override
+    public void adicionarOrdemServico(OrdemServico ordem) {
+        listaDeServicos.add(ordem);
+        System.out.println(ordem.getTipoServico()+ " para a moto de " +this.proprietario.getNome()+ " do modelo " +this.modelo+ " da marca " +this.marca+ " foi realizada");
+    }
+
+    @Override
+    public void listarServicos() {
+        if (listaDeServicos.isEmpty()) {
+            System.out.println("nao foi realizado nenhum serviço na moto de " +this.proprietario.getNome()+ " do modelo " +this.modelo);
+        } else {
+            for (OrdemServico servicos : listaDeServicos) {
+                servicos.exibirDetalhesDoServico();
+            }
+        }
+    }
+}
