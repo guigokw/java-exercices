@@ -1,0 +1,90 @@
+public class OrdemServico {
+    private int idOrdem;
+    private String dataServico;
+    private Veiculo veiculo;
+    private String tipoServico;
+    private String descricao;
+    private double custo;
+
+    public OrdemServico(int idOrdem, String dataServico, Veiculo veiculo, String tipoServico, String descricao, double custo) {
+        this.idOrdem = idOrdem;
+        this.dataServico = dataServico;
+        this.veiculo = veiculo;
+        this.tipoServico = tipoServico;
+        this.descricao = descricao;
+        this.custo = custo;
+    }
+
+    public int getIdOrdem() {
+        return idOrdem;
+    }
+
+    public void setIdOrdem(int idOrdem) {
+        this.idOrdem = idOrdem;
+    }
+
+    public String getDataServico() {
+        return dataServico;
+    }
+
+    public void setDataServico(String dataServico) {
+        this.dataServico = dataServico;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public String getTipoServico() {
+        return tipoServico;
+    }
+
+    public void setTipoServico(String tipoServico) {
+        this.tipoServico = tipoServico;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public double getCusto() {
+        return custo;
+    }
+
+    public void setCusto(double custo) {
+        this.custo = custo;
+    }
+
+
+    public void exibirDetalhesDoServico() {
+        System.out.println("----------------- INFORMAÇÕES DO SERVIÇO DO VEICULO DE " +veiculo.getProprietario().getNome()+ " --------------------");
+        System.out.println("ID DO SERVIÇO: " +this.idOrdem);
+        System.out.println("DATA DO SERVIÇO: " +this.dataServico);
+        System.out.println("TIPO DE SERVIÇO: " +this.tipoServico);
+        System.out.println("VEICULO NA QUAL FOI REALIZADO O SERVIÇO: " +veiculo.getMarca()+ " " +veiculo.getModelo()+ " do proprietario " +veiculo.getProprietario().getNome());
+        System.out.println("DESCRICAO DO SERVIÇO: " +this.descricao);
+        System.out.println("CUSTO TOTAL: R$:" +this.custo);
+        System.out.println("-------------------------------------------");
+    }
+
+    public void aplicarDesconto() {
+        if (veiculo instanceof Carro) {
+            this.custo = this.custo - (this.custo * 7) / 100;
+            System.out.println("com o desconto de 7%, o custo total do serviço é de R$:" +this.custo);
+        } else if (veiculo instanceof Moto) {
+            this.custo = this.custo - (this.custo * 5) / 100;
+            System.out.println("com o desconto de 5%, o custo total do serviço é de R$:" +this.custo);
+        } else if (veiculo instanceof Caminhao) {
+            this.custo = this.custo - (this.custo * 2) / 100;
+            System.out.println("com o custo de 2%, o custo total do serviço é de R$:" +this.custo);
+        }
+    }
+}
