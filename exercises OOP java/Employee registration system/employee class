@@ -1,0 +1,79 @@
+public class Funcionario implements FuncionarioInterface {
+    protected String nome;
+    protected int idFuncionario;
+    protected double salario;
+
+    public Funcionario(String nome, int idFuncionario, double salario) throws IllegalArgumentException {
+        if (nome == null) {
+            throw new IllegalArgumentException("o nome esta nulo por favor insira novamente");
+        } else if (nome.isEmpty()) {
+            throw new IllegalArgumentException("o nome esta vazio, por favor insira novamente");
+        } else if (salario <= 0) {
+            throw new IllegalArgumentException("o salario esta incorreto, por favor digite novamente");
+        } else {
+            this.nome = nome;
+            this.idFuncionario = idFuncionario;
+            this.salario = salario;
+        }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) throws IllegalArgumentException {
+        if (nome == null) {
+            throw new IllegalArgumentException("o nome esta vazio, por favor digite novamente");
+        } else if (nome.isEmpty()) {
+            throw new IllegalArgumentException("o nome esta nulo, por favor digite novamente");
+        } else {
+            this.nome = nome;
+        }
+    }
+
+    public int getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(int idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) throws IllegalArgumentException {
+        if (salario <= 0) {
+            throw new IllegalArgumentException("o salario esta incorreto, por favor digite novamente");
+        } else {
+            this.salario = salario;
+        }
+    }
+
+    @Override
+    public void realizarTarefa(String tarefa) throws IllegalArgumentException {
+        if (tarefa == null) {
+            throw new IllegalArgumentException("tarefa nula, por favor insira a tarefa...");
+        } else if (tarefa.isEmpty()) {
+            throw new IllegalArgumentException("a tarefa esta vazia, por favor insira a tarefa");
+        } else {
+            System.out.println(tarefa+ " realizada, pelo " +this.getClass() +this.nome);
+        }
+    }
+
+    @Override
+    public double calcularBonus(double porcentagem) throws ArithmeticException {
+        if (porcentagem < 0) {
+            throw new ArithmeticException("porcentagem negativa, por favor insira novamente");
+        }
+        return this.salario + (this.salario * porcentagem) / 100;
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("NOME: " +this.nome);
+        System.out.println("CARGO: " +this.getClass().getSimpleName());
+        System.out.println("ID: " +this.idFuncionario);
+        System.out.println("SALARIO: " +this.salario);
+    }
+}
