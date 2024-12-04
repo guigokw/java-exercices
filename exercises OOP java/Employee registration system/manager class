@@ -1,0 +1,41 @@
+public class Gerente extends Funcionario {
+    private String departamento;
+
+    public Gerente(String nome, int idFuncionario, double salario, String departamento) throws IllegalArgumentException {
+        super(nome, idFuncionario, salario);
+        if (departamento == null) {
+            throw new IllegalArgumentException("o departamento esta nulo, por favor insira novamente");
+        } else if (departamento.isEmpty()) {
+            throw new IllegalArgumentException("o departamento esta vazio, por favor insira novamente");
+        } else {
+            this.departamento = departamento;
+        }
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    @Override
+    public void realizarTarefa(String tarefa) throws IllegalArgumentException {
+        super.realizarTarefa(tarefa);
+    }
+
+    @Override
+    public double calcularBonus(double porcentagem) throws ArithmeticException {
+        if (porcentagem < 0) {
+            throw new ArithmeticException("porcentagem negativa, por favor insira novamente");
+        }
+        return this.salario + (this.salario * (porcentagem + 5)) / 100;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        super.exibirDetalhes();
+        System.out.println("DEPARTAMENTO: " +this.departamento);
+    }
+}
