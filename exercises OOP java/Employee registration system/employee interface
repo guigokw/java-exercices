@@ -1,0 +1,4 @@
+public interface FuncionarioInterface {
+    void realizarTarefa(String tarefa) throws IllegalArgumentException;
+    double calcularBonus(double porcentagem) throws IllegalArgumentException;
+}
