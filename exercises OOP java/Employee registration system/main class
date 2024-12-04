@@ -1,0 +1,184 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayList<Funcionario> listaDeFuncionarios = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.println("1 - cadastrar funcionario");
+                System.out.println("2 - cadastrar gerente");
+                System.out.println("3 - atribuir tarefa");
+                System.out.println("4 - calcular bonus");
+                System.out.println("5 listar todos os funcionarios");
+                System.out.println("6 - sair do programa");
+                System.out.println("=============================");
+                System.out.print("escolha uma dessas opcoes");
+                int opcao = input.nextInt();
+
+                input.nextLine();
+
+                if (opcao == 1) {
+                    try {
+                        System.out.print("qual o nome do funcionario?");
+                        String nome = input.nextLine();
+
+                        System.out.print("qual o id do funcionario?");
+                        int idFuncionario = input.nextInt();
+
+                        System.out.print("qual o salario do funcionario?");
+                        double salario = input.nextDouble();
+
+                        Funcionario funcionario = new Funcionario(nome, idFuncionario, salario);
+                        listaDeFuncionarios.add(funcionario);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 2) {
+                    try {
+                        System.out.print("qual o nome do gerente?");
+                        String nome = input.nextLine();
+
+                        System.out.print("qual o id do gerente");
+                        int idFuncionario = input.nextInt();
+
+                        System.out.print("qual o salario do gerente");
+                        double salario = input.nextDouble();
+
+                        input.nextLine();
+
+                        System.out.print("qual o departamento do gerente");
+                        String departamento = input.nextLine();
+
+                        Gerente gerente = new Gerente(nome, idFuncionario, salario, departamento);
+                        listaDeFuncionarios.add(gerente);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 3) {
+                    try {
+                        System.out.println("1 - funcionario");
+                        System.out.println("2 - gerente");
+                        System.out.println("-------------------------");
+                        System.out.print("qual desses vc deseja atribuir a tarefa");
+                        int opcao2 = input.nextInt();
+
+                        input.nextLine();
+
+                        if (opcao2 == 1) {
+                            try {
+                                System.out.print("qual funcioanrio realizara a tarefa?");
+                                String nome = input.nextLine();
+
+                                for (Funcionario funcionario : listaDeFuncionarios) {
+                                    if (nome.equalsIgnoreCase(funcionario.getNome())) {
+                                        System.out.print("qual tarefa sera realizada hoje?");
+                                        String tarefa = input.nextLine();
+                                        funcionario.realizarTarefa(tarefa);
+                                    }
+                                }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (opcao2 == 2) {
+                            try {
+                                System.out.print("qual gerente realizara a tarefa?");
+                                String nome = input.nextLine();
+
+                                for (Funcionario gerente : listaDeFuncionarios) {
+                                    if (nome.equalsIgnoreCase(gerente.getNome())) {
+                                        System.out.print("qual tarefa sera realizada hoje?");
+                                        String tarefa = input.nextLine();
+                                        gerente.realizarTarefa(tarefa);
+                                    }
+
+                                }
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else {
+                            System.out.println("opcao invalida, por favor diigte novamente");
+                        }
+
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor insira um numero para a opção");
+                        input.nextLine();
+                    }
+                } else if (opcao == 4) {
+                    try {
+                        System.out.println("1 - funcionario");
+                        System.out.println("2 - gerente");
+                        System.out.println("-------------------------");
+                        System.out.print("qual desses vc deseja calcular o bonus");
+                        int opcao2 = input.nextInt();
+
+                        input.nextLine();
+
+                        if (opcao2 == 1) {
+                            try {
+                                System.out.print("digite o nome do funcionario que vc deseja calcular o bonus");
+                                String nome = input.nextLine();
+
+                                for (Funcionario funcionario : listaDeFuncionarios) {
+                                    if (nome.equalsIgnoreCase(funcionario.getNome())) {
+                                        System.out.print("qual a porcentagem do bonus do funcionario");
+                                        double porcentagem = input.nextDouble();
+                                        funcionario.calcularBonus(porcentagem);
+                                        System.out.println("o salario do " +funcionario.getClass().getSimpleName()+ funcionario.getNome()+ " com bonus de " +porcentagem+"% foi de " +funcionario.calcularBonus(porcentagem));
+                                    }
+                                }
+                            } catch (ArithmeticException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (opcao2 == 2) {
+                                try {
+                                    System.out.print("digite o nome do gerente que vc deseja calcular o bonus");
+                                    String nome = input.nextLine();
+
+                                    for (Funcionario gerente : listaDeFuncionarios) {
+                                        if (nome.equalsIgnoreCase(gerente.getNome())) {
+                                            System.out.print("qual a porcentagem do bonus do gerente");
+                                            double porcentagem = input.nextDouble();
+                                            gerente.calcularBonus(porcentagem);
+                                            System.out.println("o salario do " +gerente.getClass().getSimpleName()+ gerente.getNome()+ " com bonus de " +(porcentagem + 5)+"% foi de " +gerente.calcularBonus(porcentagem));
+                                        }
+                                    }
+                                } catch (ArithmeticException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                        } else {
+                            System.out.println("opcao invalia, por favor digite novamente");
+                        }
+
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite uma dessas opções");
+                        input.nextLine();
+                    }
+                } else if (opcao == 5) {
+                    if (listaDeFuncionarios.isEmpty()) {
+                        System.out.println("a lista de funcioanrios esta vazia");
+                    } else {
+                        System.out.println("================ DADOS DOS FUNCIONARIOS/GERENTES ===================== ");
+
+                        for (Funcionario funcionario : listaDeFuncionarios) {
+                            funcionario.exibirDetalhes();
+                            System.out.println("--------------------------------");
+                        }
+                    }
+                } else if (opcao == 6) {
+                    System.out.println("saindo do programa....");
+                    break;
+                } else {
+                    System.out.println("opcao invalida, por favor digite novamente");
+                }
+
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite um numero");
+                input.nextLine();
+            }
+        }
+    }
+}
