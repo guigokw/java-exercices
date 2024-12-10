@@ -1,0 +1,3 @@
+public interface Promocao {
+    double aplicarDesconto(double percentual) throws IllegalArgumentException;
+}
