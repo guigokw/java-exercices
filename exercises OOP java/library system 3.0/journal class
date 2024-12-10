@@ -1,0 +1,29 @@
+public final class Jornal extends Publicacao {
+    private String dataPublicacao;
+
+    public Jornal(String titulo, String autor, double preco, String dataPublicacao) throws IllegalArgumentException {
+        super(titulo, autor, preco);
+        if (dataPublicacao.isEmpty()) {
+            throw new IllegalArgumentException("data de publicacao vazia, por favor insira novamente");
+        } else {
+            this.dataPublicacao = dataPublicacao;
+        }
+    }
+
+    public String getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(String dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("TITULO DO JORNAL: " +this.titulo);
+        System.out.println("AUTOR DO JORNAL: " +this.autor);
+        System.out.println("PRECO DO JORNAL: " +this.preco);
+        System.out.println("DATA DE PUBLICACAO DO JORNAL: " +this.dataPublicacao);
+        System.out.println("---------------------------------");
+    }
+}
