@@ -1,0 +1,177 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws NullPointerException {
+        Scanner input = new Scanner(System.in);
+
+        Livraria livraria = new Livraria();
+
+        while (true) {
+            try {
+                System.out.println("1 - adicionar publicacao");
+                System.out.println("2 - listar todas as publicaces");
+                System.out.println("3 - aplicar desconto em alguma publicacao");
+                System.out.println("4 - buscar publicacao pelo titulo");
+                System.out.println("5 - sair do programa");
+                System.out.println("=============================");
+                System.out.print("Escolha uma dessas opcoes:");
+                int opcao = input.nextInt();
+
+                input.nextLine();
+
+                if (opcao == 1) {
+                    try {
+                        System.out.println("1 - livro");
+                        System.out.println("2 - revista");
+                        System.out.println("3 - jornal");
+                        System.out.println("--------------------");
+                        System.out.print("qual dessas opcoes vc deseja adicionar:");
+                        int opcao2 = input.nextInt();
+
+                        input.nextLine();
+
+                        if (opcao2 == 1) {
+                            try {
+                                System.out.print("qual o titulo do livro?");
+                                String titulo = input.nextLine();
+
+                                System.out.print("qual o autor do livro?");
+                                String autor = input.nextLine();
+
+                                System.out.print("qual o preco do livro?");
+                                double preco = input.nextDouble();
+
+                                Livro livro = new Livro(titulo, autor, preco);
+                                livraria.adicionarPublicacao(livro);
+
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (opcao2 == 2) {
+                            try {
+                                System.out.print("qual o titulo da revista?");
+                                String titulo = input.nextLine();
+
+                                System.out.print("qual o autor da revista?");
+                                String autor = input.nextLine();
+
+                                System.out.print("qual o preco da revista?");
+                                double preco = input.nextDouble();
+
+                                System.out.print("qual a edicao da revista?");
+                                int edicao = input.nextInt();
+
+                                Revista revista = new Revista(titulo, autor, preco, edicao);
+                                livraria.adicionarPublicacao(revista);
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (opcao2 == 3) {
+                            try {
+                                System.out.print("qual o titulo do jornal?");
+                                String titulo = input.nextLine();
+
+                                System.out.print("qual o autor do jornal?");
+                                String autor = input.nextLine();
+
+                                System.out.print("qual o preco do jornal?");
+                                double preco = input.nextDouble();
+
+                                input.nextLine();
+
+                                System.out.print("qual a data de publicacao do jornal?");
+                                String dataPublicacao = input.nextLine();
+
+                                Jornal jornal = new Jornal(titulo, autor, preco, dataPublicacao);
+                                livraria.adicionarPublicacao(jornal);
+
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else {
+                            System.out.println("opcao invalia por favor digite novamente");
+                        }
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite novamente");
+                        input.nextLine();
+                    }
+                } else if (opcao == 2) {
+                    livraria.listarTodasAsPublicacoes();
+                } else if (opcao == 3) {
+                    try {
+                        System.out.println("1 - livro");
+                        System.out.println("2 - revista");
+                        System.out.println("--------------------");
+                        System.out.print("qual dessas opcoes vc escolhe?");
+                        int opcao2 = input.nextInt();
+
+                        input.nextLine();
+
+                        if (opcao2 == 1) {
+                            try {
+                                System.out.print("qual o nome do livro que vc deseja aplicar desconto?");
+                                String titulo = input.nextLine();
+
+                                System.out.print("qual o percentual de desconto?");
+                                double percentual = input.nextDouble();
+
+                                for (Publicacao publicacao : livraria.publicacoes) {
+                                    if (titulo.equalsIgnoreCase(publicacao.getTitulo()) && publicacao instanceof Livro) {
+                                        System.out.println("com o desconto o livro " +titulo+ " vai passar a ter o valor de R$:" + ((Livro) publicacao).aplicarDesconto(percentual));
+                                    } else {
+                                        throw new NullPointerException("nao foi encontrado nehum livro com esse nome");
+                                    }
+                                }
+                            } catch (java.util.InputMismatchException e) {
+                                System.out.println("entrada invalida, por favor digite novamente");
+                                input.nextLine();
+                            } catch (ArithmeticException | NullPointerException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } else if (opcao2 == 2) {
+                            try {
+                                System.out.print("qual o nome da revista que vc deseja aplicar desconto?");
+                                String titulo = input.nextLine();
+
+                                System.out.print("qual o percentual de desconto?");
+                                double percentual = input.nextDouble();
+
+                                for (Publicacao publicacao : livraria.publicacoes) {
+                                    if (titulo.equalsIgnoreCase(publicacao.getTitulo()) && publicacao instanceof Revista) {
+                                        System.out.println("com o desconto a revista " + titulo + " vai passar a ter o valor de R$:" + ((Revista) publicacao).aplicarDesconto(percentual));
+                                    } else {
+                                        throw new NullPointerException("nao foi encontrado nenhuma revista com esse nome");
+                                    }
+                                }
+                            } catch (java.util.InputMismatchException e) {
+                                System.out.println("entrada invalida, por favor digite novamente");
+                                input.nextLine();
+                            } catch (ArithmeticException | NullPointerException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite novamente");
+                        input.nextLine();
+                    }
+                } else if (opcao == 4) {
+                    try {
+                        livraria.buscarPeloTitulo();
+                    } catch (IllegalArgumentException | NullPointerException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 5) {
+                    System.out.println("saindo do programa...");
+                    break;
+                } else {
+                    System.out.println("opcao invalida, por favor digite novamente");
+                }
+
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite novamente");
+                input.nextLine();
+            }
+        }
+    }
+}
