@@ -1,0 +1,37 @@
+public final class Revista extends Publicacao implements Promocao {
+    private int edicao;
+
+    public Revista(String titulo, String autor, double preco, int edicao) throws IllegalArgumentException {
+        super(titulo, autor, preco);
+        if (edicao <= 0) {
+            throw new IllegalArgumentException("numero de edicao invalido, por favor digite novamente");
+        } else {
+            this.edicao = edicao;
+        }
+    }
+
+    public int getEdicao() {
+        return edicao;
+    }
+
+    public void setEdicao(int edicao) {
+        this.edicao = edicao;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("TITULO DA REVISTA: " +this.titulo);
+        System.out.println("AUTOR DA REVISTA: " +this.autor);
+        System.out.println("PRECO DA REVISTA: " +this.preco);
+        System.out.println("EDICAO DA REVISTA: " +this.edicao);
+        System.out.println("---------------------------------");
+    }
+
+    @Override
+    public double aplicarDesconto(double percentual) throws IllegalArgumentException {
+        if (percentual <= 0) {
+            throw new IllegalArgumentException("valor do percentual invalido, por favor insira novamente");
+        }
+        return this.preco - (this.preco * percentual) / 100;
+    }
+}
