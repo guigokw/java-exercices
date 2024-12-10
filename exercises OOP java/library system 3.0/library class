@@ -1,0 +1,54 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Livraria {
+    Scanner input = new Scanner(System.in);
+    ArrayList<Publicacao> publicacoes = new ArrayList<>();
+
+
+    public void adicionarPublicacao(Publicacao publicacao) {
+        if (publicacao instanceof Livro) {
+            publicacoes.add(publicacao);
+            System.out.println("livro " +publicacao.getTitulo()+ " adicionado a livraria");
+        } else if (publicacao instanceof Revista) {
+            publicacoes.add(publicacao);
+            System.out.println("revista " +publicacao.getTitulo()+ " adicionado a livraria");
+        } else if (publicacao instanceof Jornal) {
+            publicacoes.add(publicacao);
+            System.out.println("jornal " +publicacao.getTitulo()+ " adicionado a livraria");
+        }
+    }
+
+    public void listarTodasAsPublicacoes() {
+        if (publicacoes.isEmpty()) {
+            System.out.println("a lista de publicacoes da livraria esta vazia");
+        } else {
+            System.out.println("-------------- TODAS AS PUBLICACOES DA LIVRARIA---------------");
+            for (Publicacao publicacao : publicacoes) {
+                publicacao.exibirDetalhes();
+            }
+        }
+    }
+
+    public void buscarPeloTitulo() throws IllegalArgumentException, NullPointerException {
+        System.out.print("qual o titulo da publicacao que vc deseja buscar?");
+        String tituloPublicacao = input.nextLine();
+
+        if (tituloPublicacao.isEmpty()) {
+            throw new IllegalArgumentException("o titulo que vc deseja buscar esta nulo, por favor insira novamente");
+        } else {
+            for (Publicacao publicacao : publicacoes) {
+                if (tituloPublicacao.equalsIgnoreCase(publicacao.getTitulo()) && publicacao instanceof Livro) {
+                    publicacao.exibirDetalhes();
+                } else if (tituloPublicacao.equalsIgnoreCase(publicacao.getTitulo()) && publicacao instanceof Revista) {
+                    publicacao.exibirDetalhes();
+                } else if (tituloPublicacao.equalsIgnoreCase(publicacao.getTitulo()) && publicacao instanceof Jornal) {
+                    publicacao.exibirDetalhes();
+                } else {
+                    throw new NullPointerException("nao foi encontrado nenhuma publicacao com esse titulo");
+                }
+            }
+        }
+    }
+}
+
