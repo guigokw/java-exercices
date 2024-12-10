@@ -1,0 +1,45 @@
+public abstract class Publicacao {
+    protected String titulo;
+    protected String autor;
+    protected double preco;
+
+    public Publicacao(String titulo, String autor, double preco) throws IllegalArgumentException {
+        if (titulo.isEmpty()) {
+            throw new IllegalArgumentException("o titulo esta nulo, por favor digite novamente");
+        } else if (autor.isEmpty()) {
+            throw new IllegalArgumentException("o nome do autor esta vazio, por favor digite novamente");
+        } else if (preco <= 0) {
+            throw new IllegalArgumentException("o preco esta invalido por favor digite novamente");
+        } else {
+            this.titulo = titulo;
+            this.autor = autor;
+            this.preco = preco;
+        }
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public abstract void exibirDetalhes();
+}
