@@ -1,0 +1,22 @@
+public final class Livro extends Publicacao implements Promocao {
+
+    public Livro(String titulo, String autor, double preco) throws IllegalArgumentException {
+        super(titulo, autor, preco);
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("TITULO DO LIVRO: " +this.titulo);
+        System.out.println("AUTOR DO LIVRO: " +this.autor);
+        System.out.println("PRECO DO LIVRO: " +this.preco);
+        System.out.println("-----------------------------");
+    }
+
+    @Override
+    public double aplicarDesconto(double percentual) throws IllegalArgumentException {
+        if (percentual <= 0) {
+            throw new IllegalArgumentException("o valor do percentual esta invalido, por favor digite novamente");
+        }
+        return this.preco - (this.preco * (percentual + 2)) / 100;
+    }
+}
