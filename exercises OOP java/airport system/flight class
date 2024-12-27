@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public abstract class Voo {
+    protected String codigoVoo;
+    protected String origemVoo;
+    protected String destinoVoo;
+    protected String companhiaAerea;
+    protected int capacidadePassageiros;
+
+    ArrayList<Passageiro> listaDePassageiros = new ArrayList<>();
+    HashSet<Long> cpfUnico = new HashSet<>();
+
+    public Voo(String codigoVoo, String origemVoo, String destinoVoo, String companhiaAerea, int capacidadePassageiros) throws IllegalArgumentException {
+        if (capacidadePassageiros < 75 || capacidadePassageiros > 615) {
+            throw new IllegalArgumentException("capacidade de passageiros invalida, por favor insira novamente");
+        } else {
+            this.codigoVoo = codigoVoo;
+            this.origemVoo = origemVoo;
+            this.destinoVoo = destinoVoo;
+            this.companhiaAerea = companhiaAerea;
+            this.capacidadePassageiros = capacidadePassageiros;
+        }
+    }
+
+    public String getCodigoVoo() {
+        return codigoVoo;
+    }
+
+    public void setCodigoVoo(String codigoVoo) {
+        this.codigoVoo = codigoVoo;
+    }
+
+    public String getOrigemVoo() {
+        return origemVoo;
+    }
+
+    public void setOrigemVoo(String origemVoo) {
+        this.origemVoo = origemVoo;
+    }
+
+    public String getDestinoVoo() {
+        return destinoVoo;
+    }
+
+    public void setDestinoVoo(String destinoVoo) {
+        this.destinoVoo = destinoVoo;
+    }
+
+    public String getCompanhiaAerea() {
+        return companhiaAerea;
+    }
+
+    public void setCompanhiaAerea(String companhiaAerea) {
+        this.companhiaAerea = companhiaAerea;
+    }
+
+    public int getCapacidadePassageiros() {
+        return capacidadePassageiros;
+    }
+
+    public void setCapacidadePassageiros(int capacidadePassageiros) {
+        this.capacidadePassageiros = capacidadePassageiros;
+    }
+
+    public void exibirDetalhesVoo() {
+        System.out.println("CODIGO DO VOO: " +this.codigoVoo);
+        System.out.println("ORIGEM DO VOO: " +this.origemVoo);
+        System.out.println("DESTINO DO VOO: " +this.destinoVoo);
+        System.out.println("COMPANHIA AEREA DO VOO: " +this.companhiaAerea);
+        System.out.println("CAPACIDADE DE PASSAGEIROS: " +this.capacidadePassageiros);
+        System.out.println("----------------------------");
+    }
+
+    public void adicionarPassageiroAoVoo(Passageiro passageiro) throws CpfDuplicadoException {
+        if (!cpfUnico.add(passageiro.getCpfPassageiro())) {
+            throw new CpfDuplicadoException();
+        } else {
+            listaDePassageiros.add(passageiro);
+            System.out.println(passageiro.getNomePassageiro()+ " adicionado ao voo");
+        }
+    }
+
+    public abstract double calcularPrecoBaseVoo();
+}
