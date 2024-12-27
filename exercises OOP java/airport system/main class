@@ -2,344 +2,239 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class MainAeroporto {
+public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ArrayList<Aeroporto> aeroportosCadastrados = new ArrayList<>();
         HashSet<String> codigoUnicoAeroporto = new HashSet<>();
 
-        // menu de opcoes
-
         while (true) {
             try {
-                System.out.println("1 - Cadastrar aeroporto");
-                System.out.println("2 - Cadastrar voo em um aeroporto");
-                System.out.println("3 - Cadastrar passageiro em um voo");
-                System.out.println("4 - Exibir detalhes e listar voos de um aeroporto");
-                System.out.println("5 - Buscar voo por destino ou código");
-                System.out.println("6 - Listar passageiros de um voo");
-                System.out.println("7 - Calcular preço total do voo");
-                System.out.println("8 - Sair do programa");
-                System.out.print("Escolha uma opção: ");
+                System.out.println("1 - cadastrar aeroporto");
+                System.out.println("2 - cadastrar voo em um aeroporto");
+                System.out.println("3 - cadastrar passageiro em um voo");
+                System.out.println("4 - exibir detalhes e listar todos os voos de um aeroporto");
+                System.out.println("5 - buscar voo por destino ou código");
+                System.out.println("6 - listar os passageiros de um determinado voo");
+                System.out.println("7 - calcular preço total do voo");
+                System.out.println("8 - sair do programa");
+                System.out.println("===============================");
+                System.out.print("escolha uma dessas opções:");
                 int opcao = input.nextInt();
 
                 input.nextLine();
 
-                switch (opcao) {
-                    case 1:
-                        cadastrarAeroporto(input, aeroportosCadastrados, codigoUnicoAeroporto);
-                        break;
-                    case 2:
-                        cadastrarVooNoAeroporto(input, aeroportosCadastrados);
-                        break;
-                    case 3:
-                        cadastrarPassageiroVoo(input, aeroportosCadastrados);
-                        break;
-                    case 4:
-                        exibirDetalhesEListarVooDeUmAeroporto(input, aeroportosCadastrados);
-                        break;
-                    case 5:
-                        buscarVooPorCodigoOuDestino(input, aeroportosCadastrados);
-                        break;
-                    case 6:
-                        listarPassageirosDeUmVoo(input, aeroportosCadastrados);
-                        break;
-                    case 7:
-                        calcularPrecoTotalDeUmVoo(input, aeroportosCadastrados);
-                        break;
-                    case 8:
-                        System.out.println("saindo do programa.....");
-                        return;
-                    default:
-                        System.out.println("opcao invalida, por favor digite novamente");
+                if (opcao == 1) {
+                    try {
+                        System.out.print("qual o nome do aeroporto?");
+                        String nomeAeroporto = input.nextLine();
+
+                        System.out.print("qual o codigo do aeroporto?");
+                        String codigoAeroporto = input.nextLine();
+
+                        if (!codigoUnicoAeroporto.add(codigoAeroporto)) {
+                            throw new CodigoDuplicadoException("nao foi possivel adicionar o aeroporto no sistema, pois o codigo do aeroporto esta duplicado!!!");
+                        } else if (nomeAeroporto.isEmpty() | codigoAeroporto.isEmpty()) {
+                            throw new NullPointerException("entrada nula, por favor insira novamente");
+                        } else {
+                            Aeroporto aeroporto = new Aeroporto(nomeAeroporto, codigoAeroporto);
+                            aeroportosCadastrados.add(aeroporto);
+                            System.out.println(aeroporto.getNomeAeroporto() + " cadastrado no sistema");
+
+                        }
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite novamente");
+                        input.nextLine();
+                    } catch (CodigoDuplicadoException | NullPointerException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 2) {
+                    try {
+                        System.out.print("qual o codigo do aeroporto que vc deseja adicionar voo?");
+                        String codigoAeroporto = input.nextLine();
+
+                        for (Aeroporto aeroporto : aeroportosCadastrados) {
+                            try {
+                                if (codigoAeroporto.equalsIgnoreCase(aeroporto.getCodigoAeroprorto())) {
+                                    System.out.println("1 - nacional");
+                                    System.out.println("2 - internacional");
+                                    System.out.println("=========================");
+                                    System.out.print("qual dessas opcoes vc escolhe?");
+                                    int opcao2 = input.nextInt();
+
+                                    input.nextLine();
+
+                                    if (opcao2 == 1) {
+                                        System.out.print("qual o codigo do voo?");
+                                        String codigoVoo = input.nextLine();
+
+                                        System.out.print("qual a origem do voo?");
+                                        String origemVoo = input.nextLine();
+
+                                        System.out.print("qual o destino do voo?");
+                                        String destinoVoo = input.nextLine();
+
+                                        System.out.print("qual a companhia aerea do voo?");
+                                        String companhiaAerea = input.nextLine();
+
+                                        System.out.print("qual a capacidade de passageiros do voo?");
+                                        int capacidadePassageiros = input.nextInt();
+
+                                        VooNacional voo = new VooNacional(codigoVoo, origemVoo, destinoVoo, companhiaAerea, capacidadePassageiros);
+                                        aeroporto.adicionarUmVooAoAeroporto(voo);
+                                    } else if (opcao2 == 2) {
+                                        System.out.print("qual o codigo do voo?");
+                                        String codigoVoo = input.nextLine();
+
+                                        System.out.print("qual a origem do voo?");
+                                        String origemVoo = input.nextLine();
+
+                                        System.out.print("qual o destino do voo?");
+                                        String destinoVoo = input.nextLine();
+
+                                        System.out.print("qual a companhia aerea do voo?");
+                                        String companhiaAerea = input.nextLine();
+
+                                        System.out.print("qual a capacidade de passageiros do voo?");
+                                        int capacidadePassageiros = input.nextInt();
+
+                                        VooInternacional voo = new VooInternacional(codigoVoo, origemVoo, destinoVoo, companhiaAerea, capacidadePassageiros);
+                                        aeroporto.adicionarUmVooAoAeroporto(voo);
+                                    } else {
+                                        System.out.println("opcao invalida, por favor insira novamente!!!");
+                                    }
+                                } else {
+                                    System.out.println("codigo do aeroporto nao encontrado!!!");
+                                }
+                            } catch (NullPointerException e) {
+                                System.out.println("nao foi possivel adicionar o voo, pois o codigo de aeroporto nao foi encontardo");
+                            } catch (CodigoDuplicadoException e) {
+                                System.out.println(e.getMessage());
+                            } catch (java.util.InputMismatchException e) {
+                                System.out.println("entrada invalida, por favor digite novemente!!!");
+                                input.nextLine();
+                            }
+                        }
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor insira novamente!!!");
+                        input.nextLine();
+                    } catch (NullPointerException e) {
+                        System.out.println("nao foi possivel adicionar o voo, pois o codigo de aeroporto nao foi encontardo");
+                    }
+                } else if (opcao == 3) {
+                    try {
+                        System.out.print("qual o codigo do voo que vc deseja adicionar o passageiro?");
+                        String codigoVoo = input.nextLine();
+
+                        for (Aeroporto aeroporto : aeroportosCadastrados) {
+                            for (Voo voo : aeroporto.voosCadastrados) {
+                                try {
+                                    if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
+                                        System.out.print("qual o nome do passageiro?");
+                                        String nomePassageiro = input.nextLine();
+
+                                        System.out.print("qual o cpf do passageiro?");
+                                        Long cpfPassageiro = input.nextLong();
+
+                                        input.nextLine();
+
+                                        System.out.print("qual o assento preferido do passageiro?");
+                                        String assentoPreferido = input.nextLine();
+
+                                        Passageiro passageiro = new Passageiro(nomePassageiro, cpfPassageiro, assentoPreferido);
+                                        voo.adicionarPassageiroAoVoo(passageiro);
+                                    } else {
+                                        System.out.println("voo nao encontrado!!!");
+                                    }
+                                } catch (NullPointerException e) {
+                                    System.out.println("nao foi possivel buscar o codigo, pois a entrada é nula");
+                                } catch (CodigoDuplicadoException e) {
+                                    System.out.println(e.getMessage());
+                                }
+                            }
+                        }
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite novamente");
+                        input.nextLine();
+                    }
+                } else if (opcao == 4) {
+                    System.out.print("qual o codigo do aeroporto que vc deseja listar os voos");
+                    String codigoAeroporto = input.nextLine();
+
+                    for (Aeroporto aeroporto : aeroportosCadastrados) {
+                        if (codigoAeroporto.equalsIgnoreCase(aeroporto.getCodigoAeroprorto())) {
+                            System.out.println("==================== detalhes do aeroporto =================");
+                            aeroporto.exibirDetalhesAeroporto();
+                        }
+                    }
+                } else if (opcao == 5) {
+                    try {
+                        for (Aeroporto aeroporto : aeroportosCadastrados) {
+                            aeroporto.buscarVoo();
+                        }
+                    } catch (VooNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    } catch (java.util.InputMismatchException e) {
+                        System.out.println("entrada invalida, por favor digite novamente");
+                        input.nextLine();
+                    }
+                } else if (opcao == 6) {
+                    try {
+                        System.out.print("qual o codigo do voo que vc deseja listar os passageiros?");
+                        String codigoVoo = input.nextLine();
+
+                        if (aeroportosCadastrados.isEmpty()) {
+                            System.out.println("as listas estao vazias");
+                        } else {
+                            System.out.println("============= detalhes dos passageiros =================");
+                            for (Aeroporto aeroporto : aeroportosCadastrados) {
+                                for (Voo voo : aeroporto.getVoosCadastrados()) {
+                                    for (Passageiro passageiro : voo.listaDePassageiros) {
+                                        if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
+                                            passageiro.exibirDetalhesPassageiro();
+                                            System.out.println("----------------------------");
+                                        } else {
+                                            throw new VooNaoEncontradoException();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } catch (VooNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 7) {
+                    try {
+                        System.out.print("digite o codigo do voo que vc deseja buscar para calcular o preço?");
+                        String codigoVoo = input.nextLine();
+
+                        if (aeroportosCadastrados.isEmpty()) {
+                            System.out.println("as listas estao vazias");
+                        } else {
+                            for (Aeroporto aeroporto : aeroportosCadastrados) {
+                                for (Voo voo : aeroporto.voosCadastrados) {
+                                    if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
+                                        System.out.println("o preço do voo " +voo.getCodigoVoo()+ " é de " +voo.calcularPrecoBaseVoo());
+                                    } else {
+                                        throw new VooNaoEncontradoException();
+                                    }
+                                }
+                            }
+                        }
+
+                    } catch (VooNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else if (opcao == 8) {
+                    System.out.println("saindo do programa....");
+                    break;
+                } else {
+                    System.out.println("opcao invalida, por favor digite novamente!!!");
                 }
             } catch (java.util.InputMismatchException e) {
                 System.out.println("entrada invalida, por favor digite novamente");
                 input.nextLine();
             }
-        }
-    }
-
-    /*
-     *
-     *
-     * cadastrando aeroporto no sistema
-     *
-     *
-     */
-
-    private static void cadastrarAeroporto(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados, HashSet<String> codigoUnicoAeroporto) {
-        try {
-            System.out.print("qual o nome do aeroporto?");
-            String nomeAeroporto = input.nextLine();
-
-            System.out.print("qual o codigo do aeroporto?");
-            String codigoAeroporto = input.nextLine();
-
-            if (!codigoUnicoAeroporto.add(codigoAeroporto)) {
-                throw new CodigoDuplicadoException("nao foi possivel adicionar o aeroporto no sistema, pois o codigo do aeroporto esta duplicado!!!");
-            } else if (nomeAeroporto.isEmpty() || codigoAeroporto.isEmpty()) {
-                throw new NullPointerException("entrada nula, por favor insira novamente");
-            } else {
-                Aeroporto aeroporto = new Aeroporto(nomeAeroporto, codigoAeroporto);
-                aeroportosCadastrados.add(aeroporto);
-                System.out.println(aeroporto.getNomeAeroporto() + " cadastrado no sistema");
-
-            }
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("entrada invalida, por favor digite novamente");
-            input.nextLine();
-        } catch (CodigoDuplicadoException | NullPointerException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /*
-     *
-     *  cadastrando voos no aeroporto especifico
-     *
-     *
-     */
-
-    private static void cadastrarVooNoAeroporto(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            System.out.print("qual o codigo do aeroporto que vc deseja adicionar voo?");
-            String codigoAeroporto = input.nextLine();
-
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("nao foi possivel buscar nenhum aeroporto pois nao ha aeroportos cadastrados no sistema");
-            } else {
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    if (codigoAeroporto.equalsIgnoreCase(aeroporto.getCodigoAeroprorto())) {
-                        System.out.println("1 - nacional");
-                        System.out.println("2 - internacional");
-                        System.out.println("=========================");
-                        System.out.print("qual dessas opcoes vc escolhe?");
-                        int opcao2 = input.nextInt();
-
-                        input.nextLine();
-
-                        if (opcao2 == 1) {
-                            System.out.print("qual o codigo do voo?");
-                            String codigoVoo = input.nextLine();
-
-                            System.out.print("qual a origem do voo?");
-                            String origemVoo = input.nextLine();
-
-                            System.out.print("qual o destino do voo?");
-                            String destinoVoo = input.nextLine();
-
-                            System.out.print("qual a companhia aerea do voo?");
-                            String companhiaAerea = input.nextLine();
-
-                            System.out.print("qual a capacidade de passageiros do voo?");
-                            int capacidadePassageiros = input.nextInt();
-
-                            VooNacional voo = new VooNacional(codigoVoo, origemVoo, destinoVoo, companhiaAerea, capacidadePassageiros);
-                            aeroporto.adicionarUmVooAoAeroporto(voo);
-                        } else if (opcao2 == 2) {
-                            System.out.print("qual o codigo do voo?");
-                            String codigoVoo = input.nextLine();
-
-                            System.out.print("qual a origem do voo?");
-                            String origemVoo = input.nextLine();
-
-                            System.out.print("qual o destino do voo?");
-                            String destinoVoo = input.nextLine();
-
-                            System.out.print("qual a companhia aerea do voo?");
-                            String companhiaAerea = input.nextLine();
-
-                            System.out.print("qual a capacidade de passageiros do voo?");
-                            int capacidadePassageiros = input.nextInt();
-
-                            VooInternacional voo = new VooInternacional(codigoVoo, origemVoo, destinoVoo, companhiaAerea, capacidadePassageiros);
-                            aeroporto.adicionarUmVooAoAeroporto(voo);
-                        } else {
-                            System.out.println("opcao invalida, por favor insira novamente!!!");
-                        }
-                    } else {
-                        throw new CodigoNaoEncontradoException();
-                    }
-                }
-            }
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("entrada invalida, por favor insira novamente!!!");
-            input.nextLine();
-        } catch (NullPointerException e) {
-            System.out.println("nao foi possivel adicionar o voo, pois o codigo de aeroporto nao foi encontardo");
-        } catch (CodigoNaoEncontradoException | CodigoDuplicadoException | IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /*
-     *
-     *
-     * cadastrando passageiros no voo especifico
-     *
-     */
-
-    private static void cadastrarPassageiroVoo(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            System.out.print("qual o codigo do voo que vc deseja adicionar o passageiro?");
-            String codigoVoo = input.nextLine();
-
-
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("nao foi possivel buscar o codigo de voo, pois nao ha nenhum aeroporto cadastrado");
-            } else {
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    for (Voo voo : aeroporto.voosCadastrados) {
-                        try {
-                            if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
-                                System.out.print("qual o nome do passageiro?");
-                                String nomePassageiro = input.nextLine();
-
-                                System.out.print("qual o cpf do passageiro?");
-                                Long cpfPassageiro = input.nextLong();
-
-                                input.nextLine();
-
-                                System.out.print("qual o assento preferido do passageiro?");
-                                String assentoPreferido = input.nextLine();
-
-                                Passageiro passageiro = new Passageiro(nomePassageiro, cpfPassageiro, assentoPreferido);
-                                voo.adicionarPassageiroAoVoo(passageiro);
-                            } else {
-                                throw new VooNaoEncontradoException();
-                            }
-
-
-                        } catch (NullPointerException e) {
-                            System.out.println("nao foi possivel buscar o codigo, pois a entrada é nula");
-                        } catch (CodigoDuplicadoException | VooNaoEncontradoException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    }
-                }
-            }
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("entrada invalida, por favor digite novamente");
-            input.nextLine();
-        }
-    }
-
-    /*
-     *
-     *
-     * exibindo detalhes e listando o voo de um aeroporto
-     *
-     */
-
-    private static void exibirDetalhesEListarVooDeUmAeroporto(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            System.out.print("qual o codigo do aeroporto que vc deseja listar os voos");
-            String codigoAeroporto = input.nextLine();
-
-
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("nao foi possivel buscar o codigo do aeroporto, pois nao ha nenhum aeroporto cadastrado");
-            } else {
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    if (codigoAeroporto.equalsIgnoreCase(aeroporto.getCodigoAeroprorto())) {
-                        System.out.println("==================== detalhes do aeroporto =================");
-                        aeroporto.exibirDetalhesAeroporto();
-                    } else {
-                        throw new VooNaoEncontradoException();
-                    }
-                }
-            }
-        } catch (VooNaoEncontradoException e) {
-            System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("nao foi possivel buscar os detalhes pois esse aeroporto nao esta registrado no sistema");
-        }
-    }
-
-    private static void buscarVooPorCodigoOuDestino(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("nao foi possivel buscar um voo, pois nao ha aeroportos cadastrados");
-            } else {
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    aeroporto.buscarVoo();
-                }
-            }
-        } catch (VooNaoEncontradoException e) {
-            System.out.println(e.getMessage());
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("entrada invalida, por favor digite novamente");
-            input.nextLine();
-        }
-    }
-
-    /*
-     *
-     *
-     *  listando passageiros de um voo especifico
-     *
-     */
-
-    private static void listarPassageirosDeUmVoo(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            System.out.print("qual o codigo do voo que vc deseja listar os passageiros?");
-            String codigoVoo = input.nextLine();
-
-
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("as listas estao vazias");
-            } else {
-                System.out.println("============= detalhes dos passageiros =================");
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    for (Voo voo : aeroporto.getVoosCadastrados()) {
-                        for (Passageiro passageiro : voo.listaDePassageiros) {
-                            if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
-                                passageiro.exibirDetalhesPassageiro();
-                                System.out.println("----------------------------");
-                            } else {
-                                throw new VooNaoEncontradoException();
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (VooNaoEncontradoException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    /*
-     *
-     *
-     * calculando o preco total de um voo especifico
-     *
-     */
-
-    private static void calcularPrecoTotalDeUmVoo(Scanner input, ArrayList<Aeroporto> aeroportosCadastrados) {
-        try {
-            System.out.print("digite o codigo do voo que vc deseja buscar para calcular o preço?");
-            String codigoVoo = input.nextLine();
-
-
-            if (aeroportosCadastrados.isEmpty()) {
-                System.out.println("as listas estao vazias");
-            } else {
-                for (Aeroporto aeroporto : aeroportosCadastrados) {
-                    for (Voo voo : aeroporto.voosCadastrados) {
-                        if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
-                            System.out.println("o preço do voo " +voo.getCodigoVoo()+ " é de " +voo.calcularPrecoBaseVoo());
-                        } else {
-                            throw new VooNaoEncontradoException();
-                        }
-
-                    }
-                }
-            }
-
-        } catch (VooNaoEncontradoException e) {
-            System.out.println(e.getMessage());
         }
     }
 }
