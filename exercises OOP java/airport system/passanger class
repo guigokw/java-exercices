@@ -1,0 +1,42 @@
+public class Passageiro {
+    private String nomePassageiro;
+    private Long cpfPassageiro;
+    private String assentoPreferido;
+
+    public Passageiro(String nomePassageiro, Long cpfPassageiro, String assentoPreferido) {
+        this.nomePassageiro = nomePassageiro;
+        this.cpfPassageiro = cpfPassageiro;
+        this.assentoPreferido = assentoPreferido;
+    }
+
+    public String getNomePassageiro() {
+        return nomePassageiro;
+    }
+
+    public void setNomePassageiro(String nomePassageiro) {
+        this.nomePassageiro = nomePassageiro;
+    }
+
+    public long getCpfPassageiro() {
+        return cpfPassageiro;
+    }
+
+    public void setCpfPassageiro(Long cpfPassageiro) {
+        this.cpfPassageiro = cpfPassageiro;
+    }
+
+    public String getAssentoPreferido() {
+        return assentoPreferido;
+    }
+
+    public void setAssentoPreferido(String assentoPreferido) {
+        this.assentoPreferido = assentoPreferido;
+    }
+
+    public void exibirDetalhesPassageiro() {
+        System.out.println("NOME DO PASSAGEIRO: " +this.nomePassageiro);
+        System.out.println("CPF DO PASSAGEIRO: " +this.cpfPassageiro);
+        System.out.println("ASSENTO PREFERIDO DO PASSAGEIRO: " +this.assentoPreferido);
+        System.out.println("-------------------------------------");
+    }
+}
