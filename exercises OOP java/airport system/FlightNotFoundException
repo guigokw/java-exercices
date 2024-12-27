@@ -1,0 +1,5 @@
+public class VooNaoEncontradoException extends RuntimeException {
+    public VooNaoEncontradoException() {
+        super("voo nao encontrado!!!");
+    }
+}
