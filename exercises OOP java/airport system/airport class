@@ -1,0 +1,121 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Aeroporto {
+    private String nomeAeroporto;
+    private String codigoAeroporto;
+
+    ArrayList<Voo> voosCadastrados = new ArrayList<>();
+    HashSet<String> codigoUnico = new HashSet<>();
+    Scanner input = new Scanner(System.in);
+
+    public Aeroporto(String nomeAeroporto, String codigoAeroporto) {
+        this.nomeAeroporto = nomeAeroporto;
+        this.codigoAeroporto = codigoAeroporto;
+    }
+
+    public ArrayList<Voo> getVoosCadastrados() {
+        return voosCadastrados;
+    }
+
+    public String getNomeAeroporto() {
+        return nomeAeroporto;
+    }
+
+    public void setNomeAeroporto(String nomeAeroporto) {
+        this.nomeAeroporto = nomeAeroporto;
+    }
+
+    public String getCodigoAeroprorto() {
+        return codigoAeroporto;
+    }
+
+    public void setCodigoAeroprorto(String codigoAeroprorto) {
+        this.codigoAeroporto = codigoAeroprorto;
+    }
+
+    public void adicionarUmVooAoAeroporto(Voo voo) throws CodigoDuplicadoException {
+        if (voo.getCapacidadePassageiros() < 75 || voo.getCapacidadePassageiros() > 615) {
+            throw new IllegalArgumentException("capacidade de passageiros invalida, por favor insira novamente");
+        } else if (!codigoUnico.add(voo.codigoVoo)) {
+            throw new CodigoDuplicadoException();
+        } else {
+            voosCadastrados.add(voo);
+            System.out.println("voo com origem de " +voo.getOrigemVoo()+ " e o destino de " +voo.getDestinoVoo()+ " adicionado ao aeroporto de " +this.nomeAeroporto);
+        }
+    }
+
+    public void listarVoos() throws NullPointerException {
+        if (voosCadastrados.isEmpty()) {
+            throw new NullPointerException("a lista de voos esta vazia!!");
+        } else {
+            for (Voo voo : voosCadastrados) {
+                System.out.println("============= DETALHES DE TODOS OS VOOS ==============");
+                voo.exibirDetalhesVoo();
+                System.out.println("------------------------------");
+            }
+        }
+    }
+
+    public void buscarVoo() throws VooNaoEncontradoException {
+        System.out.println("1 - buscar voo por destino");
+        System.out.println("2 - buscar voo por codigo unico");
+        System.out.println("---------------------------");
+        System.out.print("qual dessas opcoes vc escolhe?");
+        int opcao = input.nextInt();
+
+        input.nextLine();
+        boolean encontrado = false;
+
+        switch (opcao) {
+            case 1:
+                System.out.print("qual o destino do voo que vc deseja buscar?");
+                String destinoVoo = input.nextLine();
+
+                for (Voo voo : voosCadastrados) {
+                    if (destinoVoo.equalsIgnoreCase(voo.getDestinoVoo())) {
+                        voo.exibirDetalhesVoo();
+                        encontrado = true;
+                    }
+                }
+                if (! encontrado) {
+                    throw new VooNaoEncontradoException();
+                }
+                break;
+
+            case 2:
+                System.out.print("qual o codigo de voo que vc deseja buscar?");
+                String codigoVoo = input.nextLine();
+
+                for (Voo voo : voosCadastrados) {
+                    if (codigoVoo.equalsIgnoreCase(voo.getCodigoVoo())) {
+                        voo.exibirDetalhesVoo();
+                        encontrado = true;
+                    }
+                }
+                if (! encontrado) {
+                    throw new VooNaoEncontradoException();
+                }
+                break;
+
+            default:
+                System.out.println("opcao invalida, pro favor tente novamente");
+        }
+    }
+
+    public void exibirDetalhesAeroporto() {
+        System.out.println("NOME DO AEROPORTO: " +this.nomeAeroporto);
+        System.out.println("CODIGO DO AEROPORTO : " +this.codigoAeroporto);
+        if (voosCadastrados.isEmpty()) {
+            System.out.println("a lista de voos cadastrados esta vazia");
+            System.out.println("---------------------------");
+        } else {
+            for (Voo voo : voosCadastrados) {
+                System.out.println("---------------- detalhes dos voos --------------");
+                voo.exibirDetalhesVoo();
+                System.out.println("----------------------");
+            }
+        }
+    }
+}
