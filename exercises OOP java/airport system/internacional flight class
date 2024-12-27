@@ -1,0 +1,24 @@
+public class VooInternacional extends Voo {
+
+    public VooInternacional(String codigoVoo, String origemVoo, String destinoVoo, String companhiaAerea, int capacidadePassageiros) {
+        super(codigoVoo, origemVoo, destinoVoo, companhiaAerea, capacidadePassageiros);
+    }
+
+    @Override
+    public void exibirDetalhesVoo() {
+        super.exibirDetalhesVoo();
+    }
+
+    @Override
+    public double calcularPrecoBaseVoo() {
+        double precoFixoVoo = 2000;
+        double quantidadePassageiros = listaDePassageiros.size();
+
+        return precoFixoVoo + (precoFixoVoo * (quantidadePassageiros * 100)) / 100;
+    }
+
+    @Override
+    public void adicionarPassageiroAoVoo(Passageiro passageiro) {
+        super.adicionarPassageiroAoVoo(passageiro);
+    }
+}
