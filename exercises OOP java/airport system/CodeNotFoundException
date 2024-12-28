@@ -1,5 +1,0 @@
-public class CodigoNaoEncontradoException extends RuntimeException {
-    public CodigoNaoEncontradoException() {
-        super("codigo nao encontrado");
-    }
-}

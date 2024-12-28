@@ -1,9 +1,0 @@
-public class CodigoDuplicadoException extends RuntimeException {
-    public CodigoDuplicadoException() {
-        super("nao foi possivel adicionar o voo pois o codigo de voo esta duplicado!!!");
-    }
-
-    public CodigoDuplicadoException(String mensagem) {
-        super(mensagem);
-    }
-}
