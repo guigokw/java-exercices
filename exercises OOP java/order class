@@ -1,0 +1,44 @@
+import java.util.ArrayList;
+
+public class Pedido {
+    private Cardapio itemEscolhido;
+    private int quantidade;
+
+    static ArrayList<Pedido> listaDePedidos = new ArrayList<>();
+
+    public Pedido(Cardapio itemEscolhido, int quantidade) {
+        this.itemEscolhido = itemEscolhido;
+        this.quantidade = quantidade;
+    }
+
+    public Cardapio getItemEscolhido() {
+        return itemEscolhido;
+    }
+
+    public void setItemEscolhido(Cardapio itemEscolhido) {
+        this.itemEscolhido = itemEscolhido;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public ArrayList<Pedido> getListaDePedidos() {
+        return listaDePedidos;
+    }
+
+    public double calcularValorPedido() {
+
+        double valorPedido = 0;
+
+        for (Pedido precos : listaDePedidos) {
+            valorPedido += precos.getItemEscolhido().getPreco() * precos.getQuantidade();
+        }
+
+        return valorPedido;
+    }
+}
