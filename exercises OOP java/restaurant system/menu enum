@@ -1,0 +1,32 @@
+public enum Cardapio {
+
+    HAMBURGER("um hamburger artesanal com carne desfiada, chedar, bacon, ovo, pao brioche e molho especial", 25.80),
+    PIZZA("pizza de marguerita especial com quatro queijos", 32.25),
+    BATATAFRITA("batata frita curly enrolada com bacon, ketchup e maionese temperada", 15.85),
+    SALADA("uma salada completa com alface, tomate, pepino e muitas outras", 18);
+
+
+    private String descricao;
+    private double preco;
+
+    Cardapio(String descricao, double preco) {
+        this.descricao = descricao;
+        this.preco = preco;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+}
