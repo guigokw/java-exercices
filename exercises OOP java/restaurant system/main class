@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class MainPedido {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        while (true) {
+            try {
+                System.out.println("=========== MENU ============");
+                System.out.println("1 - " + Cardapio.HAMBURGER + " - " + Cardapio.HAMBURGER.getPreco());
+                System.out.println("2 - " + Cardapio.PIZZA + " - " + Cardapio.PIZZA.getPreco());
+                System.out.println("3 - " + Cardapio.BATATAFRITA + " - " + Cardapio.BATATAFRITA.getPreco());
+                System.out.println("4 - " + Cardapio.SALADA + " - " + Cardapio.SALADA.getPreco());
+                System.out.println("5 - sair do menu");
+                System.out.println("==============================");
+
+                System.out.print("qual dessas opcoes vc escolhe? maximo de 5 escolhas....");
+                int opcao = input.nextInt();
+
+                if (opcao == 1) {
+                    System.out.print("qual a quantidade que vc escolhe?");
+                    int quantidade = input.nextInt();
+
+                    if (quantidade <= 0) {
+                        throw new IllegalArgumentException("a quantidade que vc pediu é invalida, por favor digite novamente");
+                    }
+
+                    Pedido pedido = new Pedido(Cardapio.HAMBURGER, quantidade);
+                    pedido.getListaDePedidos().add(pedido);
+
+                } else if (opcao == 2) {
+                    System.out.print("qual a quantidade que vc escolhe?");
+                    int quantidade = input.nextInt();
+
+                    if (quantidade <= 0) {
+                        throw new IllegalArgumentException("a quantidade que vc pediu é invalida, por favor digite novamente");
+                    }
+
+                    Pedido pedido = new Pedido(Cardapio.PIZZA, quantidade);
+                    pedido.getListaDePedidos().add(pedido);
+
+                } else if (opcao == 3) {
+                    System.out.print("qual a quantidade que vc escolhe?");
+                    int quantidade = input.nextInt();
+
+                    if (quantidade <= 0) {
+                        throw new IllegalArgumentException("a quantidade que vc pediu é invalida, por favor digite novamente");
+                    }
+
+                    Pedido pedido = new Pedido(Cardapio.BATATAFRITA, quantidade);
+                    pedido.getListaDePedidos().add(pedido);
+
+                } else if (opcao == 4) {
+                    System.out.print("qual a quantidade que vc escolhe?");
+                    int quantidade = input.nextInt();
+
+                    if (quantidade <= 0) {
+                        throw new IllegalArgumentException("a quantidade que vc pediu é invalida, por favor digite novamente");
+                    }
+
+                    Pedido pedido = new Pedido(Cardapio.SALADA, quantidade);
+                    pedido.getListaDePedidos().add(pedido);
+
+                } else if (opcao == 5) {
+                    break;
+                } else {
+                    System.out.println("opcao invalida, por favor digite novamente");
+                }
+
+
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite novamente");
+                input.nextLine();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        System.out.println("========= LISTA DE PEDIDOS ===========");
+        for (Pedido pedido : Pedido.listaDePedidos) {
+            System.out.println(pedido.getQuantidade() + "x " + pedido.getItemEscolhido() + " - " + pedido.getItemEscolhido().getPreco() * pedido.getQuantidade());
+        }
+        for (Pedido pedidoTotal : Pedido.listaDePedidos) {
+            System.out.println("---------------------------");
+            System.out.println("TOTAL: R$:" + pedidoTotal.calcularValorPedido());
+            break;
+        }
+    }
+}
+
