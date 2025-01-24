@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+
+public class Usuario {
+    private String nomeUsuario;
+    ArrayList<Livro> livrosEmprestados;
+
+    public Usuario(String nomeUsuario, ArrayList<Livro> livroeEmprestados) {
+        this.nomeUsuario = nomeUsuario;
+        this.livrosEmprestados = livroeEmprestados;
+    }
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public void adicionarLivroNaListaDeEmprestimosDoUsuario(Livro livro) throws IllegalArgumentException {
+        if (!livro.getEmprestado()) {
+            livrosEmprestados.add(livro);
+            System.out.println(livro.getTituloLivro() + " emprestado para " +this.nomeUsuario);
+            livro.setEmprestado(true);
+        } else {
+            throw new IllegalArgumentException("nao foi possivel emprestar o livro " + livro.getTituloLivro() + " pos ele ja foi emprestado");
+        }
+    }
+
+    public void removerLivroNaListaDeEmprestimosDoUsuario(Livro livro) throws IllegalArgumentException {
+        if (livro.getEmprestado()) {
+            livrosEmprestados.remove(livro);
+            System.out.println(livro.getTituloLivro() + " removido da lista de emprestimos de " + this.nomeUsuario);
+            livro.setEmprestado(false);
+        } else {
+            throw new IllegalArgumentException("nao foi possivel devolver o livro " + livro.getTituloLivro() + " pois ele nao foi emprestado");
+        }
+    }
+
+    public void listarOsLivrosEmprestados() {
+        if (livrosEmprestados.isEmpty()) {
+            throw new NullPointerException("a lista de livros emprestados esta vazia");
+        } else {
+            System.out.println("====== LISTA DE TODOS OS LIVROS EMPRESTADOS ======");
+            for (Livro livro : livrosEmprestados) {
+                livro.exibirDetalhes();
+            }
+        }
+    }
+}
