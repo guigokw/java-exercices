@@ -1,0 +1,210 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+
+public class MainBiblioteca {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        Biblioteca biblioteca = new Biblioteca();
+
+        while (true) {
+            try {
+                System.out.println("1 - cadastrar novo livro no catalogo");
+                System.out.println("2 - cadastrar novo usuario");
+                System.out.println("3 - listar todos os livros do catalogo");
+                System.out.println("4 - realizar emprestimo de um livro");
+                System.out.println("5 - realizar devolucao de um livro");
+                System.out.println("6 - listar livros emprestados por um usuario");
+                System.out.println("7 - sair do programa");
+                System.out.println("---------------------");
+                System.out.print("escolha uma dessas opcoes?");
+                int opcao = input.nextInt();
+
+                input.nextLine();
+
+                switch (opcao) {
+                    case 1 -> cadastrarLivroCatalogo(input, biblioteca);
+                    case 2 -> cadastrarUsuario(input, biblioteca);
+                    case 3 -> listarLivrosCatalogo(biblioteca);
+                    case 4 -> realizarEmprestimoLivro(input, biblioteca, biblioteca.catalogo);
+                    case 5 -> devolverLivro(input, biblioteca, biblioteca.catalogo);
+                    case 6 -> listarLivroDeUmUsuario(input, biblioteca);
+                    default -> {
+                        System.out.println("saindo do programa....");
+                        input.close();
+                        return;
+                    }
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite novamente");
+                input.nextLine();
+            }
+        }
+    }
+
+    private static void cadastrarLivroCatalogo(Scanner input, Biblioteca biblioteca) {
+        try {
+            System.out.print("qual o id do livro?");
+            int id = input.nextInt();
+
+            input.nextLine();
+
+            System.out.print("qual o titulo do livro?");
+            String tituloLivro = input.nextLine();
+
+            System.out.print("qual o autor do livro?");
+            String autorLivro = input.nextLine();
+
+            System.out.println("1 = ficção");
+            System.out.println("2 = ciencia");
+            System.out.println("3 - historia");
+            System.out.println("4 - fantasia");
+            System.out.println("---------------");
+            System.out.print("escolha uma dessas opcoes:");
+            int opcao = input.nextInt();
+
+            Genero genero = switch (opcao) {
+                case 1 -> Genero.FICCAO;
+                case 2 -> Genero.CIENCIA;
+                case 3 -> Genero.HISTORIA;
+                case 4 -> Genero.FANTASIA;
+                default -> throw new IllegalArgumentException("opcao invalida, por favor tente novamente");
+            };
+
+            Livro livro = new Livro(tituloLivro, autorLivro, genero, false);
+            biblioteca.adicionarLivroCatalogo(id, livro);
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente");
+            input.nextLine();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void cadastrarUsuario(Scanner input, Biblioteca biblioteca) {
+        System.out.print("qual o nome do usuario?");
+        String nomeUsuario = input.nextLine();
+
+        Usuario usuario = new Usuario(nomeUsuario, new ArrayList<>());
+
+        biblioteca.cadastrarUsuario(usuario);
+    }
+
+    private static void listarLivrosCatalogo(Biblioteca biblioteca) {
+        try {
+            biblioteca.listarLivrosDoCatalogo();
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void realizarEmprestimoLivro(Scanner input, Biblioteca biblioteca, HashMap<Integer, Livro> catalogo) {
+        try {
+            AtomicBoolean encontrado = new AtomicBoolean(false);
+
+            System.out.print("qual o nome do usuario que deseja realizar o emprestimo?");
+            String nomeUsuario = input.nextLine();
+
+            System.out.print("qual o nome do livro que vc deseja emprestar?");
+            String tituloLivro = input.nextLine();
+
+            biblioteca.usuarios.stream()
+                    .filter(a -> a.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
+                    .findFirst()
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException("nao foi possivel realizar o emprestimo do livro pois o usuario " +nomeUsuario+ " nao foi encontrado"));
+
+
+            for (Usuario usuario : biblioteca.usuarios) {
+                for (Integer key : catalogo.keySet()) {
+                    catalogo.keySet().stream()
+                            .filter(a -> catalogo.get(key).getTituloLivro().equalsIgnoreCase(tituloLivro))
+                            .collect(Collectors.toSet())
+                            .forEach(livro -> {
+                                if (catalogo.get(key).getTituloLivro().equalsIgnoreCase(tituloLivro) && usuario.getNomeUsuario().equalsIgnoreCase(nomeUsuario)) {
+                                    biblioteca.emprestarLivro(usuario, catalogo.get(key));
+                                    encontrado.set(true);
+                                }
+                            });
+                }
+            }
+
+            if (!encontrado.get()) {
+                throw new LivroNaoEncontradoException("nao foi possivel emprestar o livro " +tituloLivro+ " pois ele nao foi registrado no sistema");
+            }
+
+
+        } catch (IllegalArgumentException | UsuarioNaoEncontradoException| LivroNaoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void devolverLivro(Scanner input, Biblioteca biblioteca, HashMap<Integer, Livro> catalogo) {
+        try {
+            AtomicBoolean encontrado = new AtomicBoolean(false);
+
+            System.out.print("qual o nome do usuario que deseja devolver o livro?");
+            String nomeUsuario = input.nextLine();
+
+            System.out.print("qual o nome do livro que vc deseja devolver?");
+            String tituloLivro = input.nextLine();
+
+            biblioteca.usuarios.stream()
+                    .filter(a -> a.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
+                    .findFirst()
+                    .orElseThrow(() -> new UsuarioNaoEncontradoException("nao foi possivel realizar a devolucao do livro pois o usuario" +nomeUsuario+ " nao foi encontrado"));
+
+
+            for (Usuario usuario : biblioteca.usuarios) {
+                for (Integer key : catalogo.keySet()) {
+                    catalogo.keySet().stream()
+                            .filter(a -> catalogo.get(key).getTituloLivro().equalsIgnoreCase(tituloLivro))
+                            .collect(Collectors.toSet())
+                            .forEach(livro -> {
+                                if (catalogo.get(key).getTituloLivro().equalsIgnoreCase(tituloLivro) && usuario.getNomeUsuario().equalsIgnoreCase(nomeUsuario)) {
+                                    biblioteca.devolverLivro(usuario, catalogo.get(key));
+                                    encontrado.set(true);
+                                }
+                            });
+                }
+            }
+
+            if (!encontrado.get()) {
+                throw new LivroNaoEncontradoException("nao foi possivel devolver o livro " +tituloLivro+ " pois ele nao esta foi registrado no sistema");
+            }
+
+
+        } catch (IllegalArgumentException | UsuarioNaoEncontradoException| LivroNaoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void listarLivroDeUmUsuario(Scanner input, Biblioteca biblioteca) {
+        try {
+            AtomicBoolean encontrado = new AtomicBoolean(false);
+
+            System.out.print("qual o nome do usuario que vc deseja listar os livros emprestados?");
+            String nomeUsuario = input.nextLine();
+
+            for (Usuario usuario : biblioteca.usuarios) {
+                biblioteca.usuarios.stream()
+                        .filter(a -> a.getNomeUsuario().equalsIgnoreCase(nomeUsuario))
+                        .collect(Collectors.toSet())
+                        .forEach(livro -> {
+                            if (usuario.getNomeUsuario().equalsIgnoreCase(nomeUsuario)) {
+                                usuario.listarOsLivrosEmprestados();
+                                encontrado.set(true);
+                            }
+                        });
+            }
+
+            if (!encontrado.get()) {
+                throw new UsuarioNaoEncontradoException("nao foi possivel listar os livro de " + nomeUsuario + " pois este usuario nao foi encontrado");
+            }
+        } catch (UsuarioNaoEncontradoException | NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
