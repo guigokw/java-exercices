@@ -1,0 +1,16 @@
+public enum Genero {
+    FICCAO("um livro que conta historias baseados em uma ficção, podendo ser cientifica, distopias e etc."),
+    CIENCIA("um livro que conta informações relacionadas a ciencia, podendo ser ciencias bioligicas, ciencias espaciais e etc."),
+    HISTORIA("um livro que conta fatos da historia do mundo, podendo ser a historia da segunda guerra mundial, a crise da covid e etc."),
+    FANTASIA("um livro que conta historias no mundo de fantasia, podendo ser fantasias medievais como historias de dragoes, fantasias da disney como a branca de neve e etc.");
+
+    private String descricao;
+
+    Genero (String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
