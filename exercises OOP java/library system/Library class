@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class Biblioteca {
+    HashMap<Integer, Livro> catalogo = new HashMap<>();
+    ArrayList<Usuario> usuarios = new ArrayList<>();
+    HashSet<Integer> idRegistrado = new HashSet<>();
+
+    public void adicionarLivroCatalogo(int id, Livro livro) {
+        if (idRegistrado.add(id)) {
+            catalogo.put(id, livro);
+            System.out.println(livro.getTituloLivro() + " do id: " + id + " adicinado ao catalogo da biblioteca");
+        } else {
+            throw new IllegalArgumentException("nao foi possivel adicionar o livro no catalogo pois o id esta duplicado");
+        }
+    }
+
+    public void listarLivrosDoCatalogo() {
+        if (catalogo.isEmpty()) {
+            throw new NullPointerException("a lista de livros no catalogo esta vazia");
+        } else {
+            System.out.println("====== LISTA DE LIVROS NO CATALOGO ======");
+            for (Integer key : catalogo.keySet()) {
+                catalogo.get(key).exibirDetalhes();
+            }
+        }
+    }
+
+    public void cadastrarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+        System.out.println(usuario.getNomeUsuario()+ " adicionado a lista de usuarios");
+    }
+
+    public void emprestarLivro(Usuario usuario, Livro livro) {
+        usuario.adicionarLivroNaListaDeEmprestimosDoUsuario(livro);
+    }
+
+    public void devolverLivro(Usuario usuario, Livro livro) throws IllegalArgumentException {
+        if (usuario.livrosEmprestados.contains(livro)) {
+            usuario.removerLivroNaListaDeEmprestimosDoUsuario(livro);
+        } else {
+            throw new IllegalArgumentException("nao foi possivel devolver o livro " +livro.getTituloLivro()+ " da lista de emprestimos de " +usuario.getNomeUsuario()+ " pois o livro nao foi emprestado  ele");
+        }
+    }
+}
