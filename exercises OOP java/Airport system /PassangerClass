@@ -1,0 +1,31 @@
+public class Passageiro {
+    private String nomePassageiro;
+    private TipoPassagem tipoPassagem;
+
+    public Passageiro(String nomePassageiro, TipoPassagem tipoPassagem) {
+        this.nomePassageiro = nomePassageiro;
+        this.tipoPassagem = tipoPassagem;
+    }
+
+    public String getNomePassageiro() {
+        return nomePassageiro;
+    }
+
+    public void setNomePassageiro(String nomePassageiro) {
+        this.nomePassageiro = nomePassageiro;
+    }
+
+    public TipoPassagem getTipoPassagem() {
+        return tipoPassagem;
+    }
+
+    public void setTipoPassagem(TipoPassagem tipoPassagem) {
+        this.tipoPassagem = tipoPassagem;
+    }
+
+    public void exibirDetalhes() {
+        System.out.println("NOME DO PASSAGEIRO: " +this.nomePassageiro);
+        System.out.println("TIPO DE PASSAGEM: " +this.tipoPassagem);
+        System.out.println("PRECO DA PASSAGEM: " +this.tipoPassagem.getPreco());
+    }
+}
