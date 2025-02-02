@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class Aeroporto {
+    Map<String, Voo> listaDeVoos = new LinkedHashMap<>();
+    Set<String> numeroDoVoo = new HashSet<>();
+    Set<String> modelo = new HashSet<>();
+    Set<Aerononave> listaDeAeronaves = new LinkedHashSet<>();
+
+    public void cadastrarAeronave(Aerononave aerononave) throws AeronaveDuplicadaException {
+        if (!modelo.add(aerononave.getModelo())) {
+            throw new AeronaveDuplicadaException("nao foi possivel adicionar essa aeronave na lista de aeronaves, pois ela ja foi registrada, ou seja esta duplicada");
+        } else {
+            listaDeAeronaves.add(aerononave);
+            System.out.println(aerononave.getModelo()+ " adicionada a lista de aeronaves");
+        }
+    }
+
+    public void cadastrarVoo(String numeroVoo, Voo voo) throws VooDuplicadoException {
+        if (!numeroDoVoo.add(numeroVoo)) {
+            throw new VooDuplicadoException("nao foi possivel adicionar o voo " + numeroVoo + " pois ele esta duplicado");
+        } else {
+            listaDeVoos.put(numeroVoo, voo);
+            System.out.println("voo do numero " + numeroVoo + " adicionado a lista de voos");
+        }
+    }
+
+    public void listarTodosOsVoos() {
+        if (listaDeVoos.isEmpty()) {
+            System.out.println("a lista de voos esta vazia");
+        } else {
+            System.out.println("====== LISTA DE VOOS =====");
+            for (String key : listaDeVoos.keySet()) {
+                listaDeVoos.get(key).exibirDetalhesVoo();
+                System.out.println("------------------------");
+            }
+        }
+    }
+
+}
