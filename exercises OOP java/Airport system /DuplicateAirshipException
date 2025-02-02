@@ -1,0 +1,5 @@
+public class AeronaveDuplicadaException extends RuntimeException {
+    public AeronaveDuplicadaException(String mensagem) {
+        super(mensagem);
+    }
+}
