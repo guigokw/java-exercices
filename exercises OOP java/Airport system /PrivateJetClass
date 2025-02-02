@@ -1,0 +1,26 @@
+public class JatoPrivado extends Aerononave {
+
+    public JatoPrivado(String modelo, int capacidade, boolean emVoo, TipoPassagem tipoDeAviao) throws IllegalArgumentException {
+        super(modelo, capacidade, emVoo, tipoDeAviao);
+    }
+
+    @Override
+    public void decolar() throws IllegalArgumentException {
+        if (!emVoo) {
+            System.out.println("o jato privado do modelo " +this.modelo+ " entrou em voo");
+            this.emVoo = true;
+        } else {
+            throw new IllegalArgumentException("nao foi possivel decolar o jato privado do modelo " +this.modelo+ " pois ele ja esta em voo");
+        }
+    }
+
+    @Override
+    public void aterrissar() throws IllegalArgumentException {
+        if (emVoo) {
+            System.out.println("o jato privado do modelo " +this.modelo+ " realizou a aterrissagem");
+            this.emVoo = false;
+        } else {
+            throw new IllegalArgumentException("nao foi possivel realizar a aterrissagem do jato privado do modelo " +this.modelo+ " pois ele nao esta em voo");
+        }
+    }
+}
