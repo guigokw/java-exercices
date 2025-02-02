@@ -1,0 +1,235 @@
+import java.util.Scanner;
+
+public class MainAeroporto {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        Aeroporto aeroporto = new Aeroporto();
+
+        while (true) {
+            try {
+                System.out.println("1 - cadastrar aeronave");
+                System.out.println("2 - cadastrar voo");
+                System.out.println("3 - listar voos");
+                System.out.println("4 - adicionar passageiro ao voo");
+                System.out.println("5 - remover passageiro do voo");
+                System.out.println("6 - listar passageiros de um voo especifico");
+                System.out.println("7 - decolar voo");
+                System.out.println("8 - aterrissar vo");
+                System.out.println("9 - sair do programa");
+                System.out.println("-----------------------");
+                System.out.print("escolha uma dessas opcoes:");
+                int opcao = input.nextInt();
+
+                input.nextLine();
+
+                switch (opcao) {
+                    case 1 -> cadastrarAeronave(input, aeroporto);
+                    case 2 -> cadastrarVoo(input, aeroporto);
+                    case 3 -> listarVoos(aeroporto);
+                    case 4 -> cadastrarPassageiroVoo(input, aeroporto);
+                    case 5 -> removerPassageiroVoo(input, aeroporto);
+                    case 6 -> listarPassageirosVooEspecifico(input, aeroporto);
+                    case 7 -> decolarVoo(input, aeroporto);
+                    case 8 -> aterrissarVoo(input, aeroporto);
+                    case 9 -> {
+                        System.out.println("saindo do programa de aeroporto...");
+                        input.close();
+                        return;
+                    }
+                    default -> System.out.println("opcao invalida, por favor digite novamente");
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite noavemente");
+                input.nextLine();
+            }
+        }
+    }
+
+
+    private static void cadastrarAeronave(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o modelo do avião?");
+            String modelo = input.nextLine();
+
+            System.out.print("qual a capacidade do avião?");
+            int capacidade = input.nextInt();
+
+            System.out.println("1 - voo comercial");
+            System.out.println("2 - jato privado");
+            System.out.println("-------------------");
+            System.out.print("escolha uma dessas opcoes para registrar o voo");
+            int opcao = input.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("qual a quantidade de assentos ecnomicos do avião?");
+                    int quantidadeAssentosEconomicos = input.nextInt();
+
+                    AviaoComercial aviao = new AviaoComercial(modelo, capacidade, false, TipoPassagem.ECONOMICA, quantidadeAssentosEconomicos);
+                    aeroporto.cadastrarAeronave(aviao);
+                    System.out.println("aviao do modelo " +modelo+ " adicionado a lista de aeronaves");
+                    break;
+
+                case 2:
+                    JatoPrivado jato = new JatoPrivado(modelo, capacidade, false, TipoPassagem.PRIMEIRA_CLASSE);
+                    aeroporto.cadastrarAeronave(jato);
+                    System.out.println("jato do modelo " +modelo+ " adciionado a lista de aeronaves");
+                    break;
+                default:
+                    System.out.println("opcao invalida, por favor insira novamente");
+            }
+
+        } catch (IllegalArgumentException | AeronaveDuplicadaException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor insira noavmente");
+            input.nextLine();
+        }
+    }
+
+
+    private static void cadastrarVoo(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o numero do voo?");
+            String numeroVoo = input.nextLine();
+
+            System.out.print("qual a origem do voo?");
+            String origemVoo = input.nextLine();
+
+            System.out.print("qual o destino do voo?");
+            String destinoVoo = input.nextLine();
+
+            System.out.print("qual o modelo da aeronave que vc deseja registrar no voo");
+            String modelo = input.nextLine();
+
+             Aerononave aerononave = aeroporto.listaDeAeronaves.stream()
+                                        .filter(a -> a.getModelo().equalsIgnoreCase(modelo))
+                                        .findFirst()
+                                        .orElseThrow(() -> new AeronaveNaoEncontradaException("nao foi possivel cadastrar o voo, pois a aeronave do modelo " +modelo+ " nao foi registrada no sistema"));
+
+            Voo voo = new Voo(numeroVoo, origemVoo, destinoVoo, aerononave, 0, 0);
+            aeroporto.cadastrarVoo(numeroVoo, voo);
+        } catch (VooDuplicadoException | AeronaveNaoEncontradaException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void listarVoos(Aeroporto aeroporto) {
+        aeroporto.listarTodosOsVoos();
+    }
+
+    private static void cadastrarPassageiroVoo(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o nome do passgaeiro?");
+            String nomePassageiro = input.nextLine();
+
+            System.out.println("1 - economica");
+            System.out.println("2 - primeira classe");
+            System.out.println("-------------------");
+            System.out.print("escolha uma dessas opcoes de passagem:");
+            int opcao = input.nextInt();
+
+            input.nextLine();
+
+            TipoPassagem tipo = switch (opcao) {
+                case 1 -> TipoPassagem.ECONOMICA;
+                case 2 -> TipoPassagem.PRIMEIRA_CLASSE;
+                default -> throw new IllegalArgumentException("opcao invalida, por favor digite novamente");
+            };
+            Passageiro passageiro = new Passageiro(nomePassageiro, tipo);
+
+            System.out.print("qual o numero do voo que vc deseja cadastrar o passageiro?");
+            String numeroDoVoo = input.nextLine();
+
+            Voo voo = aeroporto.listaDeVoos.values().stream()
+                    .filter(a -> a.getNumeroVoo().equalsIgnoreCase(numeroDoVoo))
+                    .filter(b -> b.getAerononave().getTipoDeAviao() == passageiro.getTipoPassagem())
+                    .findFirst()
+                    .orElseThrow(() -> new VooNaoEncontradoException("nao foi possivel cadastrar o passageiro no voo " + numeroDoVoo + ", pois esse voo nao foi registrado no sistema | ou | o tipo de passagem do passageiro nao corresponde ao tipo de voo que o aviao faz"));
+
+
+            voo.adicionarPassageiro(passageiro);
+
+        } catch (IllegalArgumentException | VooNaoEncontradoException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida por favor insira novamente");
+            input.nextLine();
+        }
+    }
+
+    private static void removerPassageiroVoo(Scanner input, Aeroporto aeroporto) {
+        try {
+        System.out.print("qual o nome do passageiro que vc deseja remover?");
+        String nomePassageiro = input.nextLine();
+
+        System.out.print("qual o numero do voo do passageiro que vc deseja remover?");
+        String numeroVoo = input.nextLine();
+
+        Voo voo = aeroporto.listaDeVoos.values().stream()
+                .filter(v -> v.getNumeroVoo().equalsIgnoreCase(numeroVoo))
+                .findFirst()
+                .orElseThrow(() -> new VooNaoEncontradoException("nao foi possivel remover o pssageiro deste voo, pois o este voo nao foi registrado no sistema"));
+
+        Passageiro passageiro = voo.passageiros.stream()
+                .filter(p -> p.getNomePassageiro().equalsIgnoreCase(nomePassageiro))
+                .findFirst()
+                .orElseThrow(() -> new PassageiroNaoEncontradoException("nao foi possivel remover o passageiro " +nomePassageiro+ " pois este nao foi encontrado no sistema"));
+
+        voo.removerPassageiro(passageiro);
+
+        } catch (IllegalArgumentException | PassageiroNaoEncontradoException | VooNaoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void listarPassageirosVooEspecifico(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o numero do voo que vc deseja listar os passageiros?");
+            String numeroVoo = input.nextLine();
+
+            Voo voo = aeroporto.listaDeVoos.values().stream()
+                    .filter(v -> v.getNumeroVoo().equalsIgnoreCase(numeroVoo))
+                    .findFirst()
+                    .orElseThrow(() -> new VooNaoEncontradoException("nao foi possivel listar os passageiros do voo " + numeroVoo + " pois esse voo nao foi registrado no sistema"));
+
+            voo.listarPassageiros();
+        } catch (VooNaoEncontradoException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void decolarVoo(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o modelo do avião que vc deseja decolar?");
+            String modelo = input.nextLine();
+
+            Aerononave aviao = aeroporto.listaDeAeronaves.stream()
+                    .filter(a -> a.getModelo().equalsIgnoreCase(modelo))
+                    .findFirst()
+                    .orElseThrow(() -> new AeronaveNaoEncontradaException("nao foi possivel decolar o voo do aviao de modelo " +modelo+ " pois este modelo nao foi registrado no sistema"));
+
+            aviao.decolar();
+
+        } catch (IllegalArgumentException | AeronaveNaoEncontradaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void aterrissarVoo(Scanner input, Aeroporto aeroporto) {
+        try {
+            System.out.print("qual o modelo do aviao que vc deseja aterrissar?");
+            String modelo = input.nextLine();
+
+            Aerononave aviao = aeroporto.listaDeAeronaves.stream()
+                    .filter(a -> a.getModelo().equalsIgnoreCase(modelo))
+                    .findFirst()
+                    .orElseThrow(() -> new AeronaveNaoEncontradaException("nao foi possivel aterrissar o aviao do modelo " +modelo+ " pois esse modelo ano foi registrado no sistema"));
+
+            aviao.aterrissar();
+        } catch (IllegalArgumentException | AeronaveNaoEncontradaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
