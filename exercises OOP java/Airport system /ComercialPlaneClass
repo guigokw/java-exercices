@@ -1,0 +1,40 @@
+public class AviaoComercial extends Aerononave {
+    private int quantidadeAssentoEconomico;
+
+    public AviaoComercial(String modelo, int capacidade, boolean emVoo, TipoPassagem tipoDeAviao, int quantidadeAssentoEconomico) throws IllegalArgumentException {
+        super(modelo, capacidade, emVoo, tipoDeAviao);
+        if (quantidadeAssentoEconomico < 45 || quantidadeAssentoEconomico > 468 || capacidade < 70 || capacidade > 699) {
+            throw new IllegalArgumentException("a quantidade de assentos do aviao comercial esta invalida, por favor insira novamente");
+        } else {
+            this.quantidadeAssentoEconomico = quantidadeAssentoEconomico;
+        }
+    }
+
+    public int getQuantidadeAssentoEconomico() {
+        return quantidadeAssentoEconomico;
+    }
+
+    public void setQuantidadeAssentoEconomico(int quantidadeAssentoEconomico) {
+        this.quantidadeAssentoEconomico = quantidadeAssentoEconomico;
+    }
+
+    @Override
+    public void decolar() throws IllegalArgumentException {
+        if (!emVoo) {
+            System.out.println("o aviao comercial do modelo " +this.modelo+ " entrou em voo");
+            this.emVoo = true;
+        } else {
+            throw new IllegalArgumentException("nao foi possivel decolar o avaião comercial do modelo " +this.modelo+ " pois ele ja esta em voo");
+        }
+    }
+
+    @Override
+    public void aterrissar() throws IllegalArgumentException {
+        if (emVoo) {
+            System.out.println("o avião comercial do modelo " +this.modelo+ " realizou a aterrissagem");
+            this.emVoo = false;
+        } else {
+            throw new IllegalArgumentException("nao foi possivel realizar a aterrissagem do aviao comercial do modelo " +this.modelo+ " pois ele nao esta em voo");
+        }
+    }
+}
