@@ -1,0 +1,49 @@
+public abstract class Aerononave {
+    protected String modelo;
+    protected int capacidade;
+    protected boolean emVoo;
+    protected TipoPassagem tipoDeAviao;
+
+    public Aerononave(String modelo, int capacidade, boolean emVoo, TipoPassagem tipoDeAviao) throws IllegalArgumentException {
+        this.modelo = modelo;
+        this.capacidade = capacidade;
+        this.emVoo = emVoo;
+        this.tipoDeAviao = tipoDeAviao;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public boolean isEmVoo() {
+        return emVoo;
+    }
+
+    public void setEmVoo(boolean emVoo) {
+        this.emVoo = emVoo;
+    }
+
+    public TipoPassagem getTipoDeAviao() {
+        return tipoDeAviao;
+    }
+
+    public void setTipoDeAviao(TipoPassagem tipoDeAviao) {
+        this.tipoDeAviao = tipoDeAviao;
+    }
+
+    public abstract void decolar();
+
+    public abstract void aterrissar();
+}
