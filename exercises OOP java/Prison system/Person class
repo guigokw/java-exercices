@@ -1,0 +1,53 @@
+public abstract class Pessoa {
+    protected int idPessoa;
+    protected String nomePessoa;
+    protected int idadePessoa;
+
+    public Pessoa(int idPessoa, String nomePessoa, int idadePessoa) throws IllegalArgumentException {
+        if (idPessoa < 0 || nomePessoa.isEmpty() || idadePessoa < 0 || idadePessoa > 120) {
+            throw new IllegalArgumentException("entrada de dados invalido, por favor insira novamente");
+        } else {
+            this.idPessoa = idPessoa;
+            this.nomePessoa = nomePessoa;
+            this.idadePessoa = idadePessoa;
+        }
+    }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) throws IllegalArgumentException {
+        if (idPessoa <= 0) {
+            throw new IllegalArgumentException("nao foi possivel adicionar essa pessoa pois o id esta invalido, por favor insira novamente");
+        } else {
+            this.idPessoa = idPessoa;
+        }
+    }
+
+    public String getNomePessoa() {
+        return nomePessoa;
+    }
+
+    public void setNomePessoa(String nomePessoa) throws IllegalArgumentException {
+        if (nomePessoa.isEmpty()) {
+            throw new IllegalArgumentException("nao foi possivel adicionar essa pessoa pois o nome esta vazio, por favor insira novamente");
+        } else {
+            this.nomePessoa = nomePessoa;
+        }
+    }
+
+    public int getIdadePessoa() {
+        return idadePessoa;
+    }
+
+    public void setIdadePessoa(int idadePessoa) throws IllegalArgumentException {
+        if (idadePessoa < 0 || idadePessoa > 120) {
+            throw new IllegalArgumentException("nao foi possivel adicionar essa pessoa pois a idade esta invalida, por favor digite novamente");
+        } else {
+            this.idadePessoa = idadePessoa;
+        }
+    }
+
+    public abstract void exibirDetalhes();
+}
