@@ -1,0 +1,63 @@
+public class Prisioneiro extends Pessoa {
+    private TipoCrime tipoCrime;
+    private NivelSegurança nivelPericulosidade;
+    private int penaRestante;
+
+    public Prisioneiro(int idPessoa, String nomePessoa, int idadePessoa, TipoCrime tipoCrime, NivelSegurança nivelPericulosidade, int penaRestante) throws IllegalArgumentException {
+        super(idPessoa, nomePessoa, idadePessoa);
+        if (penaRestante <= 0) {
+            throw new IllegalArgumentException("o tempo de pena restante é invalido, por favor digite noavmente");
+        } else {
+            this.tipoCrime = tipoCrime;
+            this.nivelPericulosidade = nivelPericulosidade;
+            this.penaRestante = penaRestante;
+        }
+    }
+
+    public TipoCrime getTipoCrime() {
+        return tipoCrime;
+    }
+
+    public void setTipoCrime(TipoCrime tipoCrime) {
+        this.tipoCrime = tipoCrime;
+    }
+
+    public NivelSegurança getNivelPericulosidade() {
+        return nivelPericulosidade;
+    }
+
+    public void setNivelPericulosidade(NivelSegurança nivelPericulosidade) {
+        this.nivelPericulosidade = nivelPericulosidade;
+    }
+
+    public int getPenaRestante() {
+        return penaRestante;
+    }
+
+    public void setPenaRestante(int penaRestante) throws IllegalArgumentException {
+        if (penaRestante <= 0) {
+            throw new IllegalArgumentException("o tempo de pena restante esta invalido, por favor digite novamente");
+        } else {
+            this.penaRestante = penaRestante;
+        }
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("ID DO PRISIONEIRO: " +this.idPessoa);
+        System.out.println("NOME DO PRISIONEIRO: " +this.nomePessoa);
+        System.out.println("IDADE DO PRISIONEIRO: " +this.idadePessoa);
+        System.out.println("TIPO DE CRIME COMETIDO: " +this.tipoCrime);
+        System.out.println("NIVEL DE PERICULOSIDADE: " +this.nivelPericulosidade);
+        System.out.println("------------------------");
+    }
+
+    public void cumprirPena() {
+        this.penaRestante--;
+        if (this.penaRestante <= 0) {
+            System.out.println("o tempo de pena do prisioneiro " +this.nomePessoa+ " foi cumprido, agora ele sera solto");
+        } else {
+            System.out.println("TEMPO DE PENA RESTANTE DO PRISIONEIRO " +this.nomePessoa+ ": " +this.penaRestante);
+        }
+    }
+}
