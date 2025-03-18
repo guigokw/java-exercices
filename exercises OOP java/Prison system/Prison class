@@ -1,0 +1,146 @@
+import java.util.*;
+import java.util.Scanner;
+
+public class Prisao {
+    Map<Integer, Cela> celas = new LinkedHashMap<>();
+    Set<Integer> idGuarda = new HashSet<>();
+    List<Guarda> guardas = new ArrayList<>();
+
+    Scanner input = new Scanner(System.in);
+
+    public void adicionarCela(Cela cela) {
+        celas.put(cela.getNumeroCela(), cela);
+        System.out.println("cela numero " +cela.getNumeroCela()+ " de segurança " +cela.getNivelSeguranca()+ " adicionado a prisão");
+    }
+
+    public void adicioanarGuarda(Guarda guarda) throws GuardaDuplicadoException {
+        if (!idGuarda.add(guarda.getIdPessoa())) {
+            throw new GuardaDuplicadoException("nao foi possivel adicionar o guarda " +guarda.getNomePessoa()+ " pois o id do guarda esta duplicado");
+        } else {
+            guardas.add(guarda);
+            System.out.println("guarda " +guarda.getNomePessoa()+ " adicionado a lista de guardas");
+        }
+    }
+
+    public void adicionarPrisioneiroNaCela(Cela cela, Prisioneiro prisioneiro) {
+        cela.adicionarPrisioneiro(prisioneiro);
+    }
+
+    public void removerPrisioneiro(Cela cela) {
+        cela.removerPrisioneiro();
+    }
+
+    public void listarPrisioneiros(Cela cela) {
+        if (cela.prisioneiros.isEmpty()) {
+            System.out.println("nao foi possivel listar os prisioneiros pois a lista esta vazia");
+        } else {
+            System.out.println("====== LISTA DE PRISIONEIROS ======");
+            for (Prisioneiro prisioneiro : cela.prisioneiros) {
+                prisioneiro.exibirDetalhes();
+            }
+        }
+    }
+
+    public void listarGuardas() {
+        if (guardas.isEmpty()) {
+            System.out.println("nao foi possivel listar os guardas pois a lista esta vazia");
+        } else {
+            System.out.println("===== LISTA DE GUARDAS ======");
+            for (Guarda guarda : guardas) {
+                guarda.exibirDetalhes();
+            }
+        }
+    }
+
+    public void filtrarPrisioneirosPorCrime() {
+        System.out.println("1 - roubo");
+        System.out.println("2 - homicidio");
+        System.out.println("3 - trafico");
+        System.out.println("4 - fraude");
+        System.out.println("-----------------");
+        System.out.print("qual tipo de crime vc deseja selecionar os prisioneiros?");
+        int opcao = input.nextInt();
+
+        TipoCrime crime = switch (opcao) {
+            case 1 -> TipoCrime.ROUBO;
+            case 2 -> TipoCrime.HOMICIDIO;
+            case 3 -> TipoCrime.TRAFICO;
+            case 4 -> TipoCrime.FRAUDE;
+            default -> throw new IllegalArgumentException("opcao invalida, por favor digite novamente");
+        };
+
+        for (Cela cela : celas.values()) {
+            List<Prisioneiro> crimePrisioneiros = cela.prisioneiros.stream()
+                    .filter(a -> a.getTipoCrime() == crime)
+                    .toList();
+
+            if (crimePrisioneiros.isEmpty()) {
+                System.out.println("nao há nenhum prisioneiro que cometeu o crime de " + crime);
+            } else {
+                System.out.println("====== LISTA DE PRISIONEIROS QUE COMETERAM O CRIME DE " + crime + " ======");
+                for (Prisioneiro prisioneiro : crimePrisioneiros) {
+                    prisioneiro.exibirDetalhes();
+                }
+            }
+        }
+    }
+
+
+    public void ordenarPrisioneirosPorNivel() {
+        for (Cela cela : celas.values()) {
+
+            List<Prisioneiro> prisioneirosOrdenados = cela.prisioneiros.stream()
+                    .sorted(Comparator.comparing(Prisioneiro::getNivelPericulosidade))
+                    .toList();
+
+            if (prisioneirosOrdenados.isEmpty()) {
+                System.out.println("nao foi possivel ordenar os prisioneiros pois a lista de prisioneiros esta vazia");
+            } else {
+                for (Prisioneiro prisioneiro : prisioneirosOrdenados) {
+                    prisioneiro.exibirDetalhes();
+                }
+            }
+        }
+    }
+
+
+    public void monitorarCelaDaPrisao() {
+        System.out.print("qual o id do guarda que vc deseja fazer o monitoramento de cela?");
+        int id = input.nextInt();
+
+        Guarda guarda = guardas.stream()
+                .filter(a -> a.getIdPessoa() == id)
+                .findFirst()
+                .orElseThrow(() -> new GuardaNaoEncontradoException("nao foi possivel selecionar um guarda para o monitoramento pois nao foi registrado nenhum guarda com o id " +id));
+
+        guarda.exibirDetalhes();
+
+        System.out.println("1 - sim");
+        System.out.println("2 - não");
+        System.out.println("===================");
+        System.out.print("esse é o guarda que vc deseja fazer o monitoramento?");
+        int opcao = input.nextInt();
+
+        switch (opcao) {
+            case 1:
+                System.out.print("qual o numero da cela que vc deseja monitorar?");
+                int numero = input.nextInt();
+
+                Cela cela = celas.values().stream()
+                        .filter(a -> a.getNumeroCela() == numero)
+                        .findFirst()
+                        .orElseThrow(() -> new CelaNaoEncontradaException("nao foi possivel fazer o monitoramento da cela pois a cela com o numero " +numero+ " não foi encontrada"));
+
+                guarda.monitorarCela(cela);
+                break;
+
+            case 2:
+                System.out.println("guarda nao selecionado, se deseja selecionar outro guarda tente noavmente");
+                break;
+
+            default:
+                System.out.println("opcao invalida, por favor tente novamente");
+        }
+    }
+
+}
