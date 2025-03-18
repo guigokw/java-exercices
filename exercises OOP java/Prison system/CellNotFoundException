@@ -1,0 +1,6 @@
+public class CelaNaoEncontradaException extends RuntimeException {
+
+    public CelaNaoEncontradaException(String mensagem) {
+        super(mensagem);
+    }
+}
