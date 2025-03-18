@@ -1,0 +1,258 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        Prisao prisao = new Prisao();
+
+        while (true) {
+            try {
+                System.out.println("1 - adicionar celas");
+                System.out.println("2 - adicionar prisioneiro");
+                System.out.println("3 - adicionar guardas");
+                System.out.println("4 - remover prisioneiro");
+                System.out.println("5 - listar prisioneiros de uma cela");
+                System.out.println("6 - listar guardas");
+                System.out.println("7 - filtrar prisioneiros por crime");
+                System.out.println("8 - ordenar prisioneiros por nivel de periculosidade");
+                System.out.println("9 - monitorar cela");
+                System.out.println("10 - sair do programa");
+
+                System.out.print("escolha uma dessas opções?");
+                int opcao = input.nextInt();
+
+                switch (opcao) {
+                    case 1 -> adicionarCela(input, prisao);
+                    case 2 -> adicionarPrisioneiro(input, prisao);
+                    case 3 -> adicionarGuardas(input, prisao);
+                    case 4 -> removerPrisioneiro(input, prisao);
+                    case 5 -> exibirDetalhesPrisioneiros(input, prisao);
+                    case 6 -> listarGuardas(prisao);
+                    case 7 -> filtarPrisioneirosPorCrime(input, prisao);
+                    case 8 -> ordenarPrisioneirosPorNivel(prisao);
+                    case 9 -> monitorarCela(input, prisao);
+                    case 10 -> {
+                        System.out.println("saindo do programa.....");
+                        return;
+                    }
+                    default -> System.out.println("opcao invalida, por favor digite novamente");
+                }
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("entrada invalida, por favor digite novamente");
+                input.nextLine();
+            }
+        }
+    }
+
+    private static void adicionarCela(Scanner input, Prisao prisao) throws java.util.InputMismatchException, IllegalArgumentException {
+        try {
+            System.out.print("qual o numero da cela?");
+            int numeroCela = input.nextInt();
+
+            System.out.print("qual a capcidade maxima da cela?");
+            int capacidadeMaxima = input.nextInt();
+
+            System.out.println("1 - baixo");
+            System.out.println("2 - medio");
+            System.out.println("3 - alto");
+            System.out.println("------------------");
+            System.out.print("qual dessas opções de nivel de segurança é da cela?");
+            int opcao = input.nextInt();
+
+            NivelSegurança nivel = switch (opcao) {
+                case 1 -> NivelSegurança.BAIXO;
+                case 2 -> NivelSegurança.MEDIO;
+                case 3 -> NivelSegurança.ALTO;
+                default -> throw new IllegalArgumentException("opcao invalida, pr favor digite noavmente");
+            };
+
+            Cela cela = new Cela(numeroCela, capacidadeMaxima, nivel, 0);
+
+            prisao.adicionarCela(cela);
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite noavmente");
+            input.nextLine();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void adicionarPrisioneiro(Scanner input, Prisao prisao) throws IllegalArgumentException, CelaNaoEncontradaException, java.util.InputMismatchException {
+        try {
+            if (prisao.celas.isEmpty()) {
+                throw new IllegalArgumentException("nao foi possivel adicionar um prisioneiro a prisão pois nao há nenhuma cela registrada");
+            } else {
+                System.out.print("qual o id do prisioneiro?");
+                int idPessoa = input.nextInt();
+
+                input.nextLine();
+
+                System.out.print("qual o nome do prisioneiro?");
+                String nomePessoa = input.nextLine();
+
+                System.out.print("qual a idade do prisioneiro?");
+                int idadePessoa = input.nextInt();
+
+                System.out.println("1 - roubo");
+                System.out.println("2 - homicidio");
+                System.out.println("3 - trafico");
+                System.out.println("4 - fraude");
+                System.out.println("------------------");
+                System.out.print("qual desses tipos de crime o prisioneiro cometeu?");
+                int opcao1 = input.nextInt();
+
+                TipoCrime tipo = switch (opcao1) {
+                    case 1 -> TipoCrime.ROUBO;
+                    case 2 -> TipoCrime.HOMICIDIO;
+                    case 3 -> TipoCrime.TRAFICO;
+                    case 4 -> TipoCrime.FRAUDE;
+                    default -> throw new IllegalArgumentException("opcao invalida, por favor digite novamente");
+                };
+
+                System.out.println("1 - baixo");
+                System.out.println("2 - medio");
+                System.out.println("3 - alto");
+                System.out.println("----------------------");
+                System.out.print("qual dessas opções de nivel de periculosidade é a do prisioneiro");
+                int opcao2 = input.nextInt();
+
+                NivelSegurança nivel = switch (opcao2) {
+                    case 1 -> NivelSegurança.BAIXO;
+                    case 2 -> NivelSegurança.MEDIO;
+                    case 3 -> NivelSegurança.ALTO;
+                    default -> throw new IllegalArgumentException("opcao invalida, por favor digite novamente");
+                };
+
+                System.out.print("qual tempo de pena ele tem restante?");
+                int penaRestante = input.nextInt();
+
+                Prisioneiro prisioneiro = new Prisioneiro(idPessoa, nomePessoa, idadePessoa, tipo, nivel, penaRestante);
+
+                System.out.print("qual o numero da cela que vc deseja adicionar o prisioneiro?");
+                int numero = input.nextInt();
+
+                Cela cela = prisao.celas.values().stream()
+                        .filter(a -> a.getNumeroCela() == numero)
+                        .findFirst()
+                        .orElseThrow(() -> new CelaNaoEncontradaException("nao foi possivel adicionar o prisioneiro pois a cela nao foi encontrada"));
+
+
+                prisao.adicionarPrisioneiroNaCela(cela, prisioneiro);
+            }
+
+        } catch (IllegalArgumentException | CelaNaoEncontradaException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente?");
+            input.nextLine();
+        }
+    }
+
+    private static void adicionarGuardas(Scanner input, Prisao prisao) throws GuardaDuplicadoException, IllegalArgumentException, java.util.InputMismatchException {
+        try {
+            System.out.print("qual o id do guarda?");
+            int idPessoa = input.nextInt();
+
+            input.nextLine();
+
+            System.out.print("qual o nome do guarda?");
+            String nomePessoa = input.nextLine();
+
+            System.out.print("qual a idade do guarda?");
+            int idadePessoa = input.nextInt();
+
+            System.out.println("1 - baixo");
+            System.out.println("2 - medio");
+            System.out.println("3 - alto");
+            System.out.println("----------------------");
+            System.out.print("qual dessas opções de nivel de de autorização de segurança do guarda");
+            int opcao2 = input.nextInt();
+
+            NivelSegurança nivel = switch (opcao2) {
+                case 1 -> NivelSegurança.BAIXO;
+                case 2 -> NivelSegurança.MEDIO;
+                case 3 -> NivelSegurança.ALTO;
+                default -> throw new IllegalArgumentException("opcao invalida, por favor digite novamente");
+            };
+
+            Guarda guarda = new Guarda(idPessoa, nomePessoa, idadePessoa, nivel);
+
+            prisao.adicioanarGuarda(guarda);
+
+        } catch (IllegalArgumentException | GuardaDuplicadoException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite noavmente");
+            input.nextLine();
+        }
+    }
+
+    private static void removerPrisioneiro(Scanner input, Prisao prisao) throws IllegalArgumentException, CelaNaoEncontradaException, PrisioneiroNaoEncontradoException, java.util.InputMismatchException {
+        try {
+            System.out.print("qual o numero da cela que vc deseja remover o prisioneiro");
+            int numero = input.nextInt();
+
+            Cela cela = prisao.celas.values().stream()
+                    .filter(a -> a.getNumeroCela() == numero)
+                    .findFirst()
+                    .orElseThrow(() -> new CelaNaoEncontradaException("nao foi possivel remover o prisioneiro da cela pois o numero da cela nao foi encontrado"));
+
+            prisao.removerPrisioneiro(cela);
+        } catch (PrisioneiroNaoEncontradoException | CelaNaoEncontradaException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente");
+            input.nextLine();
+        }
+    }
+
+    private static void exibirDetalhesPrisioneiros(Scanner input, Prisao prisao) throws CelaNaoEncontradaException, java.util.InputMismatchException {
+        try {
+            System.out.print("qual o numero da cela que vc deseja listar os prisioneiros?");
+            int numeroCela = input.nextInt();
+
+            Cela cela = prisao.celas.values().stream()
+                    .filter(a -> a.getNumeroCela() == numeroCela)
+                    .findFirst()
+                    .orElseThrow(() -> new CelaNaoEncontradaException("nao foi possivel listar os prisioneiros da cela " + numeroCela + " pois esta cela nao foi registrada no sistema"));
+
+            prisao.listarPrisioneiros(cela);
+        } catch (CelaNaoEncontradaException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente");
+            input.nextLine();
+        }
+    }
+
+    private static void listarGuardas(Prisao prisao) {
+        prisao.listarGuardas();
+    }
+
+    private static void filtarPrisioneirosPorCrime(Scanner input, Prisao prisao) throws IllegalArgumentException, java.util.InputMismatchException {
+        try {
+            prisao.filtrarPrisioneirosPorCrime();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente");
+            input.nextLine();
+        }
+    }
+
+    private static void ordenarPrisioneirosPorNivel(Prisao prisao) {
+        prisao.ordenarPrisioneirosPorNivel();
+    }
+
+    private static void monitorarCela(Scanner input, Prisao prisao) throws IllegalArgumentException, java.util.InputMismatchException, GuardaNaoEncontradoException, CelaNaoEncontradaException {
+        try {
+            prisao.monitorarCelaDaPrisao();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("entrada invalida, por favor digite novamente");
+            input.nextLine();
+        } catch (IllegalArgumentException | GuardaNaoEncontradoException | CelaNaoEncontradaException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
