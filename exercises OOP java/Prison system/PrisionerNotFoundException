@@ -1,0 +1,5 @@
+public class PrisioneiroNaoEncontradoException extends RuntimeException {
+    public PrisioneiroNaoEncontradoException(String mensagem) {
+        super(mensagem);
+    }
+}
