@@ -1,0 +1,110 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Cela {
+    private int numeroCela;
+    private int capacidadeMaxima;
+    private NivelSegurança nivelSeguranca;
+    private int limitePresos;
+
+    Scanner input = new Scanner(System.in);
+
+    List<Prisioneiro> prisioneiros = new ArrayList<>();
+
+    public Cela(int numeroCela, int capacidadeMaxima, NivelSegurança nivelSeguranca, int limitePresos) throws IllegalArgumentException {
+        if (numeroCela <= 0 || capacidadeMaxima <= 0 || capacidadeMaxima > 200) {
+            throw new IllegalArgumentException("configurações de cela invalido, por favor digite novamente");
+        } else {
+            this.numeroCela = numeroCela;
+            this.capacidadeMaxima = capacidadeMaxima;
+            this.nivelSeguranca = nivelSeguranca;
+            this.limitePresos = limitePresos;
+        }
+    }
+
+    public int getNumeroCela() {
+        return numeroCela;
+    }
+
+    public void setNumeroCela(int numeroCela) throws IllegalArgumentException {
+        if (numeroCela <= 0) {
+            throw new IllegalArgumentException("nao foi possivel adicionar essa cela pois o numero dela é invaliido, por favor digite novamente");
+        } else {
+            this.numeroCela = numeroCela;
+        }
+    }
+
+    public int getCapacidadeMaxima() {
+        return capacidadeMaxima;
+    }
+
+    public void setCapacidadeMaxima(int capacidadeMaxima) throws IllegalArgumentException {
+        if (capacidadeMaxima <= 0 || capacidadeMaxima > 200) {
+            throw new IllegalArgumentException("nao foi possivel adicionar a cela pois a capacidade maxima de prisioneiros esta invalida, por favor digite noavmente");
+        } else {
+            this.capacidadeMaxima = capacidadeMaxima;
+        }
+    }
+
+    public NivelSegurança getNivelSeguranca() {
+        return nivelSeguranca;
+    }
+
+    public void setNivelSeguranca(NivelSegurança nivelSeguranca) {
+        this.nivelSeguranca = nivelSeguranca;
+    }
+
+    public int getLimitePresos() {
+        return limitePresos;
+    }
+
+    public void setLimitePresos(int limitePresos) {
+        this.limitePresos = limitePresos;
+    }
+
+    public void adicionarPrisioneiro(Prisioneiro prisioneiro) throws IllegalArgumentException {
+        if (this.limitePresos >= this.capacidadeMaxima) {
+            throw new IllegalArgumentException("nao foi possivel adicionar o prisioneiro " +prisioneiro.getNomePessoa()+ " pois a capacidade maxima da cela " +this.numeroCela+ " foi batida");
+        } else {
+            this.limitePresos++;
+            prisioneiros.add(prisioneiro);
+            System.out.println("prisoneiro " + prisioneiro.getNomePessoa() + " adicionado a cela numero " + this.numeroCela);
+        }
+    }
+
+    public void removerPrisioneiro() throws IllegalArgumentException, PrisioneiroNaoEncontradoException {
+        if (prisioneiros.isEmpty()) {
+            throw new IllegalArgumentException("nao é possivel remover um prisioneiro, pois nao há nenhum registrado");
+        } else {
+            System.out.print("qual o numero do id do prisioneiro que vc deseja remover?");
+            int id = input.nextInt();
+
+            Prisioneiro prisioneiro = prisioneiros.stream()
+                    .filter(a -> a.getIdPessoa() == id)
+                    .findFirst()
+                    .orElseThrow(() -> new PrisioneiroNaoEncontradoException("nao foi possivel remover o prisioneiro pois nao foi encontrado nenhum id " +id));
+
+            System.out.println("====== DETALHES DO PRISIONEIRO ======");
+            prisioneiro.exibirDetalhes();
+
+            System.out.println("1 - sim");
+            System.out.println("2 - não");
+            System.out.print("esse é o prisioneiro que vc deseja remover?");
+            int opcao = input.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    prisioneiros.remove(prisioneiro);
+                    System.out.println("prisioneiro " +prisioneiro.getNomePessoa()+ " removido");
+                    break;
+                case 2:
+                    System.out.println("prisioneiro selecionado nao é o correto, por favor se deseja remover um prisioneiro insria novamente");
+                    break;
+                default:
+                    throw new IllegalArgumentException("opcao invalida, por favor se quiser remover o prisioneiro insira novamente");
+            }
+        }
+    }
+
+}
