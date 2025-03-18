@@ -1,0 +1,61 @@
+public class Guarda extends Pessoa implements Seguranca {
+    private NivelSegurança nivelDeAutorizacao;
+
+    
+
+    public Guarda(int idPessoa, String nomePessoa, int idadePessoa, NivelSegurança nivelDeAutorizacao) throws IllegalArgumentException {
+        super(idPessoa, nomePessoa, idadePessoa);
+        this.nivelDeAutorizacao = nivelDeAutorizacao;
+    }
+
+    public NivelSegurança getNivelDeAutorizacao() {
+        return nivelDeAutorizacao;
+    }
+
+    public void setNivelDeAutorizacao(NivelSegurança nivelDeAutorizacao) {
+        this.nivelDeAutorizacao = nivelDeAutorizacao;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("ID DO GUARDA: " +this.idPessoa);
+        System.out.println("NOME DO GUARDA: " +this.nomePessoa);
+        System.out.println("IDADE DO GUARDA: " +this.idadePessoa);
+        System.out.println("NIVEL DE AUTORIZAÇÃO: " +this.nivelDeAutorizacao);
+        System.out.println("-----------------------------");
+    }
+
+    public void monitorarCela(Cela cela) {
+        try {
+            verificarPermissao(cela);
+
+            int totalPresos = cela.prisioneiros.size();
+
+            int limiteSegurança = switch (cela.getNivelSeguranca()) {
+                case ALTO -> 20;
+                case MEDIO -> 35;
+                case BAIXO -> 50;
+            };
+
+            if (totalPresos > limiteSegurança) {
+                System.out.println("o nivel de risco da cela " + cela.getNumeroCela() + " esta muito alto, por favor realoque alguns prisioneiros em outras celas");
+            } else {
+                System.out.println("as celas estão em ordem");
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void verificarPermissao(Cela cela) throws IllegalArgumentException {
+        if (this.nivelDeAutorizacao == NivelSegurança.BAIXO && cela.getNivelSeguranca() == NivelSegurança.MEDIO | cela.getNivelSeguranca() == NivelSegurança.ALTO) {
+            throw new IllegalArgumentException("o guarda " +this.nomePessoa+ " nao tem autorização para revistar a cela numero " +cela.getNumeroCela());
+        } else if (this.nivelDeAutorizacao == NivelSegurança.MEDIO && cela.getNivelSeguranca() == NivelSegurança.ALTO) {
+            throw new IllegalArgumentException("o guarda " + this.nomePessoa + " nao tem autorização para revistar a cela numero " + cela.getNumeroCela());
+        } else {
+            System.out.println("o guarda " +this.nomePessoa+ " tem a autorização de monitorar a cela numero " +cela.getNumeroCela());
+        }
+    }
+
+}
