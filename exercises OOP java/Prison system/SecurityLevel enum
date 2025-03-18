@@ -1,0 +1,17 @@
+public enum NivelSegurança {
+
+    BAIXO("nivel de segurança para prisioneiros que representam um nivel de risco baixo"),
+    MEDIO("nivel de segurança para prisioneiros que representam nivel de risco medio"),
+    ALTO("nivel de segurança para prisioneiros que representam nivel de risco alto");
+
+
+    private String descricao;
+
+    NivelSegurança(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
