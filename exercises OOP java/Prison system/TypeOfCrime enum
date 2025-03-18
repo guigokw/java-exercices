@@ -1,0 +1,17 @@
+public enum TipoCrime {
+    ROUBO("roubo é o ato de subtrair coisa móvel alheia, para si ou para outrem, mediante  grave ameaça ou violência a pessoa, ou depois de havê-la, por qualquer meio, reduzido à impossibilidade de resistência."),
+    HOMICIDIO("Homicídio é o ato que consiste em uma pessoa matar a outra. O homicídio pode ser dividido em diferentes subcategorias, como o infanticídio, a eutanásia, a pena de morte e a legítima defesa; que dependem da circunstância em que ocorreu a morte."),
+    TRAFICO("Tráfico é de modo amplo a circulação de mercadorias em geral, e de modo mais estrito, o comércio ilícito, seja de entorpecentes, plantas, animais ou mesmo de humanos. O termo também se aplica ao transporte de seres humanos escravizados, já que nesses casos as pessoas são tratadas como meras mercadorias."),
+    FRAUDE("Num sentido amplo, uma fraude é um esquema ilícito ou de má fé criado para obter ganhos pessoais, apesar de ter, juridicamente, outros significados legais mais específicos. Muitos embustes são fraudulentos, apesar dos que não são criados para obter ganhos pessoais não são adequadamente descritos desta maneira.");
+
+
+    private String descricao;
+
+    TipoCrime(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+}
